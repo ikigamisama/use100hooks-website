@@ -1,0 +1,5 @@
+{
+  "https://unpkg.com/prettier@2.8.8/esm/parser-html.mjs": { "integrity": "sha512-Sr6fEbQhxWOJnyXel3HyaxtPtrfrzpa6N3BRpWIjlxLflGy6AOQ5dytXGGZY2pma1kmh5dpX1xnH3MYDfwd/nw==", "contentType": "application/javascript; charset=utf-8" },
+  "https://unpkg.com/prettier@2.8.8/esm/standalone.mjs": { "integrity": "sha512-RJDduVFW5NjPTwmSwFRmVLYyJjWDdfKoxmYlqXczGqFawYJqZhrhXp8m54DFcp0qL+MgFFVTYzaag0L40e9u8A==", "contentType": "application/javascript; charset=utf-8" },
+  "version": 1
+}
