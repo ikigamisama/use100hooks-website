@@ -1,8 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title:
@@ -22,6 +20,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <Analytics />
       </body>
     </html>
   );
