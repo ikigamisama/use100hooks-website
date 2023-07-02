@@ -1,11 +1,35 @@
 "use client";
 
+import { ToolsData } from "@/common.types";
+import { useDebounce } from "@/dist/useDebounce";
 import { toolsList } from "@/lib/tools";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const ToolsNavbar = () => {
   const params = useParams();
+  const [searchTool, setSearchTool] = useState<string>("");
+  const [listTools, setListTools] = useState<ToolsData[]>(toolsList);
+  const debounceSearch = useDebounce(searchTool, 250);
+
+  useEffect(() => {
+    const searchTools = () => {
+      if (debounceSearch) {
+        const filteredTools = toolsList.filter((tool) => {
+          const { title } = tool;
+          const searchValue = debounceSearch.toLowerCase();
+
+          return title.toLowerCase().includes(searchValue);
+        });
+        setListTools(filteredTools);
+      }
+      if (searchTool === "") {
+        setListTools(toolsList);
+      }
+    };
+    searchTools();
+  }, [toolsList, debounceSearch]);
 
   return (
     <div className="hidden lg:block fixed z-20 top-[80px] w-[18rem] overflowy-auto navbar-tool-list">
@@ -33,6 +57,8 @@ const ToolsNavbar = () => {
               id="simple-search"
               className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full pl-10 p-2 dark:text-white"
               placeholder="Search"
+              value={searchTool}
+              onChange={(e) => setSearchTool(e.target.value)}
               required
             />
           </div>
@@ -42,7 +68,7 @@ const ToolsNavbar = () => {
             List of Tools
           </h5>
           <ul className="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
-            {toolsList.map((d, i) => (
+            {listTools.map((d, i) => (
               <li key={i}>
                 <Link
                   href={d.url}

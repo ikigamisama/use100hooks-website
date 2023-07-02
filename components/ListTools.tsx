@@ -6,6 +6,8 @@ import { toolsList } from "@/lib/tools";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
 import useCustomState from "@/dist/useCategoryChoose";
 import Link from "next/link";
+import { useDebounce } from "@/dist/useDebounce";
+import { useEffect, useState } from "react";
 
 const CardTools = ({
   icon: Icon,
@@ -46,7 +48,33 @@ const CardTools = ({
 };
 
 const ListTools = () => {
-  const [search, setSearch] = useCustomState<string>("Name");
+  const [search, setSearch] = useCustomState<string>("");
+  const [listTools, setListTools] = useState<ToolsData[]>(toolsList);
+  const debounceSearch = useDebounce(search, 250);
+
+  useEffect(() => {
+    const searchTools = () => {
+      if (debounceSearch) {
+        const filteredTools = toolsList.filter((tool) => {
+          const { title, description } = tool;
+          const searchValue = debounceSearch.toLowerCase();
+
+          return (
+            title.toLowerCase().includes(searchValue) ||
+            description.short.toLowerCase().includes(searchValue) ||
+            description.long.toLowerCase().includes(searchValue)
+          );
+        });
+        setListTools(filteredTools);
+      }
+
+      if (search === "") {
+        setListTools(toolsList);
+      }
+    };
+    searchTools();
+  }, [toolsList, debounceSearch]);
+
   return (
     <div className="mx-auto max-w-7xl mb-10 px-4">
       <div className="flexStart mb-6">
@@ -63,7 +91,7 @@ const ListTools = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {toolsList.map((d, i) => (
+        {listTools.map((d, i) => (
           <CardTools
             key={i}
             classIcon={d.classIcon}

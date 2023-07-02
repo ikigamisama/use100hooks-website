@@ -6,7 +6,7 @@ import { FaMoon } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <nav className="navbar fixed top-0 left-0 w-full z-40">
+    <nav className="navbar fixed top-0 left-0 w-full z-50">
       <div className="max-w-8xl mx-auto">
         <div className="flex items-center">
           <div className="flex-1 flexStart gap-10">

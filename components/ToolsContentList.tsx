@@ -1,9 +1,10 @@
 import { ToolsContentListProps } from "@/common.types";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const ToolsContentList = ({ toolKeyInfo }: ToolsContentListProps) => {
   const [toolsList, setToolsList] = useState<string[]>([]);
-  const currentKeyTool = "Install";
+  const [currentScroll, setCurrentScroll] = useState("Install");
 
   useEffect(() => {
     const capitalizeFirstLetter = (str: string): string => {
@@ -34,16 +35,18 @@ const ToolsContentList = ({ toolKeyInfo }: ToolsContentListProps) => {
         <ul className="text-slate-700 text-sm leading-6">
           {toolsList.map((d, i) => (
             <li key={i}>
-              <a
-                href="#"
+              <Link
+                href={`#${d.toLowerCase()}-section`}
+                scroll={false}
+                onClick={() => setCurrentScroll(d)}
                 className={`${
-                  currentKeyTool === d
-                    ? "block py-1 font-medium text-sky-500"
+                  currentScroll === d
+                    ? "block py-1 font-bold text-sky-500"
                     : "block py-1 font-medium hover:text-slate-900"
                 } `}
               >
                 {d}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

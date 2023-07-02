@@ -2,7 +2,7 @@
 import { TerminalProps } from "@/common.types";
 import useCustomState from "@/dist/useCategoryChoose";
 import { useClipboard } from "@/dist/useClipboard";
-import { BsClipboard } from "react-icons/bs";
+import { BsClipboard, BsFillClipboardCheckFill } from "react-icons/bs";
 
 const Terminal = ({ text }: TerminalProps) => {
   const [selectModuleType, setSelectModuleType] = useCustomState<string>("npm");
@@ -56,7 +56,7 @@ const Terminal = ({ text }: TerminalProps) => {
           <div className="ml-2 border-yellow-900 bg-yellow-500 shadow-inner rounded-full w-3 h-3"></div>
           <div className="ml-2 border-green-900 bg-green-500 shadow-inner rounded-full w-3 h-3"></div>
         </div>
-        <div className="relative w-full bg-black">
+        <div className="relative w-full bg-[#011627]">
           <div className="flexBetween">
             <pre className="text-lg leading-6 text-left text-slate-50 flex ligatures-none overflow-auto">
               <code className="flex-none min-w-full p-6">
@@ -89,7 +89,11 @@ const Terminal = ({ text }: TerminalProps) => {
             </pre>
             <div className="pr-6 text-white">
               <button type="button" onClick={handleCopy}>
-                <BsClipboard size={20} />
+                {copied ? (
+                  <BsFillClipboardCheckFill size={20} />
+                ) : (
+                  <BsClipboard size={20} />
+                )}
               </button>
             </div>
           </div>

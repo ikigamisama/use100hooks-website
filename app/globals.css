@@ -10,8 +10,9 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth !important;
 }
 
 .flexCenter {
@@ -34,6 +35,7 @@ body {
 .navbar {
   @apply py-4 px-8 gap-4;
   box-shadow: rgba(2, 1, 1, 0.1) 0px 5px 20px -5px;
+  backdrop-filter: saturate(180%) blur(10px);
 }
 
 
@@ -47,10 +49,10 @@ body {
   border-radius: 12px;
 }
 
-.tools-icons.gr path{
+.tools-icons.gr path,
+.tools-icons.tb path:not([stroke="none"]){
   stroke: #3b82f6 !important;
 }
-
 .tools-icons.lia path{
   fill: #3b82f6 !important;
 }

@@ -46,7 +46,7 @@ const MainToolsInfo = () => {
   }, []);
 
   return (
-    <section className="mt-[80px] max-w-3xl mx-auto">
+    <section className="relative z-20 mt-[80px] max-w-3xl mx-auto">
       <div className="max-w-3xl mx-auto pt-10 xl:max-w-none xl:pr-8">
         <div className="block xl:hidden mb-4">
           <Link href="/" className="flexStart">
@@ -62,18 +62,18 @@ const MainToolsInfo = () => {
           {toolInfo.description.short}
         </p>
 
-        <div className="mt-8">
+        <div className="mt-8" id="install-section">
           <p className="mb-4 text-lg text-sky-500 font-semibold">Install</p>
           <Terminal text={toolInfo.install} />
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8" id="description-section">
           <p className="mb-4 text-lg text-sky-500 font-semibold">Description</p>
           <p className="leading-normal">{toolInfo.description.long}</p>
         </div>
 
         {ifKeyExists("parameters") && (
-          <div className="mt-8 relative">
+          <div className="mt-8 relative" id="parameters-section">
             <p className="mb-4 text-lg text-sky-500 font-semibold">
               Parameters
             </p>
@@ -105,16 +105,47 @@ const MainToolsInfo = () => {
           </div>
         )}
 
+        {ifKeyExists("return") && (
+          <div className="mt-8 relative" id="return-section">
+            <p className="mb-4 text-lg text-sky-500 font-semibold">Return</p>
+
+            <table className="w-full text-sm text-left border border-sky-500">
+              <thead className="text-xs text-white uppercase bg-sky-500 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Type
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Description
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {toolInfo.return?.map((d, i) => (
+                  <tr key={i} className="bg-white border-b border-sky-500 ">
+                    <td className="px-6 py-4">{d.name}</td>
+                    <td className="px-6 py-4">{d.type}</td>
+                    <td className="px-6 py-4">{d.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
         {toolInfo.demo && (
-          <div className="mt-8">
+          <div className="mt-8" id="demo-section">
             <p className="mb-4 text-lg text-sky-500 font-semibold">Demo</p>
-            <div className="h-full mb-4 text-center w-full">
+            <div className="h-full mb-8 text-center w-full">
               <toolInfo.demo />
             </div>
           </div>
         )}
 
-        <div className="mt-8">
+        <div className="mt-8" id="example-section">
           <p className="mb-4 text-lg text-sky-500 font-semibold">Example</p>
           <pre>
             <code className="js">{prettifyCode(toolInfo.example)}</code>
