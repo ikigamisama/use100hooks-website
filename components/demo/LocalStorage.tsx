@@ -1,5 +1,5 @@
 "use client";
-import useLocalStorage from "@/dist/useLocalStorage";
+import { useLocalStorage } from "use100hooks";
 import { useState } from "react";
 
 const LocalStorage = () => {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RxGithubLogo } from "react-icons/rx";
 import { FaMoon, FaSun } from "react-icons/fa";
-import useDarkMode from "@/dist/useDarkMode";
+import { useDarkMode } from "use100hooks";
 
 const Navbar = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode();

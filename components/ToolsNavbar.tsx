@@ -1,7 +1,7 @@
 "use client";
 
 import { ToolsData } from "@/common.types";
-import { useDebounce } from "@/dist/useDebounce";
+import { useDebounce } from "use100hooks";
 import { toolsList } from "@/lib/tools";
 import Link from "next/link";
 import { useParams } from "next/navigation";

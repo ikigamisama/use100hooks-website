@@ -2,7 +2,7 @@ import { FiCopy } from "react-icons/fi";
 import { AiOutlineApi } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useClipboard } from "@/dist/useClipboard";
+import { useClipboard } from "use100hooks";
 
 const ClipBoard = () => {
   const [value, setValue] = useState<string>("");

@@ -1,4 +1,4 @@
-import { useDebounce } from "@/dist/useDebounce";
+import { useDebounce } from "use100hooks";
 import { useState } from "react";
 
 const Debounce = () => {

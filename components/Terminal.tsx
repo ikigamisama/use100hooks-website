@@ -1,7 +1,7 @@
 "use client";
 import { TerminalProps } from "@/common.types";
 import useCustomState from "@/dist/useCategoryChoose";
-import { useClipboard } from "@/dist/useClipboard";
+import { useClipboard } from "use100hooks";
 import { BsClipboard, BsFillClipboardCheckFill } from "react-icons/bs";
 
 const Terminal = ({ text }: TerminalProps) => {

@@ -6,7 +6,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useParams } from "next/navigation";
 import { toSearchTools, toSearchToolsKeyObject } from "@/lib/tools";
 import Terminal from "./Terminal";
-import { useDocumentTitle } from "@/dist/useDocumentTitle";
+import { useDocumentTitle } from "use100hooks";
 import "highlight.js/styles/night-owl.css";
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";

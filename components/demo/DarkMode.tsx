@@ -1,4 +1,4 @@
-import useDarkMode from "@/dist/useDarkMode";
+import { useDarkMode } from "use100hooks";
 
 const DarkMode = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode();
@@ -8,6 +8,7 @@ const DarkMode = () => {
       toggleDarkMode();
     }
   };
+
   return (
     <section>
       <button

@@ -4,10 +4,10 @@ import { ToolsData } from "@/common.types";
 import { inter } from "@/lib/fonts";
 import { toolsList } from "@/lib/tools";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
-import useCustomState from "@/dist/useCategoryChoose";
 import Link from "next/link";
-import { useDebounce } from "@/dist/useDebounce";
 import { useEffect, useState } from "react";
+import useCustomState from "@/dist/useCategoryChoose";
+import { useDebounce } from "use100hooks";
 
 const CardTools = ({
   icon: Icon,

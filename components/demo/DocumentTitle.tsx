@@ -1,4 +1,4 @@
-import { useDocumentTitle } from "@/dist/useDocumentTitle";
+import { useDocumentTitle } from "use100hooks";
 import { useState } from "react";
 
 const DocumentTitle = () => {
