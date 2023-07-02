@@ -34,7 +34,7 @@ const ToolsNavbar = () => {
   return (
     <div className="hidden lg:block fixed z-20 top-[80px] w-[18rem] overflowy-auto navbar-tool-list">
       <nav className="lg:text-sm lg:leading-6 relative">
-        <div className="h-10 bg-white dark:bg-slate-900"></div>
+        <div className="h-10 bg-white "></div>
         <div className="bg-white relative">
           <div className="w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -55,7 +55,7 @@ const ToolsNavbar = () => {
             <input
               type="text"
               id="simple-search"
-              className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full pl-10 p-2 dark:text-white"
+              className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full pl-10 p-2 "
               placeholder="Search"
               value={searchTool}
               onChange={(e) => setSearchTool(e.target.value)}
@@ -64,18 +64,18 @@ const ToolsNavbar = () => {
           </div>
         </div>
         <div className="mt-12 lg:mt-8">
-          <h5 className="mb-8 lg:mb-3 font-semibold text-lg text-slate-900 dark:text-slate-200">
+          <h5 className="mb-8 lg:mb-3 font-semibold text-lg text-slate-900 ">
             List of Tools
           </h5>
-          <ul className="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
+          <ul className="space-y-6 lg:space-y-2 border-l border-slate-100 ">
             {listTools.map((d, i) => (
               <li key={i}>
                 <Link
                   href={d.url}
                   className={`${
                     params.tools === d.title
-                      ? 'block border-l pl-4 -ml-px  border-current font-semibold dark:text-sky-400"'
-                      : "block text-md border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                      ? 'block border-l pl-4 -ml-px border-current font-semibold dark:text-sky-400"'
+                      : "block text-md border-l pl-4 -ml-px border-transparent hover:border-slate-400 "
                   }`}
                 >
                   {d.title}

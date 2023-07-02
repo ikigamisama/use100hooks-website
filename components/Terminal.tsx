@@ -9,15 +9,16 @@ const Terminal = ({ text }: TerminalProps) => {
   const [copied, copyToClipboard] = useClipboard();
 
   const handleCopy = () => {
+    let toCopy = "";
     if (text) {
-      const textCopy =
-        text === ""
-          ? selectModuleType === "npm"
-            ? "npm install use100hooks"
-            : "yarn add use100hooks"
-          : text;
-      copyToClipboard(textCopy);
+      toCopy = text;
+    } else {
+      toCopy =
+        selectModuleType === "npm"
+          ? "npm install use100hooks"
+          : "yarn add use100hooks";
     }
+    copyToClipboard(toCopy);
   };
 
   return (

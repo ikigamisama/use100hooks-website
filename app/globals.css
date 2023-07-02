@@ -56,6 +56,13 @@ html, body {
 .tools-icons.lia path{
   fill: #3b82f6 !important;
 }
+.tools-icons.fa path{
+  fill: #3b82f6 !important;
+}
+
+.tools-icons.md path:not([fill="none"]){
+  fill: #3b82f6 !important;
+}
 
 .navbar-tool-list::-webkit-scrollbar {
   width: 5px;

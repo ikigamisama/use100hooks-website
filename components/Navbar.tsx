@@ -1,10 +1,21 @@
+"use client";
+
 import { satisfy } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { RxGithubLogo } from "react-icons/rx";
-import { FaMoon } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
+import useDarkMode from "@/dist/useDarkMode";
 
 const Navbar = () => {
+  const [isDarkMode, toggleDarkMode] = useDarkMode();
+
+  const handleToggle = () => {
+    if (typeof toggleDarkMode === "function") {
+      toggleDarkMode();
+    }
+  };
+
   return (
     <nav className="navbar fixed top-0 left-0 w-full z-50">
       <div className="max-w-8xl mx-auto">
@@ -27,9 +38,10 @@ const Navbar = () => {
           <div className="flexCenter gap-4">
             <button
               type="button"
+              onClick={handleToggle}
               className="rounded-full bg-gray-800 p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-800"
             >
-              <FaMoon size={20} />
+              {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
             </button>
             <Link href="/">
               <RxGithubLogo size={25} />
