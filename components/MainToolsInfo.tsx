@@ -5,16 +5,20 @@ import ToolsContentList from "./ToolsContentList";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useParams } from "next/navigation";
 import { toSearchTools, toSearchToolsKeyObject } from "@/lib/tools";
-import Terminal from "./Terminal";
 import { useDocumentTitle } from "use100hooks";
 import "highlight.js/styles/night-owl.css";
-import hljs from "highlight.js";
-import javascript from "highlight.js/lib/languages/javascript";
-import { useEffect } from "react";
-import prettier from "prettier/standalone";
-import parserHtml from "prettier/parser-html";
-import parserBabel from "prettier/parser-babel";
-hljs.registerLanguage("javascript", javascript);
+
+import dynamic from "next/dynamic";
+import TerminalLoader from "./loader/Terminal";
+import SourceCodeLoader from "./loader/SourceCode";
+
+const Terminal = dynamic(() => import("./Terminal"), {
+  loading: () => <TerminalLoader />,
+});
+
+const SourceCode = dynamic(() => import("./SourceCode"), {
+  loading: () => <SourceCodeLoader />,
+});
 
 const MainToolsInfo = () => {
   const params = useParams();
@@ -30,20 +34,6 @@ const MainToolsInfo = () => {
     }
     return false;
   };
-
-  const prettifyCode = (code: string | undefined) => {
-    if (code) {
-      const prettifiedCode = prettier.format(code, {
-        parser: "babel",
-        plugins: [parserHtml, parserBabel],
-      });
-      return prettifiedCode;
-    }
-  };
-
-  useEffect(() => {
-    hljs.highlightAll();
-  }, []);
 
   return (
     <section className="relative z-20 mt-[80px] max-w-3xl mx-auto">
@@ -145,12 +135,7 @@ const MainToolsInfo = () => {
           </div>
         )}
 
-        <div className="mt-8" id="example-section">
-          <p className="mb-4 text-lg text-sky-500 font-semibold">Example</p>
-          <pre>
-            <code className="js">{prettifyCode(toolInfo.example)}</code>
-          </pre>
-        </div>
+        <SourceCode code={toolInfo.example} />
 
         <ToolsContentList toolKeyInfo={toolKeyInfo} />
       </div>

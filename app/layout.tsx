@@ -1,7 +1,8 @@
-import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-
+import { inter } from "@/lib/fonts";
+import { Providers } from "./providers";
+import dynamic from "next/dynamic";
 export const metadata = {
   title:
     "use100hooks - Maximize Reusability with use100hooks: 100+ React Hooks",
@@ -10,6 +11,10 @@ export const metadata = {
   author: "ikigami-sama",
 };
 
+const Navbar = dynamic(() => import("@/components/Navbar"), {
+  loading: () => <p>Loading...</p>,
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -17,10 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Analytics />
+      <body className={`${inter.className} bg-white dark:bg-black`}>
+        <Providers>
+          <Navbar />
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );

@@ -18,7 +18,7 @@ const CardTools = ({
 }: ToolsData) => {
   return (
     <Link href={url}>
-      <div className="w-full bg-white h-48 drop-shadow-xl p-4 ease-in duration-300 hover:drop-shadow-2xl">
+      <div className="w-full bg-white dark:bg-[#16181A] h-48 drop-shadow-xl p-4 ease-in duration-300 hover:drop-shadow-2xl">
         <div className="flex flex-col justify-between h-full">
           <div className="flex flex-row items-center mb-4">
             <div className="rounded-full w-10 h-10 bg-blue-100 flex items-center justify-center">
@@ -90,7 +90,7 @@ const ListTools = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {listTools.map((d, i) => (
           <CardTools
             key={i}
