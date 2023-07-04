@@ -7,7 +7,7 @@ import { MdStorage, MdOutlinePages, MdAnimation } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 import { VscSymbolParameter } from "react-icons/vsc";
 import { LiaSortAmountDownSolid } from "react-icons/lia";
-import { BsDatabaseFillLock } from "react-icons/bs";
+import { BsDatabaseFillLock, BsFillGeoAltFill } from "react-icons/bs";
 import { LuKeyboard, LuPanelBottomInactive } from "react-icons/lu";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { TfiLayoutSidebarLeft } from "react-icons/tfi";
@@ -20,7 +20,8 @@ import {
 } from "react-icons/bs";
 import { PiFlyingSaucerBold } from "react-icons/pi";
 import { GiNetworkBars } from "react-icons/gi";
-import { AiTwotoneAudio } from "react-icons/ai";
+import { AiTwotoneAudio, AiOutlineExpandAlt } from "react-icons/ai";
+import { RxVideo } from "react-icons/rx";
 
 import DarkMode from "@/components/demo/DarkMode";
 import HTMLEscape from "@/components/demo/HTMLEscape";
@@ -44,6 +45,9 @@ import Location from "@/components/demo/Location";
 import Network from "@/components/demo/Network";
 import AnimationFrame from "@/components/demo/AnimationFrame";
 import Audio from "@/components/demo/Audio";
+import Video from "@/components/demo/Video";
+import ResizeObserver from "@/components/demo/ResizeObserver";
+import Geolocation from "@/components/demo/Geolocation";
 
 export const toolsList: ToolsData[] = [
   {
@@ -731,7 +735,6 @@ export const toolsList: ToolsData[] = [
     example:
       'import { useAnimationFrame } from "use100hooks";import { useState } from "react";const AnimationFrame = () => { const [count, setCount] = useState(0);  const animate = () => { setCount(Math.floor(value));  };  useAnimationFrame(animate, 0.01);  return (<div><p>Animation Value: {count}</p></div>);};export default AnimationFrame;',
   },
-
   {
     icon: AiTwotoneAudio,
     classIcon: "ai",
@@ -774,6 +777,104 @@ export const toolsList: ToolsData[] = [
     demo: Audio,
     example:
       'import { useAudio } from "use100hooks";const Audio = () => { const { play, isPlaying, pause, audioRef } = useAudio("/bosspick.wav"); return ( <section><audio ref={audioRef} /><button onClick={() => (isPlaying ? pause() : play())}>{isPlaying ? "Pause" : "Play"}</button></section> );};export default Audio;',
+  },
+  {
+    icon: RxVideo,
+    classIcon: "rs",
+    title: "useVideo",
+    install: 'import { useVideo } from "use100hooks"',
+    description: {
+      short: "Control and interact with video playback.",
+      long: `The useVideo hook allows you to control the playback of a video element in React. It takes a src parameter that represents the URL of the video file. The hook returns an object containing functions to play, pause, and toggle the video's playback, as well as a reference to the video element.`,
+    },
+    url: "/tools/useVideo",
+    parameters: [
+      {
+        name: "src",
+        type: "string",
+        description: "URL of the video file.",
+      },
+    ],
+    return: [
+      {
+        name: "play",
+        type: "function",
+        description: "Function to play the video.",
+      },
+      {
+        name: "pause",
+        type: "function",
+        description: "Function to pause the video.",
+      },
+      {
+        name: "togglePlay",
+        type: "function",
+        description: "Function to toggle video playback.",
+      },
+      {
+        name: "videoRef",
+        type: "React.RefObject<HTMLVideoElement>",
+        description: "Reference to the video element.",
+      },
+    ],
+    demo: Video,
+    example:
+      'import { useVideo } from "use100hooks";const Video = () => { const videoSrc = "/sample-video.mp4";  const { play, pause, togglePlay, videoRef } = useVideo(videoSrc); return ( <div><video ref={videoRef} /><button onClick={play}>Play</button><button onClick={pause}>Pause</button><button onClick={togglePlay}>Toggle Play</button></div>);};export default Video;',
+  },
+
+  {
+    icon: AiOutlineExpandAlt,
+    classIcon: "ai",
+    title: "useResizeObserver",
+    install: 'import { useResizeObserver } from "use100hooks"',
+    description: {
+      short: "Observe and respond to changes in the size of an element.",
+      long: `The useResizeObserver hook allows you to track the width and height of a specified DOM element in a React component. It uses the ResizeObserver API to monitor changes in the element's size. The hook returns an object with the current width and height of the observed element, along with a reference (targetRef) that you can attach to the element you want to observe.`,
+    },
+    url: "/tools/useResizeObserver",
+    parameters: [
+      {
+        name: "targetRef",
+        type: "RefObject",
+        description:
+          " RefObject pointing to the target element you want to observe for size changes.",
+      },
+      {
+        name: "callback",
+        type: "ResizeObserverCallback",
+        description:
+          " A callback function that will be invoked whenever a size change is detected by the ResizeObserver. The function receives an array of ResizeObserverEntry objects.",
+      },
+    ],
+    demo: ResizeObserver,
+    example:
+      'import { useResizeObserver } from "use100hooks"; import{ useRef, useState } from "react";const ResizeObserver=()=>{const targetRef=useRef(null);const observerRef=useRef(null);const[fontSize,setFontSize]=useState(1.5);const[checked,setChecked]=useState(true);const[width,setWidth]=useState(600); useResizeObserver ( targetRef,(entries)=>{for(let entry of entries){if(entry.contentBoxSize){constinlineSize=Array.isArray(entry.contentBoxSize)?entry.contentBoxSize[0]?.inlineSize : 0; setFontSize(Math.max(1.5,inlineSize/200));}else{ setFontSize(Math.max(1.5,entry.contentRect.width/200));}}console.log("Sizechanged");});consthandleSliderChange=(event:React.ChangeEvent<HTMLInputElement>)=>{constvalue=parseFloat(event.target.value);setWidth(value);targetRef.current?.style.setProperty("width",`${value}px`);};consthandleCheckboxChange=(event:React.ChangeEvent<HTMLInputElement>)=>{if(event.target.checked){setChecked(true);if(targetRef.current&&observerRef.current){observerRef.current?.observe(targetRef.current);}}else{setChecked(false);if(targetRef.current&&observerRef.current){observerRef.current?.unobserve(targetRef.current);}}};return(<div style={{width:width,margin:"auto"}}><form><div><label>Observerenabled:</label><input type="checkbox" checked={checked} onChange={handleCheckboxChange}/></div><div><label>Adjustwidth:</label><input type="range" value={width} min="200" max="600" onChange={handleSliderChange}/></div></form><h1 style={{fontSize:`${fontSize}rem`}}>WhatisLoremIpsum?</h1><p style={{fontSize:`${fontSize}rem`}}>Lorem Ipsumis simplydummy text of the printing and type setting industry. Lorem Ipsum as been the industrys standard dummytext ever since the 1500s,when an unknown printer took a galley of typea nd scrambled it to make a type specimen book.</p><div ref={targetRef}style={{width:"600px"}}></div></div>);};export default ResizeObserver;',
+  },
+  {
+    icon: BsFillGeoAltFill,
+    classIcon: "bs",
+    title: "useGeolocation",
+    install: 'import { useGeolocation } from "use100hooks"',
+    description: {
+      short: "Retrieve the user's current geolocation.",
+      long: `The useGeolocation hook allows you to control the playback of a video element in React. It takes a src parameter that represents the URL of the video file. The hook returns an object containing functions to play, pause, and toggle the video's playback, as well as a reference to the video element.`,
+    },
+    url: "/tools/useGeolocation",
+    return: [
+      {
+        name: "coordinates",
+        type: "GeolocationCoordinates | null",
+        description: "The current geolocation coordinates, if available.",
+      },
+      {
+        name: "error",
+        type: "PositionError | null",
+        description: "Any error that occurred during geolocation retrieval.",
+      },
+    ],
+    demo: Geolocation,
+    example:
+      'import { useGeolocation } from "use100hooks";const Geolocation = () => { const { coordinates, error } = useGeolocation();  if (error) { return <div>Error: {error.message}</div>; } if (!coordinates) {    return <div>Loading...</div>; } return ( <div><h1>Current Location:</h1> <p>Latitude: {coordinates.latitude}</p><p>Longitude: {coordinates.longitude}</p></div>);};export default Geolocation;',
   },
 ];
 
