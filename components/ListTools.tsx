@@ -74,7 +74,19 @@ const ListTools = () => {
       }
 
       if (search === "") {
-        setListTools(toolsList);
+        const sortedList = [...listTools].sort((a, b) => {
+          const letterA = a.title.toLowerCase();
+          const letterB = b.title.toLowerCase();
+
+          if (letterA < letterB) {
+            return -1;
+          }
+          if (letterA > letterB) {
+            return 1;
+          }
+          return 0;
+        });
+        setListTools(sortedList);
       }
     };
     searchTools();

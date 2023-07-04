@@ -3,13 +3,24 @@ import { ToolsData } from "@/common.types";
 import { GrDocumentConfig } from "react-icons/gr";
 import { LiaClipboard } from "react-icons/lia";
 import { TbBounceRight } from "react-icons/tb";
-import { MdStorage } from "react-icons/md";
+import { MdStorage, MdOutlinePages, MdAnimation } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 import { VscSymbolParameter } from "react-icons/vsc";
 import { LiaSortAmountDownSolid } from "react-icons/lia";
 import { BsDatabaseFillLock } from "react-icons/bs";
-import { LuKeyboard } from "react-icons/lu";
+import { LuKeyboard, LuPanelBottomInactive } from "react-icons/lu";
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { TfiLayoutSidebarLeft } from "react-icons/tfi";
+import { CgScrollV } from "react-icons/cg";
+import { FaTowerObservation } from "react-icons/fa6";
+import { HiOutlineStatusOnline } from "react-icons/hi";
+import {
+  BsWindowDesktop,
+  BsReverseLayoutTextWindowReverse,
+} from "react-icons/bs";
+import { PiFlyingSaucerBold } from "react-icons/pi";
+import { GiNetworkBars } from "react-icons/gi";
+import { AiTwotoneAudio } from "react-icons/ai";
 
 import DarkMode from "@/components/demo/DarkMode";
 import HTMLEscape from "@/components/demo/HTMLEscape";
@@ -21,6 +32,18 @@ import LocalStorage from "@/components/demo/LocalStorage";
 import SessionStorage from "@/components/demo/SessionStorage";
 import KeyPress from "@/components/demo/KeyPress";
 import Throttle from "@/components/demo/Throttle";
+import ClickOutside from "@/components/demo/ClickOutside";
+import ScrollPosition from "@/components/demo/ScrollPosition";
+import IntersectionObserver from "@/components/demo/IntersectionObserver";
+import OnlineStatus from "@/components/demo/OnlineStatus";
+import MediaQuery from "@/components/demo/MediaQuery";
+import WindowSize from "@/components/demo/WindowSize";
+import Idle from "@/components/demo/Idle";
+import Hover from "@/components/demo/Hover";
+import Location from "@/components/demo/Location";
+import Network from "@/components/demo/Network";
+import AnimationFrame from "@/components/demo/AnimationFrame";
+import Audio from "@/components/demo/Audio";
 
 export const toolsList: ToolsData[] = [
   {
@@ -325,7 +348,6 @@ export const toolsList: ToolsData[] = [
     example:
       'import { useKeyPress } from "use100hooks";const KeyPress = () => { const aKeyPressed = useKeyPress("a");  const bKeyPressed = useKeyPress("b");  return ( <section><h2>Press "a" or "b" on the keyboard</h2> <p>Pressed "a": {aKeyPressed ? "Yes" : "No"}</p><p>Pressed "b": {bKeyPressed ? "Yes" : "No"}</p></section>);};export default KeyPress;',
   },
-
   {
     icon: MdProductionQuantityLimits,
     classIcon: "md",
@@ -360,6 +382,398 @@ export const toolsList: ToolsData[] = [
     demo: Throttle,
     example:
       'import { useThrottle } from "use100hooks";import { useState } from "react";const Throttle = () => {const [count, setCount] = useState(0); const handleThrottledClick = useThrottle((value: number) => {setCount(value);  }, 1000);function handleClick() {handleThrottledClick(count + 1);} return (<section><h2>Throttled Button Click Example</h2><p>Count: {count}</p><p>Delay: 1000ms</p><button onClick={handleClick}>Increment</button></section>);};export default Throttle;',
+  },
+  {
+    icon: TfiLayoutSidebarLeft,
+    classIcon: "tfi",
+    title: "useOnClickOutside",
+    install: 'import { useOnClickOutside } from "use100hooks"',
+    description: {
+      short: "Detect clicks outside of a specified element.",
+      long: `The useOnClickOutside hook is a utility hook that enables you to detect clicks or touches outside of a specified element. It is commonly used to handle scenarios such as closing a dropdown menu when the user clicks outside of it. This hook takes in a ref to the target element and a callback handler function to be executed when a click or touch event occurs outside of that element. It sets up event listeners for both mouse down and touch start events on the document. When a click or touch occurs outside of the specified element, the provided handler function is called.`,
+    },
+    url: "/tools/useOnClickOutside",
+    parameters: [
+      {
+        name: "ref",
+        type: "object",
+        description:
+          "The ref object referencing the element for which the click outside event needs to be detected.",
+      },
+      {
+        name: "handler",
+        type: "function",
+        description:
+          "The callback function to be executed when a click or touch event occurs outside the specified element. It receives the event object (either MouseEvent or TouchEvent) as a parameter.",
+      },
+    ],
+
+    demo: ClickOutside,
+    example:
+      'import { useOnClickOutside } from "use100hooks";import { useRef, useState } from "react";const ClickOutside = () => { const [isOpen, setIsOpen] = useState(false);  const [value, setvalue] = useState(""); const dropdownRef = useRef(null);  const toggleDropdown = () => { setIsOpen(!isOpen); }; const handleClickOutside = () => { setIsOpen(false); }; useOnClickOutside(dropdownRef, handleClickOutside); return ( <section><p>After you click the toggle then click outside</p><p>Value: {value}</p><button onClick={toggleDropdown}>Toggle Dropdown</button>{isOpen && (<div ref={dropdownRef} className="dropdown"><ul><li onClick={() => {setvalue("Option 1");setIsOpen(false);}}>Option 1</li><li onClick={() => {setvalue("Option 2");setIsOpen(false);}}>Option 2</li><li onClick={() => {setvalue("Option 3"); setIsOpen(false);}}>Option 3</li></ul></div>)}</section>);};export default ClickOutside;',
+  },
+  {
+    icon: CgScrollV,
+    classIcon: "cg",
+    title: "useScrollPosition",
+    install: 'import { useScrollPosition } from "use100hooks"',
+    description: {
+      short: "Track and respond to the current scroll position of the page.",
+      long: `The useScrollPosition hook is a utility hook that allows you to track and respond to the scroll position of the page within a React component. It provides the current scroll position as an object with x and y coordinates. This hook sets up a scroll event listener and updates the scroll position whenever a scroll event occurs. It also executes a specified effect function with the updated scroll position. This can be useful for implementing scroll-based animations, lazy loading of content, or any functionality that requires monitoring the scroll position of the page.`,
+    },
+    url: "/tools/useScrollPosition",
+    parameters: [
+      {
+        name: "effect",
+        type: "function",
+        description:
+          "A function to be executed with the updated scroll position. It receives an object with x and y properties representing the current scroll position.",
+      },
+      {
+        name: "dependencies",
+        type: "array",
+        description:
+          "An optional array of dependencies. When provided, the effect function will only be executed if any of the dependencies have changed. This follows the same rules as the dependencies array in useEffect.",
+      },
+    ],
+
+    demo: ScrollPosition,
+    example:
+      'import { useScrollPosition } from "use100hooks";import { useState } from "react";const ScrollPosition = () => {const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });  const handleScrollEffect = ({ x, y }: { x: number; y: number }) => {console.log(`Scroll position - x: ${x}, y: ${y}`);setCoordinates({ x: x, y: y });}; useScrollPosition(handleScrollEffect, []); return (<section><div><h2>Scroll Position Example</h2><p>Scroll down to see the scroll position logged in the console.</p><p>Coordinates: X:{coordinates.x} Y:{coordinates.y}</p></div></section>);};export default ScrollPosition',
+  },
+  {
+    icon: FaTowerObservation,
+    classIcon: "fa6",
+    title: "useIntersectionObserver",
+    install: 'import { useIntersectionObserver } from "use100hooks"',
+    description: {
+      short: "Observe and respond to element intersection with the viewport.",
+      long: `The useIntersectionObserver hook is a utility hook that allows you to observe the intersection of a target element with its container or viewport using the Intersection Observer API. It provides access to the IntersectionObserverEntry object, which contains information about the intersection ratio, bounding rectangles, and other relevant data. This hook simplifies the usage of the Intersection Observer pattern and enables you to handle intersection-based behaviors such as lazy loading, infinite scrolling, and animations with ease.`,
+    },
+    url: "/tools/useIntersectionObserver",
+    return: [
+      {
+        name: "targetRef",
+        type: "React.RefObject<HTMLDivElement>",
+        description:
+          "A ref object that should be assigned to the element you want to observe for intersection.",
+      },
+      {
+        name: "isIntersecting",
+        type: "boolean",
+        description:
+          "A boolean value indicating whether the observed element is currently intersecting the viewport by the specified threshold.",
+      },
+    ],
+
+    demo: IntersectionObserver,
+    example:
+      'import { useIntersectionObserver } from "use100hooks";const IntersectionObserver = () => { const [ref, isIntersecting] = useIntersectionObserver(); console.log(isIntersecting);return (<section><p>Check The Console.log to see the progress</p><div ref={ref}>{isIntersecting ? "Element is visible" : "Element is not visible"}</div></section>);};export default IntersectionObserver;',
+  },
+  {
+    icon: HiOutlineStatusOnline,
+    classIcon: "hi",
+    title: "useOnlineStatus",
+    install: 'import { useOnlineStatus } from "use100hooks"',
+    description: {
+      short: "Track whether the user is currently online or offline.",
+      long: `The updated useOnlineStatus hook is a custom React hook that allows you to track and adjust the online status of the user. It provides a tuple containing the current online status (isOnline) and a function (setOnlineStatus) to manually adjust the online status.   By default, the hook utilizes the browser's navigator.onLine property to determine the initial online status and update it automatically when the user's connection changes. However, you can manually toggle the online status by calling setOnlineStatus with a boolean value.`,
+    },
+    url: "/tools/useOnlineStatus",
+    return: [
+      {
+        name: "isOnline",
+        type: "boolean",
+        description:
+          "A boolean value indicating the online status of the user. true if online, false if offline.",
+      },
+      {
+        name: "setOnlineStatus",
+        type: "(online: boolean) => void",
+        description: "A function to manually set the online status.",
+      },
+    ],
+
+    demo: OnlineStatus,
+    example:
+      'import { useOnlineStatus } from "use100hooks";const OnlineStatus = () => { const [isOnline, setOnlineStatus] = useOnlineStatus(); const handleToggle = () => { setOnlineStatus(!isOnline); };return (<section><div><p>Automatic Online Status: {isOnline ? "Online" : "Offline"}</p><button onClick={handleToggle}>Toggle Online Status</button></div></section> );};export default OnlineStatus;',
+  },
+  {
+    icon: BsWindowDesktop,
+    classIcon: "bs",
+    title: "useMediaQuery",
+    install: 'import { useMediaQuery } from "use100hooks"',
+    description: {
+      short: "Track and respond to changes in the viewport's media query.",
+      long: `The useMediaQuery hook is a custom React hook that allows you to monitor the state of a CSS media query and provides a boolean value indicating whether the query matches or not. The hook takes a query parameter, which is a valid CSS media query string, and returns the current matching status.
+
+      Upon initialization, the hook evaluates the media query using window.matchMedia and sets the initial matching status. It also registers an event listener for changes in the media query status. Whenever the media query state changes, the matches state is updated accordingly.`,
+    },
+    url: "/tools/useMediaQuery",
+    return: [
+      {
+        name: "matches",
+        type: "boolean",
+        description:
+          "A boolean value indicating whether the media query matches the current screen condition.",
+      },
+    ],
+    parameters: [
+      {
+        name: "query",
+        type: "string",
+        description:
+          "A valid CSS media query string to evaluate the screen size.",
+      },
+    ],
+
+    demo: MediaQuery,
+    example:
+      'import { useMediaQuery } from "use100hooks";const MediaQuery = () => { const isMobile = useMediaQuery("(max-width: 768px)"); return ( <section><p>Check if it is Mobile View or Desktop View</p><div>{isMobile ? <p>Mobile view</p> : <p>Desktop view</p>}</div></section>);};export default MediaQuery;',
+  },
+  {
+    icon: BsReverseLayoutTextWindowReverse,
+    classIcon: "bs",
+    title: "useWindowSize",
+    install: 'import { useWindowSize } from "use100hooks"',
+    description: {
+      short: "Get the current size of the browser window.",
+      long: `The useWindowSize hook is a custom React hook that allows you to track the size of the browser window and provides an object containing the current width and height. It initializes the state with the current window size and updates it whenever the window is resized.
+
+      Upon initialization, the hook sets the initial window size using window.innerWidth and window.innerHeight. It then registers an event listener for window resize events and updates the windowSize state whenever a resize event occurs.`,
+    },
+    url: "/tools/useWindowSize",
+    return: [
+      {
+        name: "width",
+        type: "number",
+        description: "The current width of the browser window.",
+      },
+      {
+        name: "height",
+        type: "number",
+        description: "The current height of the browser window.",
+      },
+    ],
+
+    demo: WindowSize,
+    example:
+      'import { useWindowSize } from "use100hooks";const WindowSize = () => {  const { width, height } = useWindowSize(); return (<section><div><p>Window Width:{width}px</p><p>Window Height: {height}px</p></div></section>);};export default WindowSize;',
+  },
+  {
+    icon: LuPanelBottomInactive,
+    classIcon: "lu",
+    title: "useIdle",
+    install: 'import { useIdle } from "use100hooks"',
+    description: {
+      short: " Detect when the user becomes idle.",
+      long: `The useIdle hook is a custom React hook that allows you to track the user's idle state. It detects whether the user has been inactive for a specified duration and provides a boolean value indicating the idle state. The hook takes an options parameter with a time property that represents the idle duration in milliseconds.
+
+      Upon initialization, the hook sets the initial idle state to false. It then registers event listeners for user activity, such as mouse movement, key presses, and scroll events. When the user becomes idle, the isIdle state is set to true. When the user becomes active again, the idle timer is reset, and the isIdle state is set to false.`,
+    },
+    url: "/tools/useIdle",
+    parameters: [
+      {
+        name: "options",
+        type: "IdleOptions",
+        description: "An object specifying the options for the idle behavior.",
+      },
+      {
+        name: "options.time",
+        type: "number",
+        description:
+          "The duration in milliseconds for considering the user as idle.",
+      },
+    ],
+    return: [
+      {
+        name: "isIdle",
+        type: "boolean",
+        description: "A boolean value indicating the idle state.",
+      },
+    ],
+
+    demo: Idle,
+    example:
+      'import { useIdle } from "use100hooks"; const Idle = () => { const isIdle = useIdle({ time: 30000 }); return ( <section><p>Checking is use is idle within 30 sec</p><div>{isIdle ? <p>User is idle</p> : <p>User is active</p>}</div></section>);};export default Idle;',
+  },
+  {
+    icon: PiFlyingSaucerBold,
+    classIcon: "lu",
+    title: "useHover",
+    install: 'import { useHover } from "use100hooks"',
+    description: {
+      short: "Track whether an element is currently being hovered over.",
+      long: `The useHover hook is a custom React hook that allows you to track the hover state of an element. It returns a ref object and a boolean value indicating whether the element is currently being hovered over or not.
+
+      Upon initialization, the hook sets the initial hover state to false. It adds event listeners for mouseenter and mouseleave events to the target element using the ref object. When the element is hovered over, the isHovered state is set to true, and when the mouse leaves the element, the isHovered state is set to false.`,
+    },
+    url: "/tools/useHover",
+    return: [
+      {
+        name: "hoverRef",
+        type: "React.RefObject",
+        description:
+          "A ref object that should be attached to the element for tracking hover state.",
+      },
+
+      {
+        name: "isHovered",
+        type: "boolean",
+        description:
+          "A boolean value indicating whether the element is being hovered or not.",
+      },
+    ],
+
+    demo: Hover,
+    example:
+      'import { useHover } from "use100hooks";const Hover = () => {  const [hoverRef, isHovered] = useHover();  return ( <section><div ref={hoverRef}>{isHovered ? (<p>Element is being hovered</p>) : ( <p>Element is not being hovered</p>)}</div></section>);};export default Hover;',
+  },
+  {
+    icon: MdOutlinePages,
+    classIcon: "md",
+    title: "useLocation",
+    install: 'import { useLocation } from "use100hooks"',
+    description: {
+      short: "Get and update the current URL location.",
+      long: `The useLocation hook is a custom React hook that allows you to track the current browser location. It returns the current URL as a string.
+
+      Upon initialization, the hook sets the initial location to window.location.href. It adds an event listener for the popstate event, which is triggered when the user navigates back or forward in the browser history. When the popstate event is triggered, the location state is updated with the current URL.`,
+    },
+    url: "/tools/useLocation",
+    return: [
+      {
+        name: "location",
+        type: "string",
+        description: "The current URL of the browser window.",
+      },
+    ],
+
+    demo: Location,
+    example:
+      'import { useLocation } from "use100hooks";const Location = () => { const location = useLocation();  return ( <section><div><p>Current location: {location}</p></div></section>);};export default Location;',
+  },
+  {
+    icon: GiNetworkBars,
+    classIcon: "tfi",
+    title: "useNetworkStatus",
+    install: 'import { useNetworkStatus } from "use100hooks"',
+    description: {
+      short:
+        "Track the user's network status (e.g., online, offline, slow connection).",
+      long: `The useNetworkStatus hook is a powerful tool that allows you to retrieve detailed information about the network status of the user's device. It provides real-time updates on various properties related to the network connection, giving you insights into the current network conditions.
+
+      By using this hook, you can access information such as whether the device is currently online or offline, the type of network connection being used (e.g., WiFi, cellular), the maximum downlink speed in megabits per second, the effective type of the connection (e.g., slow-2g, 4g), the estimated round-trip time of the connection in milliseconds, and whether the user has enabled data-saving mode.`,
+    },
+    url: "/tools/useNetworkStatus",
+    return: [
+      {
+        name: "online",
+        type: "boolean",
+        description:
+          "Indicates whether the device is currently online or offline.",
+      },
+      {
+        name: "type",
+        type: "number",
+        description: "The maximum downlink speed in megabits per second.",
+      },
+      {
+        name: "effectiveType",
+        type: "string",
+        description:
+          "The effective type of the connection (e.g., slow-2g, 4g).",
+      },
+      {
+        name: "rtt",
+        type: "number",
+        description:
+          "The estimated round-trip time of the connection in milliseconds.",
+      },
+      {
+        name: "saveData",
+        type: "boolean",
+        description: "Indicates whether the user has enabled data-saving mode.",
+      },
+    ],
+
+    demo: Network,
+    example:
+      'import { useNetworkStatus } from "use100hooks";const Network = () => {  const networkStatus = useNetworkStatus(); return (<div><p>Online: {networkStatus.online ? "Yes" : "No"}</p><p>Network Type: {networkStatus.type}</p><p>Downlink Speed: {networkStatus.downlink} Mbps</p><p>Effective Type: {networkStatus.effectiveType}</p><p>Round-Trip Time: {networkStatus.rtt} ms</p><p>Data Saving Mode: {networkStatus.saveData ? "Enabled" : "Disabled"}</p></div>);};export default Network;',
+  },
+  {
+    icon: MdAnimation,
+    classIcon: "md",
+    title: "useAnimationFrame",
+    install: 'import { useAnimationFrame } from "use100hooks"',
+    description: {
+      short:
+        "Perform animations using the browser's requestAnimationFrame API.",
+      long: `The useAnimationFrame hook is a powerful utility that allows you to easily synchronize animations with the browser's built-in requestAnimationFrame API. This hook provides a simple and efficient way to create smooth and performant animations in your React applications.
+
+      By using this hook, you can pass a callback function that will be invoked on each animation frame. The callback receives the elapsed time since the last frame as a parameter, allowing you to create dynamic and time-based animations. You can update the UI, calculate animation values, or perform any other actions needed for your animation logic within the callback.`,
+    },
+    url: "/tools/useAnimationFrame",
+    parameters: [
+      {
+        name: "callback",
+        type: "FrameCallback",
+        description: "A callback function that is called on each frame.",
+      },
+      {
+        name: "animationSpeed",
+        type: "number",
+        description:
+          "The speed of the animation. Determines the rate at which the value increments.",
+      },
+    ],
+    demo: AnimationFrame,
+    example:
+      'import { useAnimationFrame } from "use100hooks";import { useState } from "react";const AnimationFrame = () => { const [count, setCount] = useState(0);  const animate = () => { setCount(Math.floor(value));  };  useAnimationFrame(animate, 0.01);  return (<div><p>Animation Value: {count}</p></div>);};export default AnimationFrame;',
+  },
+
+  {
+    icon: AiTwotoneAudio,
+    classIcon: "ai",
+    title: "useAudio",
+    install: 'import { useAudio } from "use100hooks"',
+    description: {
+      short: "Control and interact with audio playback.",
+      long: `The useAudio hook is a reusable hook that provides control over an HTML <audio> element. It takes a src parameter which specifies the source URL of the audio file. The hook returns an object with three properties: play, pause, and audioRef. The play function plays the audio, the pause function pauses the audio, and the audioRef is a reference to the <audio> element.`,
+    },
+    url: "/tools/useAudio",
+    parameters: [
+      {
+        name: "src",
+        type: "string",
+        description: "The source URL of the audio.",
+      },
+    ],
+    return: [
+      {
+        name: "play",
+        type: "function",
+        description: "Function to play the audio.",
+      },
+      {
+        name: "isPlaying",
+        type: "boolean",
+        description: "Status if the player is still playing",
+      },
+      {
+        name: "pause",
+        type: "function",
+        description: "Function to pause the audio.",
+      },
+      {
+        name: "audioRef",
+        type: "React.RefObject<HTMLAudioElement>",
+        description: "Reference to the HTML <audio> element.",
+      },
+    ],
+    demo: Audio,
+    example:
+      'import { useAudio } from "use100hooks";const Audio = () => { const { play, isPlaying, pause, audioRef } = useAudio("/bosspick.wav"); return ( <section><audio ref={audioRef} /><button onClick={() => (isPlaying ? pause() : play())}>{isPlaying ? "Pause" : "Play"}</button></section> );};export default Audio;',
   },
 ];
 

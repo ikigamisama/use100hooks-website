@@ -25,14 +25,27 @@ const ToolsNavbar = () => {
         setListTools(filteredTools);
       }
       if (searchTool === "") {
-        setListTools(toolsList);
+        const sortedList = [...listTools].sort((a, b) => {
+          const letterA = a.title.toLowerCase();
+          const letterB = b.title.toLowerCase();
+
+          if (letterA < letterB) {
+            return -1;
+          }
+          if (letterA > letterB) {
+            return 1;
+          }
+          return 0;
+        });
+
+        setListTools(sortedList);
       }
     };
     searchTools();
   }, [toolsList, debounceSearch]);
 
   return (
-    <div className="hidden lg:block fixed z-20 top-[80px] w-[18rem] overflowy-auto navbar-tool-list">
+    <div className="hidden lg:block fixed z-20 top-[80px] w-[18rem] navbar-tool-list">
       <nav className="lg:text-sm lg:leading-6 relative">
         <div className="h-10"></div>
         <div className="relative">
@@ -63,26 +76,28 @@ const ToolsNavbar = () => {
             />
           </div>
         </div>
-        <div className="mt-12 lg:mt-8">
+        <div className="mt-12 lg:mt-8 ">
           <h5 className="mb-8 lg:mb-4 font-semibold text-xl text-slate-900 dark:text-white">
             List of Tools
           </h5>
-          <ul className="space-y-6 lg:space-y-2 border-l-4 border-sky-100 dark:border-[#16181A]">
-            {listTools.map((d, i) => (
-              <li key={i}>
-                <Link
-                  href={d.url}
-                  className={`${
-                    params.tools === d.title
-                      ? 'block border-l-4 pl-4 -ml-[3px] border-current font-semibold text-slate-800 dark:text-sky-500 border-sky-500 dark:border-gray-500"'
-                      : "block border-l-4 pl-4 -ml-[3px] border-transparent font-light hover:border-sky-500 text-slate-600 dark:text-slate-400"
-                  } text-lg`}
-                >
-                  {d.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="overflow-y-auto h-[45rem]">
+            <ul className="space-y-6 lg:space-y-2 border-l-2 border-sky-100 dark:border-[#16181A] ">
+              {listTools.map((d, i) => (
+                <li key={i}>
+                  <Link
+                    href={d.url}
+                    className={`${
+                      params.tools === d.title
+                        ? 'block border-l-4 pl-4 -ml-[3px] border-current font-semibold text-slate-800 dark:text-sky-500 border-sky-500 dark:border-gray-500"'
+                        : "block border-l-4 pl-4 -ml-[3px] border-transparent font-normal hover:border-sky-500 text-slate-600 dark:text-slate-400"
+                    } text-lg`}
+                  >
+                    {d.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </nav>
     </div>
