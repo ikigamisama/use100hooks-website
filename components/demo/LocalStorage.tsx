@@ -25,7 +25,7 @@ const LocalStorage = () => {
         <div className="relative mb-2">
           <label
             htmlFor="first_name"
-            className="block mb-2 text-left text-sm font-bold text-sky-500 dark:text-white"
+            className="block mb-2 text-left text-sm font-bold text-sky-500"
           >
             First name
           </label>
@@ -41,7 +41,7 @@ const LocalStorage = () => {
         <div className="relative mb-2">
           <label
             htmlFor="last_name"
-            className="block mb-2 text-left text-sm font-bold text-sky-500 dark:text-white"
+            className="block mb-2 text-left text-sm font-bold text-sky-500"
           >
             Last Name
           </label>

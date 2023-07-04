@@ -45,10 +45,10 @@ const MainToolsInfo = () => {
           </Link>
         </div>
 
-        <h1 className="inline-block text-3xl sm:text-3xl font-extrabold text-slate-900 tracking-tight ">
+        <h1 className="inline-block text-3xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
           {params.tools}
         </h1>
-        <p className="mt-2 text-lg text-slate-700 dark:text-slate-400">
+        <p className="mt-2 text-lg text-slate-700 dark:text-white">
           {toolInfo.description.short}
         </p>
 
@@ -59,7 +59,9 @@ const MainToolsInfo = () => {
 
         <div className="mt-8" id="description-section">
           <p className="mb-4 text-lg text-sky-500 font-semibold">Description</p>
-          <p className="leading-normal">{toolInfo.description.long}</p>
+          <p className="leading-normal text-slate-900 dark:text-white">
+            {toolInfo.description.long}
+          </p>
         </div>
 
         {ifKeyExists("parameters") && (
@@ -84,7 +86,10 @@ const MainToolsInfo = () => {
               </thead>
               <tbody>
                 {toolInfo.parameters?.map((d, i) => (
-                  <tr key={i} className="bg-white border-b border-sky-500 ">
+                  <tr
+                    key={i}
+                    className="bg-transparent border-b text-slate-800 dark:text-white border-sky-500"
+                  >
                     <td className="px-6 py-4">{d.name}</td>
                     <td className="px-6 py-4">{d.type}</td>
                     <td className="px-6 py-4">{d.description}</td>
@@ -115,7 +120,10 @@ const MainToolsInfo = () => {
               </thead>
               <tbody>
                 {toolInfo.return?.map((d, i) => (
-                  <tr key={i} className="bg-white border-b border-sky-500 ">
+                  <tr
+                    key={i}
+                    className="bg-transparent border-b text-slate-800 dark:text-white border-sky-500 "
+                  >
                     <td className="px-6 py-4">{d.name}</td>
                     <td className="px-6 py-4">{d.type}</td>
                     <td className="px-6 py-4">{d.description}</td>
@@ -129,7 +137,7 @@ const MainToolsInfo = () => {
         {toolInfo.demo && (
           <div className="mt-8" id="demo-section">
             <p className="mb-4 text-lg text-sky-500 font-semibold">Demo</p>
-            <div className="h-full mb-8 text-center w-full">
+            <div className="h-full mb-8 p-8 text-center w-full bg-transparent dark:bg-white">
               <toolInfo.demo />
             </div>
           </div>

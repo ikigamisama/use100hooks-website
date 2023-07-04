@@ -29,7 +29,7 @@ const ToolsContentList = ({ toolKeyInfo }: ToolsContentListProps) => {
   return (
     <div className="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[18rem] py-10 overflow-y-auto hidden xl:block">
       <div className="px-8">
-        <h4 className="text-slate-900 font-semibold mb-4 text-sm leading-6">
+        <h4 className="text-slate-900 dark:text-white font-semibold mb-4 text-sm leading-6">
           On this Page
         </h4>
         <ul className="text-slate-700 text-sm leading-6">
@@ -42,7 +42,7 @@ const ToolsContentList = ({ toolKeyInfo }: ToolsContentListProps) => {
                 className={`${
                   currentScroll === d
                     ? "block py-1 font-bold text-sky-500"
-                    : "block py-1 font-medium hover:text-slate-900"
+                    : "block py-1 font-medium hover:text-sky-400 dark:text-slate-400 "
                 } `}
               >
                 {d}

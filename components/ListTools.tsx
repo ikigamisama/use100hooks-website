@@ -18,27 +18,32 @@ const CardTools = ({
 }: ToolsData) => {
   return (
     <Link href={url}>
-      <div className="w-full bg-white dark:bg-[#16181A] h-48 drop-shadow-xl p-4 ease-in duration-300 hover:drop-shadow-2xl">
+      <div className="w-full bg-white  dark:bg-gradient-to-l dark:from-sky-400 dark:to-blue-500 h-48 drop-shadow-xl p-4 ease-in duration-300 hover:drop-shadow-2xl">
         <div className="flex flex-col justify-between h-full">
           <div className="flex flex-row items-center mb-4">
-            <div className="rounded-full w-10 h-10 bg-blue-100 flex items-center justify-center">
+            <div className="rounded-full w-10 h-10 bg-blue-100 dark:bg-white flex items-center justify-center">
               <Icon size={20} className={`tools-icons ${classIcon}`} />
             </div>
             <p
-              className={`${inter.className} ml-2 font-semibold text-sky-500  text-lg`}
+              className={`${inter.className} ml-2 font-semibold text-sky-500 dark:text-white text-lg`}
             >
               {title}
             </p>
           </div>
-          <p className={`${inter.className} font-light text-base mb-4`}>
+          <p
+            className={`${inter.className} font-light text-base mb-4 text-black-900 dark:text-white`}
+          >
             {description.short}
           </p>
           <div className="flexEnd">
             <button
               type="button"
-              className="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center text-white"
+              className="w-10 h-10 rounded-full bg-sky-500  dark:bg-white flex items-center justify-center text-white"
             >
-              <MdSubdirectoryArrowRight size={20} />
+              <MdSubdirectoryArrowRight
+                size={20}
+                className="dark:fill-sky-500"
+              />
             </button>
           </div>
         </div>
@@ -78,7 +83,7 @@ const ListTools = () => {
   return (
     <div className="mx-auto max-w-7xl mb-10 px-4">
       <div className="flexStart mb-6">
-        <p>Search By:</p>
+        <p className="text-black-800 dark:text-white">Search By:</p>
         <div className="ml-4 gap-4 relative">
           <input
             type="search"
@@ -86,7 +91,7 @@ const ListTools = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search"
-            className="bg-white h-10 border border-blue-200 px-5  rounded-full text-sm focus:outline-none focus:border-sky-500"
+            className="bg-transparent h-10 border border-black-500 text-slate-900 dark:text-white dark:border-white px-5 rounded-full text-sm focus:outline-none focus:border-black-800 dark:focus:border-white"
           />
         </div>
       </div>

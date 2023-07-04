@@ -50,6 +50,7 @@ html, body {
 }
 
 .tools-icons.gr path,
+.tools-icons.lu path, .tools-icons.lu rect,
 .tools-icons.tb path:not([stroke="none"]){
   stroke: #3b82f6 !important;
 }
@@ -60,6 +61,7 @@ html, body {
 .tools-icons.md path:not([fill="none"]){
   fill: #3b82f6 !important;
 }
+
 
 
 .navbar-tool-list::-webkit-scrollbar {
