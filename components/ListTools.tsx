@@ -1,7 +1,6 @@
 "use client";
 
 import { ToolsData } from "@/common.types";
-import { inter } from "@/lib/fonts";
 import { toolsList } from "@/lib/tools";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
 import Link from "next/link";
@@ -25,13 +24,13 @@ const CardTools = ({
               <Icon size={20} className={`tools-icons ${classIcon}`} />
             </div>
             <p
-              className={`${inter.className} ml-2 font-semibold text-sky-500 dark:text-white text-lg`}
+              className={`ml-2 font-semibold text-sky-500 dark:text-white text-lg`}
             >
               {title}
             </p>
           </div>
           <p
-            className={`${inter.className} font-light text-base mb-4 text-black-900 dark:text-white`}
+            className={`font-light text-base mb-4 text-black-900 dark:text-white`}
           >
             {description.short}
           </p>
@@ -55,6 +54,7 @@ const CardTools = ({
 const ListTools = () => {
   const [search, setSearch] = useCustomState<string>("");
   const [listTools, setListTools] = useState<ToolsData[]>(toolsList);
+  const [allToolsTitle, setAlltoolsTitle] = useState("");
   const debounceSearch = useDebounce(search, 250);
 
   useEffect(() => {
@@ -86,6 +86,13 @@ const ListTools = () => {
           }
           return 0;
         });
+
+        let newTitleList: string[] = [];
+        sortedList.map((d) => {
+          newTitleList.push(d.title);
+        });
+
+        setAlltoolsTitle(newTitleList.join(", "));
         setListTools(sortedList);
       }
     };

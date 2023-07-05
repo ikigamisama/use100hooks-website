@@ -1,5 +1,11 @@
 import { IconType } from "react-icons";
 
+declare global {
+  interface Window {
+    example: string;
+  }
+}
+
 export type SortToolList = {
   selectSortType: string;
   setSelectSortType: (sortType: string) => void;

@@ -36,7 +36,7 @@ const MainToolsInfo = () => {
   };
 
   return (
-    <section className="relative z-20 mt-[80px] max-w-3xl mx-auto">
+    <section className="relative z-20 mt-[80px] mb-8 max-w-3xl mx-auto">
       <div className="max-w-3xl mx-auto pt-10 xl:max-w-none xl:pr-8">
         <div className="block xl:hidden mb-4">
           <Link href="/" className="flexStart">
@@ -70,33 +70,35 @@ const MainToolsInfo = () => {
               Parameters
             </p>
 
-            <table className="w-full text-sm text-left border border-sky-500">
-              <thead className="text-xs text-white uppercase bg-sky-500 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Name
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Type
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Description
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {toolInfo.parameters?.map((d, i) => (
-                  <tr
-                    key={i}
-                    className="bg-transparent border-b text-slate-800 dark:text-white border-sky-500"
-                  >
-                    <td className="px-6 py-4">{d.name}</td>
-                    <td className="px-6 py-4">{d.type}</td>
-                    <td className="px-6 py-4">{d.description}</td>
+            <div className="w-full overflow-x-auto">
+              <table className="w-full text-sm text-left border border-sky-500">
+                <thead className="text-xs text-white uppercase bg-sky-500 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">
+                      Name
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Type
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Description
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {toolInfo.parameters?.map((d, i) => (
+                    <tr
+                      key={i}
+                      className="bg-transparent border-b text-slate-800 dark:text-white border-sky-500"
+                    >
+                      <td className="px-6 py-4">{d.name}</td>
+                      <td className="px-6 py-4">{d.type}</td>
+                      <td className="px-6 py-4">{d.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
@@ -104,33 +106,35 @@ const MainToolsInfo = () => {
           <div className="mt-8 relative" id="return-section">
             <p className="mb-4 text-lg text-sky-500 font-semibold">Return</p>
 
-            <table className="w-full text-sm text-left border border-sky-500">
-              <thead className="text-xs text-white uppercase bg-sky-500 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Name
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Type
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Description
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {toolInfo.return?.map((d, i) => (
-                  <tr
-                    key={i}
-                    className="bg-transparent border-b text-slate-800 dark:text-white border-sky-500 "
-                  >
-                    <td className="px-6 py-4">{d.name}</td>
-                    <td className="px-6 py-4">{d.type}</td>
-                    <td className="px-6 py-4">{d.description}</td>
+            <div className="w-full overflow-x-auto">
+              <table className="w-full text-sm text-left border border-sky-500">
+                <thead className="text-xs text-white uppercase bg-sky-500 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">
+                      Name
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Type
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Description
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {toolInfo.return?.map((d, i) => (
+                    <tr
+                      key={i}
+                      className="bg-transparent border-b text-slate-800 dark:text-white border-sky-500 "
+                    >
+                      <td className="px-6 py-4">{d.name}</td>
+                      <td className="px-6 py-4">{d.type}</td>
+                      <td className="px-6 py-4">{d.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 

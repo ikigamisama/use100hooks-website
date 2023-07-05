@@ -59,7 +59,7 @@ const Terminal = ({ text }: TerminalProps) => {
         </div>
         <div className="relative w-full bg-[#011627]">
           <div className="flexBetween">
-            <pre className="text-lg leading-6 text-left text-slate-50 flex ligatures-none overflow-auto">
+            <pre className="text-md lg:text-lg leading-6 text-left text-slate-50 flex ligatures-none overflow-auto">
               <code className="flex-none min-w-full p-6">
                 <span className="flex">
                   {text === "" && (

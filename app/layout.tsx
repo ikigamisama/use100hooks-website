@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { inter } from "@/lib/fonts";
 import { Providers } from "./providers";
 import dynamic from "next/dynamic";
 export const metadata = {
@@ -22,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-white dark:bg-black`}>
+      <body className={`bg-white dark:bg-black`}>
         <Providers>
           <Navbar />
           {children}

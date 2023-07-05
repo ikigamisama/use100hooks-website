@@ -45,7 +45,7 @@ const ToolsNavbar = () => {
   }, [toolsList, debounceSearch]);
 
   return (
-    <div className="hidden lg:block fixed z-20 top-[80px] w-[18rem] navbar-tool-list">
+    <div className="hidden xl:block fixed z-20 top-[80px] w-[18rem] navbar-tool-list">
       <nav className="lg:text-sm lg:leading-6 relative">
         <div className="h-10"></div>
         <div className="relative">
@@ -90,7 +90,7 @@ const ToolsNavbar = () => {
                       params.tools === d.title
                         ? 'block border-l-4 pl-4 -ml-[3px] border-current font-semibold text-slate-800 dark:text-sky-500 border-sky-500 dark:border-gray-500"'
                         : "block border-l-4 pl-4 -ml-[3px] border-transparent font-normal hover:border-sky-500 text-slate-600 dark:text-slate-400"
-                    } text-lg`}
+                    } text-md`}
                   >
                     {d.title}
                   </Link>

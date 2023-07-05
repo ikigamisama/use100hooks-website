@@ -1,27 +1,47 @@
 import { ToolsData } from "@/common.types";
-
 import { GrDocumentConfig } from "react-icons/gr";
 import { LiaClipboard } from "react-icons/lia";
 import { TbBounceRight } from "react-icons/tb";
-import { MdStorage, MdOutlinePages, MdAnimation } from "react-icons/md";
-import { FaMoon } from "react-icons/fa";
+import {
+  MdStorage,
+  MdOutlinePages,
+  MdAnimation,
+  MdOutlineKeyboardHide,
+  MdInput,
+  MdSyncLock,
+} from "react-icons/md";
+import { FaMoon, FaRegWindowMaximize } from "react-icons/fa";
 import { VscSymbolParameter } from "react-icons/vsc";
 import { LiaSortAmountDownSolid } from "react-icons/lia";
-import { BsDatabaseFillLock, BsFillGeoAltFill } from "react-icons/bs";
+import {
+  BsDatabaseFillLock,
+  BsFillGeoAltFill,
+  BsFillCloudDownloadFill,
+  BsBatteryCharging,
+  BsFillStickyFill,
+} from "react-icons/bs";
 import { LuKeyboard, LuPanelBottomInactive } from "react-icons/lu";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { TfiLayoutSidebarLeft } from "react-icons/tfi";
-import { CgScrollV } from "react-icons/cg";
+import { CgScrollV, CgArrowsScrollV } from "react-icons/cg";
 import { FaTowerObservation } from "react-icons/fa6";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import {
   BsWindowDesktop,
   BsReverseLayoutTextWindowReverse,
 } from "react-icons/bs";
-import { PiFlyingSaucerBold } from "react-icons/pi";
-import { GiNetworkBars } from "react-icons/gi";
+import {
+  PiFlyingSaucerBold,
+  PiIdentificationBadgeFill,
+  PiUserFocusBold,
+  PiNavigationArrowFill,
+  PiCubeFocusDuotone,
+} from "react-icons/pi";
+import { GiNetworkBars, GiFloatingPlatforms } from "react-icons/gi";
 import { AiTwotoneAudio, AiOutlineExpandAlt } from "react-icons/ai";
 import { RxVideo } from "react-icons/rx";
+import { ImPagebreak } from "react-icons/im";
+import { BiScreenshot } from "react-icons/bi";
 
 import DarkMode from "@/components/demo/DarkMode";
 import HTMLEscape from "@/components/demo/HTMLEscape";
@@ -48,6 +68,21 @@ import Audio from "@/components/demo/Audio";
 import Video from "@/components/demo/Video";
 import ResizeObserver from "@/components/demo/ResizeObserver";
 import Geolocation from "@/components/demo/Geolocation";
+import UUID from "@/components/demo/UUID";
+import Focus from "@/components/demo/Focus";
+import ScrollUp from "@/components/demo/ScrollUp";
+import Navigation from "@/components/demo/Navigation";
+import WindowFocused from "@/components/demo/WindowFocused";
+import PageLeave from "@/components/demo/PageLeave";
+import BeforeUnload from "@/components/demo/BeforeUnload";
+import Screenshot from "@/components/demo/Screenshot";
+import HoverIntent from "@/components/demo/HoverIntent";
+import KeypressCombo from "@/components/demo/KeypressCombo";
+import FocusTrap from "@/components/demo/FocusTrap";
+import ValidateForm from "@/components/demo/ValidateForm";
+import BatteryStatus from "@/components/demo/BatteryStatus";
+import StickyEffect from "@/components/demo/StickyEffect";
+import Interval from "@/components/demo/Interval";
 
 export const toolsList: ToolsData[] = [
   {
@@ -875,6 +910,510 @@ export const toolsList: ToolsData[] = [
     demo: Geolocation,
     example:
       'import { useGeolocation } from "use100hooks";const Geolocation = () => { const { coordinates, error } = useGeolocation();  if (error) { return <div>Error: {error.message}</div>; } if (!coordinates) {    return <div>Loading...</div>; } return ( <div><h1>Current Location:</h1> <p>Latitude: {coordinates.latitude}</p><p>Longitude: {coordinates.longitude}</p></div>);};export default Geolocation;',
+  },
+
+  {
+    icon: PiIdentificationBadgeFill,
+    classIcon: "pi",
+    title: "useUIDgenerator",
+    install: 'import { useUIDgenerator } from "use100hooks"',
+    description: {
+      short:
+        "Creates unique random IDs based on the chosen version (v1, v4, or GUID).",
+      long: `The useUIDgenerator hook is a tool in JavaScript that generates unique identification numbers based on the specified version. It can create different types of IDs, including v1, v4, and GUID. When you use this hook, it automatically generates a unique ID for you to use in your application. The way the ID is created depends on the version you choose. For example, if you select v1, the ID will include a timestamp combined with a random string. If you choose v4, it will be a random string composed of four parts. And if you opt for GUID, the ID will follow a specific pattern with placeholders that are replaced by random numbers and letters. The useUIDgenerator hook is a convenient tool for developers who need to generate unique IDs in their projects without having to worry about the details of the ID creation process.`,
+    },
+    url: "/tools/useUIDgenerator",
+    return: [
+      {
+        name: "uid",
+        type: "string",
+        description:
+          "The generated unique ID based on the specified version of the hook.",
+      },
+    ],
+    parameters: [
+      {
+        name: "version",
+        type: "string",
+        description: `The version of the unique ID to generate. It can be one of "v1", "v4", or "guid".`,
+      },
+    ],
+    demo: UUID,
+    example:
+      'import { useUIDgenerator } from "use100hooks";const UUID = () => {  const v1 = useUIDgenerator("v1"),    v4 = useUIDgenerator("v4"),    guid = useUIDgenerator("guid");  return ( <section><div><p>v1 - {v1}</p><p>v4 - {v4}</p><p>GUID - {guid}</p></div></section>);};export default UUID;',
+  },
+  {
+    icon: PiUserFocusBold,
+    classIcon: "pi",
+    title: "useFocus",
+    install: 'import { useFocus } from "use100hooks"',
+    description: {
+      short: "Track and manage the focus state of an element.",
+      long: `The useFocus hook is a powerful tool in React that simplifies the process of managing focus on an input element. By using this hook, you can automatically set focus to the input element when your component mounts, without the need for manual intervention. Under the hood, the hook utilizes the useRef and useEffect hooks from React. It creates a ref using the useRef hook, which is then assigned to the input element you want to focus. The useEffect hook is employed to trigger the focus effect only once, ensuring that the input element receives focus when the component is mounted.`,
+    },
+    url: "/tools/useFocus",
+    return: [
+      {
+        name: "inputRef",
+        type: "React.RefObject<HTMLInputElement>",
+        description:
+          "The reference object for the input element to be focused.",
+      },
+      {
+        name: "isFocused",
+        type: "boolean",
+        description:
+          "A boolean value indicating whether the input element has focus or not.",
+      },
+    ],
+    demo: Focus,
+    example:
+      'import { useFocus } from "use100hooks";const Focus = () => {  const { inputRef, isFocused } = useFocus();  return ( <div><h1>Focus Example</h1><input ref={inputRef} type="text" /> <p>Start typing in the input field to see the focus in action.</p> <p>Is Focus {isFocused.toString()}</p></div> );};export default Focus;',
+  },
+  {
+    icon: CgArrowsScrollV,
+    classIcon: "cg",
+    title: "useScrollTop",
+    install: 'import { useScrollTop } from "use100hooks"',
+    description: {
+      short: "Scroll to the top of the page on component mount.",
+      long: `The useScrollToTop hook is a handy tool in React that enables smooth scrolling to the top of a page. It works by adding a scroll event listener to the window and keeping track of the scroll position. When the user scrolls beyond a certain threshold (300 pixels in this example), a scroll-to-top button becomes visible, indicating that they can click it to smoothly scroll back to the top of the page. This hook provides a convenient and reusable solution for implementing a scroll-to-top functionality in your React applications, enhancing the user experience and navigation within long pages.`,
+    },
+    url: "/tools/useScrollTop",
+    return: [
+      {
+        name: "isVisible",
+        type: "boolean",
+        description:
+          "A boolean value indicating the visibility of the scroll-to-top button.",
+      },
+      {
+        name: "scrollToTop",
+        type: "function",
+        description:
+          "A function that, when invoked, scrolls the page to the top.",
+      },
+    ],
+    parameters: [
+      {
+        name: "heightToShow",
+        type: "number",
+        description:
+          "The height at which the scroll-to-top button should become visible.",
+      },
+    ],
+    demo: ScrollUp,
+    example:
+      'import { useScrollTop } from "use100hooks";const ScrollUp = () => { const { isVisible, scrollToTop } = useScrollTop(200); return (<section><button onClick={scrollToTop}>Scroll to Top</button><p>Scrollup feature will appear {isVisible.toString()}</p></section>);};export default ScrollUp;',
+  },
+  {
+    icon: PiNavigationArrowFill,
+    classIcon: "pi",
+    title: "useNavigation",
+    install: 'import { useNavigation } from "use100hooks"',
+    description: {
+      short: "Manage and control navigation within your application.",
+      long: `The useNavigation hook allows you to handle keyboard navigation in your React components. It takes in two parameters: direction and callback. The direction parameter specifies whether the navigation should be triggered for the "forward" or "backward" direction. The callback is a function that will be invoked when the corresponding navigation key is pressed.`,
+    },
+    url: "/tools/useNavigation",
+
+    parameters: [
+      {
+        name: "direction",
+        type: "string",
+        description:
+          "The direction of the navigation. Specifies whether the navigation should be triggered for forward or backward.",
+      },
+      {
+        name: "callback",
+        type: "function",
+        description:
+          "The callback function to be invoked when the corresponding navigation key is pressed.",
+      },
+    ],
+    demo: Navigation,
+    example:
+      'import { useNavigation } from "use100hooks"; const Navigation = () => {  const handleNext = () => { /**Logic to navigate to the next page**/  };  const handlePrevious = () => { /**Logic to navigate to the previous page**/  }; useNavigation("forward", handleNext); useNavigation("backward", handlePrevious); return <div>My Component</div>;};export default Navigation;',
+  },
+  {
+    icon: FaRegWindowMaximize,
+    classIcon: "cg",
+    title: "useWindowFocus",
+    install: 'import { useWindowFocus } from "use100hooks"',
+    description: {
+      short: "Track whether the browser window has focus or is out of focus.",
+      long: `The useNavigation hook allows you to handle keyboard navigation in your React components. It takes in two parameters: direction and callback. The direction parameter specifies whether the navigation should be triggered for the "forward" or "backward" direction. The callback is a function that will be invoked when the corresponding navigation key is pressed.`,
+    },
+    url: "/tools/useWindowFocus",
+
+    return: [
+      {
+        name: "isWindowFocused",
+        type: "boolean",
+        description:
+          "The useWindowFocus hook allows you to track the focus state of the browser window in your React components. It returns a boolean value that indicates whether the window is currently focused or not.",
+      },
+    ],
+    demo: WindowFocused,
+    example:
+      'import { useWindowFocus } from "use100hooks";const WindowFocused = () => {  const isFocused = useWindowFocus();  return ( <div><h2>{isFocused ? "Window is focused" : "Window is not focused"}</h2></div>);};export default WindowFocused;',
+  },
+  {
+    icon: ImPagebreak,
+    classIcon: "in",
+    title: "usePageLeave",
+    install: 'import { usePageLeave } from "use100hooks"',
+    description: {
+      short: "Trigger an action when the user leaves the current page.",
+      long: `The useNavigation hook allows you to handle keyboard navigation in your React components. It takes in two parameters: direction and callback. The direction parameter specifies whether the navigation should be triggered for the "forward" or "backward" direction. The callback is a function that will be invoked when the corresponding navigation key is pressed.`,
+    },
+    url: "/tools/usePageLeave",
+    parameters: [
+      {
+        name: "callback",
+        type: "function",
+        description:
+          "The callback function to be invoked when the user tries to leave the page.",
+      },
+    ],
+    demo: PageLeave,
+    example:
+      'import { usePageLeave } from "use100hooks";const PageLeave = () => {  const handlePageLeave = () => {  /**Logic to handlee page leave */  };  usePageLeave(handlePageLeave);  return <div>My Component</div>;}; export default PageLeave;',
+  },
+  {
+    icon: BsFillCloudDownloadFill,
+    classIcon: "bs",
+    title: "useBeforeUnload",
+    install: 'import { useBeforeUnload } from "use100hooks"',
+    description: {
+      short:
+        "Execute a function before the user leaves the page or closes the window.",
+      long: `The useBeforeUnload hook allows you to display a custom message to the user when they try to leave the page. It takes a string message as a parameter, which will be shown in the browser's confirmation dialog.`,
+    },
+    url: "/tools/useBeforeUnload",
+    parameters: [
+      {
+        name: "message",
+        type: "string",
+        description:
+          "The custom message to be displayed in the browser's confirmation dialog.",
+      },
+    ],
+    demo: BeforeUnload,
+    example:
+      'import { useBeforeUnload } from "use100hooks";const BeforeUnload = () => {  useBeforeUnload("Are you sure you want to leave this page?");  return <div>My Component</div>;};export default BeforeUnload;',
+  },
+  {
+    icon: BiScreenshot,
+    classIcon: "bi",
+    title: "useScreenshot",
+    install: 'import { useScreenshot } from "use100hooks"',
+    description: {
+      short: "Capture screenshots of the current page or specific elements.",
+      long: `The updated useScreenshot hook allows developers to specify a specific <div> area using useRef or whole page. Only the contents within the specified area will be captured in the screenshot.`,
+    },
+    url: "/tools/useScreenshot",
+    parameters: [
+      {
+        name: "message",
+        type: "string",
+        description:
+          "The custom message to be displayed in the browser's confirmation dialog.",
+      },
+    ],
+    return: [
+      {
+        name: "screenshot",
+        type: "string | null",
+        description: "A data URL string representing the captured screenshot.",
+      },
+    ],
+    demo: Screenshot,
+    example:
+      'import { useScreenshot } from "use100hooks";import { useRef } from "react";const Screenshot = () => {  const pageRef = useRef(null);  const divRef = useRef(null);  const { screenshot: pageScreenshot,captureScreenshot: capturePageScreenshot } = useScreenshot(pageRef);  const { screenshot: divScreenshot, captureScreenshot: captureDivScreenshot } = useScreenshot(divRef);  return ( <div><div><h2>Capture Whole Page</h2>{pageScreenshot && (<img src={pageScreenshot} alt="Page Screenshot" style={{ width: "100%", height: "300px" }} />)}<button onClick={capturePageScreenshot}>Capture Page Screenshot</button><div style={{ margin: "15px 0" }}><h2 style={{ marginBottom: "8px" }}>Capture Specific Div</h2><div ref={divRef} style={{ width: "100%", height: "150px", border: "2px dashed black", display: "flex", alignItems: "center", justifyContent: "center",flexDirection: "column", padding: "8px", }}><p>This is the area to capture.</p><button onClick={captureDivScreenshot}>Capture Div Screenshot</button></div></div>{divScreenshot && ( <img src={divScreenshot}  alt="Div Screenshot" style={{ width: "100%", height:"300px" }} /> )}</div></div>);};export default Screenshot;',
+  },
+  {
+    icon: GiFloatingPlatforms,
+    classIcon: "gi",
+    title: "useHoverIntent",
+    install: 'import { useHoverIntent } from "use100hooks"',
+    description: {
+      short: "Track when a hover action is intentional or accidental.",
+      long: `The useHoverIntent hook is a customizable React hook that allows you to detect hover events with intent. It provides a more precise way of determining intentional hovers by taking into account the sensitivity and movement interval of the mouse. With this hook, you can create interactive components that respond specifically to deliberate hover actions, enhancing user experience and engagement. By using the useHoverIntent hook, you can define the sensitivity level and interval time for hover intent detection. The sensitivity parameter determines the minimum distance the mouse must move within the interval to be considered an intentional hover. A higher sensitivity value makes the hover detection more strict, requiring the mouse to move a greater distance to trigger the intent. On the other hand, a lower sensitivity value makes the detection more lenient, considering smaller mouse movements as intent.`,
+    },
+    url: "/tools/useHoverIntent",
+    return: [
+      {
+        name: "isHovered",
+        type: "boolean",
+        description:
+          "Indicates whether the element is currently being hovered with intent.",
+      },
+      {
+        name: "handleMouseEnter",
+        type: "function",
+        description: "Event handler function for mouse enter event.",
+      },
+      {
+        name: "handleMouseLeave",
+        type: "function",
+        description: "Event handler function for mouse leave event.",
+      },
+    ],
+    parameters: [
+      {
+        name: "options",
+        type: "Partial<HoverIntentOptions>",
+        description:
+          "Optional: Configuration options for hover intent behavior.",
+      },
+      {
+        name: "sensitivity",
+        type: "number",
+        description: "Optional: Sensitivity level for detecting hover intent.",
+      },
+      {
+        name: "interval",
+        type: "number",
+        description:
+          "Optional: Interval time in milliseconds for hover intent detection.",
+      },
+    ],
+    demo: HoverIntent,
+    example:
+      'import { useHoverIntent } from "use100hooks";const HoverIntent = () => { const { isHovered, handleMouseEnter, handleMouseLeave } = useHoverIntent({ sensitivity: 0.7,interval: 300}); return (<div><div onMouseEnter={handleMouseEnter}        onMouseLeave={handleMouseLeave} style={{ padding: "20px",backgroundColor: isHovered ? "lightblue" : "white"}}><h2>Hover over me with intent</h2></div></div>);};export default HoverIntent;',
+  },
+  {
+    icon: MdOutlineKeyboardHide,
+    classIcon: "md",
+    title: "useKeyPressCombo",
+    install: 'import { useKeyPressCombo } from "use100hooks"',
+    description: {
+      short: "Detect and handle specific key combinations (e.g., Ctrl + C).",
+      long: `The useKeyPressCombo hook is a React hook that allows you to detect specific keyboard key combinations. It provides a convenient way to create custom keyboard shortcuts or secret codes within your application. With this hook, you can define an array of key combinations and their corresponding callbacks. When the specified key combination is pressed simultaneously, the associated callback function will be triggered, allowing you to perform specific actions or handle special scenarios.`,
+    },
+    url: "/tools/useKeyPressCombo",
+    return: [
+      {
+        name: "pressedKeys",
+        type: "array",
+        description: "An array containing the currently pressed keys.  ",
+      },
+    ],
+    parameters: [
+      {
+        name: "keyCombos",
+        type: "KeyPressCombo[]",
+        description:
+          "An array of key combinations and their corresponding callbacks. Each KeyPressCombo object consists of a keyCombo property, which is an array",
+      },
+    ],
+    demo: KeypressCombo,
+    example:
+      'import { useKeyPressCombo } from "use100hooks";import { useEffect, useState } from "react";const KeypressCombo = () => {  const [isCombo, setIsCombo] = useState(false);  const handleCombo = () => {    console.log("Secret combo activated!"); setIsCombo(true);}; useKeyPressCombo([{ keyCombo: ["Control", "Shift", "K"], callback: handleCombo },]); useEffect(() => { if (isCombo === true) { setTimeout(() => { setIsCombo(false);}, 2000);} }, [isCombo]); return (<div><p>Press and hold Control + Shift + K to activate the secret combo!</p>      <p>Is Combo Active {isCombo.toString()}</p></div>);};export default KeypressCombo;',
+  },
+  {
+    icon: PiCubeFocusDuotone,
+    classIcon: "pi",
+    title: "useFocusTrap",
+    install: 'import { useFocusTrap } from "use100hooks"',
+    description: {
+      short: "Trap focus within a specific element or component.",
+      long: `The useFocusTrap hook is a React hook that enables the creation of a focus trap within a specific container element. It ensures that the focus remains within the trapped area, preventing it from moving outside to other elements on the page. This is useful for modal dialogs, dropdown menus, or any component that requires user interaction without losing focus context. With this hook, you can easily implement a focus trap by providing a container ref and handling keyboard events to manage the focus behavior.`,
+    },
+    url: "/tools/useFocusTrap",
+    return: [
+      {
+        name: "trapRef",
+        type: "React.RefObject<HTMLDivElement>",
+        description:
+          "A ref object that should be assigned to the container element where the focus trap is applied. ",
+      },
+    ],
+    parameters: [
+      {
+        name: "isEnabled",
+        type: "boolean",
+        description:
+          "Indicates whether the focus trap is enabled or disabled. When set to true, the focus trap is active, and focus will be trapped within the specified container. By default, it is set to true.",
+      },
+    ],
+    demo: FocusTrap,
+    example:
+      'import { useFocusTrap } from "use100hooks";const FocusTrap = () => {  const trapRef = useFocusTrap();  return (  <div><h1>Focus Trap Example</h1><div ref={trapRef}><input type="text" placeholder="Input 1" /><input type="text" placeholder="Input 2"/><button>Button 1</button><button> Button 2 </button></div></div>  );};export default FocusTrap;',
+  },
+  {
+    icon: MdInput,
+    classIcon: "md",
+    title: "useValidatedForm",
+    install: 'import { useValidatedForm } from "use100hooks"',
+    description: {
+      short: "Validate form input fields and handle form submission.",
+      long: `The useFocusTrap hook is a React hook that enables the creation of a focus trap within a specific container element. It ensures that the focus remains within the trapped area, preventing it from moving outside to other elements on the page. This is useful for modal dialogs, dropdown menus, or any component that requires user interaction without losing focus context. With this hook, you can easily implement a focus trap by providing a container ref and handling keyboard events to manage the focus behavior.`,
+    },
+    url: "/tools/useValidatedForm",
+    return: [
+      {
+        name: "formState",
+        type: "Record<string, string>",
+        description:
+          "The current state of the form, where each key represents a form field name and its corresponding value represents the field's value.",
+      },
+      {
+        name: "formErrors",
+        type: "FormErrors",
+        description:
+          "The errors present in the form, where each key represents a form field name, and its corresponding value is an array of error messages.",
+      },
+
+      {
+        name: "handleInputChange",
+        type: "function",
+        description:
+          "A function to handle changes in form input values. It takes the field name and the new value as parameters.",
+      },
+      {
+        name: "validateForm",
+        type: "function",
+        description:
+          "A function that performs form validation based on the defined validation schema. It returns true if the form is valid, and false otherwise.",
+      },
+    ],
+    parameters: [
+      {
+        name: "initialFormState",
+        type: "Record<string, string>",
+        description:
+          "The initial state of the form, where each key represents a form field name and its initial value.",
+      },
+      {
+        name: "validationSchema",
+        type: "ValidationSchema",
+        description:
+          "The validation schema object that defines validation rules for each form field.",
+      },
+    ],
+    demo: ValidateForm,
+    example:
+      'import { useValidateForm } from "use100hooks";const ValidateForm = () => {  const validationSchema = {    name: [      {        validate: (value: string) => value.length > 0,        message: "Name is required",      },    ],    email: [      {        validate: (value: string) => /S+@S+.S+/.test(value), message: "Invalid email format",      },    ],  };  const initialFormState = {    name: "",    email: "",  };  const { formState, formErrors, handleInputChange, validateForm } =    useValidateForm(initialFormState, validationSchema);  const handleSubmit = (e: React.FormEvent) => {    e.preventDefault();    if (validateForm()) {      /**Function Form Submit**/  } };  return ( <form onSubmit={handleSubmit}><div><label> Name</label><input type="text" value={formState.name}onChange={(e) => handleInputChange("name", e.target.value)}/>{formErrors.name && <span>{formErrors.name[0]}</span>}</div><div><label>Email</label><input type="email" value={formState.email} onChange={(e) => handleInputChange("email", e.target.value)}/>{formErrors.email && <span>{formErrors.email[0]}</span>} </div><button type="submit">Submit</button></form>);};export default ValidateForm;',
+  },
+  {
+    icon: BsBatteryCharging,
+    classIcon: "bs",
+    title: "useBatteryStatus",
+    install: 'import { useBatteryStatus } from "use100hooks"',
+    description: {
+      short: "Track the current battery status of the device.",
+      long: `The useBatteryStatus hook is a powerful tool that allows developers to access and monitor the battery status of a user's device in a React application. It provides information about the battery's level, charging status, estimated charging and discharging times, and whether the device supports battery status retrieval.  This hook is particularly useful in scenarios where developers need to build battery-aware applications or provide battery-related features to users. By utilizing the useBatteryStatus hook, developers can create dynamic user interfaces that adapt based on the device's battery conditions.`,
+    },
+    url: "/tools/useBatteryStatus",
+    return: [
+      {
+        name: "supported",
+        type: "boolean",
+        description:
+          "Indicates whether the battery status is supported by the device.",
+      },
+      {
+        name: "loading",
+        type: "boolean",
+        description: "Indicates whether the battery status is still loading.",
+      },
+      {
+        name: "level",
+        type: "number",
+        description: "The current battery level as a percentage (0-1).",
+      },
+      {
+        name: "isCharging",
+        type: "boolean",
+        description: "Indicates whether the device is currently charging.",
+      },
+      {
+        name: "chargingTime",
+        type: "number",
+        description:
+          "The estimated time remaining for the battery to be fully charged.",
+      },
+      {
+        name: "dischargingTime",
+        type: "number",
+        description:
+          "The estimated time remaining for the battery to be fully discharged.",
+      },
+    ],
+
+    demo: BatteryStatus,
+    example:
+      'import { useBatteryStatus } from "use100hooks";const BatteryStatus = () => {  const batteryStatus = useBatteryStatus();  if (!batteryStatus.supported) { return <p>Battery status not supported.</p>; }  if (batteryStatus.loading) { return <p>Loading battery status...</p>;  }return (<div><p>Battery Level: {batteryStatus.level}</p><p>Battery Charging: {batteryStatus.isCharging ? "Yes" : "No"}</p> <p>Charging Time: {batteryStatus.chargingTime} seconds</p><p>Discharging Time: {batteryStatus.dischargingTime} seconds</p></div>);};export default BatteryStatus;',
+  },
+  {
+    icon: BsFillStickyFill,
+    classIcon: "bs",
+    title: "useStickyEffect",
+    install: 'import { useStickyEffect } from "use100hooks"',
+    description: {
+      short: "Makes an element sticky based on scroll position.",
+      long: `The useStickyEffect hook allows you to track whether an element is sticky or not based on the scroll position. It takes a ref object that references the target element to observe. Additionally, you can provide an optional options object to customize the behavior of the sticky effect, such as setting a threshold value. When the scroll position reaches or exceeds the specified threshold, the isSticky value becomes true, indicating that the element is now sticky. As the scroll position changes, the isSticky value is updated accordingly.`,
+    },
+    url: "/tools/useStickyEffect",
+    return: [
+      {
+        name: "isSticky",
+        type: "boolean",
+        description: "Indicates whether the element is sticky or not",
+      },
+    ],
+    parameters: [
+      {
+        name: "ref",
+        type: "React.RefObject<HTMLElement>",
+        description: "Reference to the element to observe for sticky effect",
+      },
+      {
+        name: "options",
+        type: "StickyOptions (optional)",
+        description: "Optional configuration for the sticky effect",
+      },
+      {
+        name: "threshold",
+        type: "number",
+        description: "The scroll position threshold for the sticky effect",
+      },
+    ],
+
+    demo: StickyEffect,
+    example:
+      'import { useStickyEffect } from "@/dist/useStickyEffect";import { useRef } from "react";const StickyEffect = () => { const ref = useRef(null);  const isSticky = useStickyEffect(ref, { threshold: 100 }); return (<div><div ref={ref}>Content Sticky</div>{isSticky && <div>Yikes its Sticky</div>}</div>);};export default StickyEffect;',
+  },
+
+  {
+    icon: MdSyncLock,
+    classIcon: "md",
+    title: "useInterval",
+    install: 'import { useInterval } from "use100hooks"',
+    description: {
+      short: "Execute a function at a specified interval.",
+      long: `The useInterval hook allows you to repeatedly call a function at a specified interval. It takes a callback function and a delay value as parameters. The callback function is the function you want to be executed repeatedly, and the delay value represents the interval in milliseconds between each execution.`,
+    },
+    url: "/tools/useInterval",
+    parameters: [
+      {
+        name: "callback",
+        type: "function",
+        description: "The function to be executed repeatedly at the interval",
+      },
+      {
+        name: "delay",
+        type: "number",
+        description:
+          "The interval in milliseconds between each execution. A value of null stops the interval.",
+      },
+    ],
+
+    demo: Interval,
+    example:
+      'import { useInterval } from "@/dist/useInterval";import { useState } from "react";const Interval = () => {  const [count, setCount] = useState(0); useInterval(() => { setCount(count + 1);  }, 1000); return (<div><p>Count: {count}</p></div>);};export default Interval;',
   },
 ];
 

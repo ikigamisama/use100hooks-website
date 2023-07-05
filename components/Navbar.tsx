@@ -1,6 +1,5 @@
 "use client";
 
-import { satisfy } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { RxGithubLogo } from "react-icons/rx";
@@ -31,7 +30,7 @@ const Navbar = () => {
                 blurDataURL={"/mainlogo.png"}
               />
               <p
-                className={`${satisfy.className} ml-4 text-3xl text-black dark:text-white`}
+                className={`nav-text-logo ml-4 text-3xl text-black dark:text-white`}
               >
                 use100Hooks
               </p>
