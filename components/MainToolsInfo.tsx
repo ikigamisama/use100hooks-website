@@ -5,7 +5,7 @@ import ToolsContentList from "./ToolsContentList";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useParams } from "next/navigation";
 import { toSearchTools, toSearchToolsKeyObject } from "@/lib/tools";
-import { useDocumentTitle } from "use100hooks";
+import { useDocumentTitle, useMetaTags } from "use100hooks";
 import "highlight.js/styles/night-owl.css";
 
 import dynamic from "next/dynamic";
@@ -28,12 +28,35 @@ const MainToolsInfo = () => {
 
   useDocumentTitle(`${params.tools} - use100Hooks`);
 
+  const metaTags = {
+    title: `${params.tools} - use100Hooks`,
+    description: toolInfo.description.short,
+    image: `${window.location.protocol}//${window.location.host}/main-banner.jpg`,
+    twitter: {
+      card: "summary_large_image",
+      site: `@iikgiami`,
+      creator: "@iikgiami",
+      title: `${params.tools} - use100Hooks`,
+      url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
+      image: `${window.location.protocol}//${window.location.host}/main-banner.jpg`,
+      description: `${toolInfo.description.short}`,
+    },
+    og: {
+      title: `${params.tools} - use100Hooks`,
+      description: `${toolInfo.description.short}`,
+      imageUrl: `${window.location.protocol}//${window.location.host}/main-banner.jpg`,
+      url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
+    },
+  };
+
   const ifKeyExists = (key: string): boolean => {
     if (toolKeyInfo.includes(key)) {
       return true;
     }
     return false;
   };
+
+  useMetaTags(metaTags);
 
   return (
     <section className="relative z-20 mt-[80px] mb-8 max-w-3xl mx-auto">

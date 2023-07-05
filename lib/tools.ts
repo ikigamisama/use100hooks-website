@@ -9,6 +9,7 @@ import {
   MdOutlineKeyboardHide,
   MdInput,
   MdSyncLock,
+  MdDataArray,
 } from "react-icons/md";
 import { FaMoon, FaRegWindowMaximize } from "react-icons/fa";
 import { VscSymbolParameter } from "react-icons/vsc";
@@ -83,6 +84,7 @@ import ValidateForm from "@/components/demo/ValidateForm";
 import BatteryStatus from "@/components/demo/BatteryStatus";
 import StickyEffect from "@/components/demo/StickyEffect";
 import Interval from "@/components/demo/Interval";
+import MetaTags from "@/components/demo/MetaTags";
 
 export const toolsList: ToolsData[] = [
   {
@@ -1386,7 +1388,6 @@ export const toolsList: ToolsData[] = [
     example:
       'import { useStickyEffect } from "@/dist/useStickyEffect";import { useRef } from "react";const StickyEffect = () => { const ref = useRef(null);  const isSticky = useStickyEffect(ref, { threshold: 100 }); return (<div><div ref={ref}>Content Sticky</div>{isSticky && <div>Yikes its Sticky</div>}</div>);};export default StickyEffect;',
   },
-
   {
     icon: MdSyncLock,
     classIcon: "md",
@@ -1414,6 +1415,29 @@ export const toolsList: ToolsData[] = [
     demo: Interval,
     example:
       'import { useInterval } from "@/dist/useInterval";import { useState } from "react";const Interval = () => {  const [count, setCount] = useState(0); useInterval(() => { setCount(count + 1);  }, 1000); return (<div><p>Count: {count}</p></div>);};export default Interval;',
+  },
+  {
+    icon: MdDataArray,
+    classIcon: "md",
+    title: "useMetaTags",
+    install: 'import { useMetaTags } from "use100hooks"',
+    description: {
+      short: "Apply a meta tags needed ",
+      long: `The useMetaTags hook empowers you to effortlessly handle and update the meta tags within your React application. It simplifies the process of managing crucial metadata, including the page title, description, and image URL. Additionally, it allows you to optimize your website's appearance on social media platforms by customizing specific meta tags for Twitter and Facebook. By leveraging this hook, you can dynamically adjust the meta tags based on the current content, resulting in accurate and engaging previews when shared on social platforms. Whether you need to enhance the search engine optimization (SEO) of your website or ensure a consistent and appealing representation on social media, the useMetaTags hook provides a straightforward and efficient solution.`,
+    },
+    url: "/tools/useMetaTags",
+    parameters: [
+      {
+        name: "metaTags",
+        type: "object",
+        description:
+          "An object containing the metadata properties to be updated.",
+      },
+    ],
+
+    demo: MetaTags,
+    example:
+      'import { useMetaTags } from "@/dist/useMetaTags";const MetaTags = () => { const metaTags = { title: "My Awesome Website", description: "This is an awesome website with great content!",imageUrl: "https://example.com/image.jpg",};  useMetaTags(metaTags);  return (<div><h1>Welcome to My Awesome Website</h1><p>This website has great content for you to explore!</p></div>);};export default MetaTags;',
   },
 ];
 
