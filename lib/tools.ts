@@ -1,7 +1,7 @@
 import { ToolsData } from "@/common.types";
 import { GrDocumentConfig } from "react-icons/gr";
 import { LiaClipboard } from "react-icons/lia";
-import { TbBounceRight } from "react-icons/tb";
+import { TbBounceRight, TbArrowsRandom } from "react-icons/tb";
 import {
   MdStorage,
   MdOutlinePages,
@@ -20,12 +20,13 @@ import {
   BsFillCloudDownloadFill,
   BsBatteryCharging,
   BsFillStickyFill,
+  BsCursorText,
 } from "react-icons/bs";
 import { LuKeyboard, LuPanelBottomInactive } from "react-icons/lu";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { TfiLayoutSidebarLeft } from "react-icons/tfi";
 import { CgScrollV, CgArrowsScrollV } from "react-icons/cg";
-import { FaTowerObservation } from "react-icons/fa6";
+import { FaTowerObservation, FaCartFlatbed } from "react-icons/fa6";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import {
   BsWindowDesktop,
@@ -38,11 +39,21 @@ import {
   PiNavigationArrowFill,
   PiCubeFocusDuotone,
 } from "react-icons/pi";
-import { GiNetworkBars, GiFloatingPlatforms } from "react-icons/gi";
-import { AiTwotoneAudio, AiOutlineExpandAlt } from "react-icons/ai";
+import {
+  GiNetworkBars,
+  GiFloatingPlatforms,
+  GiCardRandom,
+} from "react-icons/gi";
+import {
+  AiTwotoneAudio,
+  AiOutlineExpandAlt,
+  AiOutlineHistory,
+} from "react-icons/ai";
 import { RxVideo } from "react-icons/rx";
 import { ImPagebreak } from "react-icons/im";
-import { BiScreenshot } from "react-icons/bi";
+import { BiScreenshot, BiRefresh } from "react-icons/bi";
+import { SiScrollreveal, SiRender } from "react-icons/si";
+import { IoLogoJavascript } from "react-icons/io";
 
 import DarkMode from "@/components/demo/DarkMode";
 import HTMLEscape from "@/components/demo/HTMLEscape";
@@ -85,6 +96,15 @@ import BatteryStatus from "@/components/demo/BatteryStatus";
 import StickyEffect from "@/components/demo/StickyEffect";
 import Interval from "@/components/demo/Interval";
 import MetaTags from "@/components/demo/MetaTags";
+import LocalStorageCartEffect from "@/components/demo/LocalStorageCartEffect";
+import TypingEffect from "@/components/demo/TypingEffect";
+import RandomNumber from "@/components/demo/RandomNumber";
+import RandomChoice from "@/components/demo/RandomChoice";
+import ScrollLock from "@/components/demo/ScrollLock";
+import ContinousRetry from "@/components/demo/ContinousRetry";
+import Script from "@/components/demo/Script";
+import RenderInfo from "@/components/demo/RenderInfo";
+import StateHistory from "@/components/demo/StateHistory";
 
 export const toolsList: ToolsData[] = [
   {
@@ -1386,7 +1406,7 @@ export const toolsList: ToolsData[] = [
 
     demo: StickyEffect,
     example:
-      'import { useStickyEffect } from "@/dist/useStickyEffect";import { useRef } from "react";const StickyEffect = () => { const ref = useRef(null);  const isSticky = useStickyEffect(ref, { threshold: 100 }); return (<div><div ref={ref}>Content Sticky</div>{isSticky && <div>Yikes its Sticky</div>}</div>);};export default StickyEffect;',
+      'import { useStickyEffect } from "use100hooks";import { useRef } from "react";const StickyEffect = () => { const ref = useRef(null);  const isSticky = useStickyEffect(ref, { threshold: 100 }); return (<div><div ref={ref}>Content Sticky</div>{isSticky && <div>Yikes its Sticky</div>}</div>);};export default StickyEffect;',
   },
   {
     icon: MdSyncLock,
@@ -1414,7 +1434,7 @@ export const toolsList: ToolsData[] = [
 
     demo: Interval,
     example:
-      'import { useInterval } from "@/dist/useInterval";import { useState } from "react";const Interval = () => {  const [count, setCount] = useState(0); useInterval(() => { setCount(count + 1);  }, 1000); return (<div><p>Count: {count}</p></div>);};export default Interval;',
+      'import { useInterval } from "use100hooks";import { useState } from "react";const Interval = () => {  const [count, setCount] = useState(0); useInterval(() => { setCount(count + 1);  }, 1000); return (<div><p>Count: {count}</p></div>);};export default Interval;',
   },
   {
     icon: MdDataArray,
@@ -1437,7 +1457,356 @@ export const toolsList: ToolsData[] = [
 
     demo: MetaTags,
     example:
-      'import { useMetaTags } from "@/dist/useMetaTags";const MetaTags = () => { const metaTags = { title: "My Awesome Website", description: "This is an awesome website with great content!",imageUrl: "https://example.com/image.jpg",};  useMetaTags(metaTags);  return (<div><h1>Welcome to My Awesome Website</h1><p>This website has great content for you to explore!</p></div>);};export default MetaTags;',
+      'import { useMetaTags } from "use100hooks";const MetaTags = () => {  const metaTags = { title: "",description: "",image: "", twitter: { card: "", site: "", creator: "", title: "", url: "", image: "", description: "", }, og: { title: "", description: "",imageUrl: "",url: "", }, };  useMetaTags(metaTags); return ( <div><h1>Welcome to My Awesome Website</h1><p>This website has great content for you to explore!</p></div>);};export default MetaTags;',
+  },
+  {
+    icon: FaCartFlatbed,
+    classIcon: "fa",
+    title: "useLocalStorageCartEffect",
+    install: 'import { useLocalStorageCartEffect } from "use100hooks"',
+    description: {
+      short: "Manages a shopping cart in local storage.",
+      long: `The useLocalStorageCartEffect hook is a versatile tool for managing a shopping cart stored in the browser's local storage within a React application. It provides functionalities to add items to the cart, remove items from the cart, and update the quantity of specific items. By utilizing this hook, you can seamlessly handle the cart state while persisting it in the local storage for data persistence across page refreshes.`,
+    },
+    url: "/tools/useLocalStorageCartEffect",
+    return: [
+      {
+        name: "cartItems",
+        type: "array",
+        description:
+          "An array of CartItem objects representing the items in the cart.",
+      },
+      {
+        name: "addToCart",
+        type: "function",
+        description:
+          "A function that adds an item to the cart. It takes an object as a parameter.",
+      },
+      {
+        name: "removeFromCart",
+        type: "function",
+        description:
+          "A function that removes an item from the cart based on its ID. It takes the ID of the item as a parameter.",
+      },
+      {
+        name: "updateCartItem",
+        type: "function",
+        description:
+          "A function that updates the quantity of a specific item in the cart. It takes the ID of the item and the new quantity as parameters.",
+      },
+    ],
+    demo: LocalStorageCartEffect,
+    example:
+      'import { useLocalStorageCartEffect, useUIDgenerator } from "use100hooks";const LocalStorageCartEffect = () => {  const [cartItems, addToCart, removeFromCart, updateCartItem] = useLocalStorageCartEffect(); const uuid = useUIDgenerator("v1");  const uuid2 = useUIDgenerator("v1");  const handleAddToCartProduct1 = () => {const item = { id: uuid,name: "Product 1", price: 10, quantity: 1,}; addToCart(item);}; const handleAddToCartProduct2 = () => { const item = { id: uuid2, name: "Product 2", price: 10, quantity: 1,}; addToCart(item);  };  const handleRemoveFromCart = (id: string) => { removeFromCart(id); }; const handleUpdateQuantity = (id: string, quantity: number) => { updateCartItem(id, quantity);};  return ( <div className="text-left"><div className="mb-4"><h1>Product 1</h1><button onClick={handleAddToCartProduct1}>Add to Cart</button></div><div className="mb-4"><h1>Product 2</h1><button onClick={handleAddToCartProduct2}>Add to Cart</button></div><ul>{cartItems.map((item) => (<li key={item.id} className="flex items-center mb-4">{item.name} - ${item.price} - Quantity: {item.quantity}<button onClick={() => handleRemoveFromCart(item.id)}>Remove</button><input type="number" value={item.quantity} onChange={(e) => handleUpdateQuantity(item.id, parseInt(e.target.value)) }/></li>))}</ul></div>);};export default LocalStorageCartEffect;',
+  },
+  {
+    icon: BsCursorText,
+    classIcon: "bs",
+    title: "useTypingEffect",
+    install: 'import { useTypingEffect } from "use100hooks"',
+    description: {
+      short: "Create a typing effect for text rendering.",
+      long: `The useTypingEffect hook allows you to create a typing effect for displaying text in your React components. It takes a text parameter, which represents the full text you want to display, and an optional delay parameter, which specifies the delay between each character being typed. The hook initializes the displayText state as an empty string. It then sets up an effect that uses a timer to gradually update the displayText by appending each character from the text parameter. The delay parameter determines the time interval between each character being added.`,
+    },
+    url: "/tools/useTypingEffect",
+    return: [
+      {
+        name: "displayText",
+        type: "string",
+        description: "The current display text being generated.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description:
+          "The full text that will be displayed with the typing effect.",
+      },
+      {
+        name: "delay",
+        type: "number",
+        description:
+          "(Optional) The delay (in milliseconds) between each character being typed.",
+      },
+    ],
+
+    demo: TypingEffect,
+    example:
+      'import { useTypingEffect } from "use100hooks";const TypingEffect = () => {  const text = "Hello World";  const displayText = useTypingEffect(text, 150);  return <h1>{displayText}</h1>;};export default TypingEffect;',
+  },
+  {
+    icon: GiCardRandom,
+    classIcon: "gi",
+    title: "useRandomNumber",
+    install: 'import { useRandomNumber } from "use100hooks"',
+    description: {
+      short:
+        "Provides a simple way to generate random numbers within a specified range.",
+      long: `The useRandNumber hook is designed to facilitate the generation of random numbers within a given range in a simple and efficient manner. It allows you to obtain a random number and provides a function that can be invoked to regenerate a new random number whenever desired. By utilizing this hook, you can easily incorporate random number generation into your React components without the need for complex logic or external libraries. Whether you need random numbers for game mechanics, data simulation, or any other scenario that requires randomness, this hook simplifies the process and enhances the reusability of your code.`,
+    },
+    url: "/tools/useRandomNumber",
+    return: [
+      {
+        name: "randomNumber",
+        type: "number",
+        description:
+          "The current randomly generated number within the specified range.",
+      },
+      {
+        name: "generateRandomNumber",
+        type: "function",
+        description:
+          "A function that can be invoked to regenerate a new random number within the specified range.",
+      },
+    ],
+    parameters: [
+      {
+        name: "min",
+        type: "number",
+        description:
+          "The minimum value of the desired range for the random number.",
+      },
+      {
+        name: "max",
+        type: "number",
+        description:
+          "The maximum value of the desired range for the random number.",
+      },
+    ],
+    demo: RandomNumber,
+    example:
+      'import { useRandomNumber } from "use100hooks";const RandomNumber = () => { const [number, generateRandomNumber] = useRandomNumber(1, 10);const handleClick = () => { generateRandomNumber();}; return ( <div> <h1>Random Number: {number}</h1><button onClick={handleClick}>Generate Random Number</button></div>);};export default RandomNumber;',
+  },
+  {
+    icon: TbArrowsRandom,
+    classIcon: "tb",
+    title: "useRandomChoice",
+    install: 'import { useRandomChoice } from "use100hooks"',
+    description: {
+      short:
+        "This hook provides a way to randomly select an element from an array of choices, inspired by Python's random.choice function.",
+      long: `By using this hook, you can easily incorporate randomness into your React components. It takes an array of choices as input and returns a randomly selected element from that array. The selection is made by generating a random index based on the length of the choices array and then retrieving the element at that index.`,
+    },
+    url: "/tools/useRandomChoice",
+    return: [
+      {
+        name: "randomChoice",
+        type: "object | string",
+        description: "The randomly selected element from the choices array.",
+      },
+    ],
+    parameters: [
+      {
+        name: "choices",
+        type: "array",
+        description: "An array of choices from which to select one.",
+      },
+    ],
+    demo: RandomChoice,
+    example:
+      'import { useRandomChoice } from "use100hooks";const RandomChoice = () => {  const fruits = ["Apple", "Banana", "Orange", "Mango"];  const randomFruit = useRandomChoice(fruits); return (<div><h1>Random Fruit: {randomFruit}</h1></div>);};export default RandomChoice;',
+  },
+  {
+    icon: SiScrollreveal,
+    classIcon: "si",
+    title: "useLockScroll",
+    install: 'import { useLockScroll } from "use100hooks"',
+    description: {
+      short:
+        "Toggle Scrolling between enable and disable scroll in certain div or body",
+      long: `The useLockScroll hook allows you to lock or unlock scrolling behavior within a specific HTML element, such as the body or a custom target element. It provides flexibility by allowing you to specify whether to disable scrolling horizontally (overflowX) and/or vertically (overflowY). This hook is useful in scenarios where you want to prevent scrolling in certain areas of your application, such as modals or overlays.`,
+    },
+    url: "/tools/useLockScroll",
+    return: [
+      {
+        name: "lockScroll",
+        type: "function",
+        description:
+          "A function that locks the scroll behavior of the specified element.",
+      },
+      {
+        name: "unlockScroll",
+        type: "function",
+        description:
+          "A function that unlocks the scroll behavior of the specified element.",
+      },
+      {
+        name: "enableBodyScroll",
+        type: "function",
+        description: "A function that enables scroll for the body element.",
+      },
+      {
+        name: "disableBodyScroll",
+        type: "function",
+        description: "A function that disables scroll for the body element.",
+      },
+    ],
+    parameters: [
+      {
+        name: "targetRef",
+        type: "React.RefObject<HTMLElement>",
+        description:
+          "A reference to the target HTML element where scrolling behavior should be controlled.",
+      },
+      {
+        name: "options",
+        type: "object",
+        description:
+          "An object containing options for controlling the scroll behavior",
+      },
+    ],
+
+    demo: ScrollLock,
+    example:
+      'import { useScrollLock } from "use100hooks";import { useRef } from "react";const ScrollLock = () => {  const targetRef = useRef<HTMLDivElement>(null);  const { lockScroll, unlockScroll, enableBodyScroll, disableBodyScroll } =    useScrollLock(targetRef, { overflowX: true, overflowY: true, });  return ( <div><button onClick={lockScroll}>Lock Scroll</button><button onClick={unlockScroll}>Unlock Scroll</button><button onClick={disableBodyScroll}> Lock Scroll (Body)</button><button onClick={enableBodyScroll}> Unlock Scroll (Body)</button><div ref={targetRef}style={{height: "200px",overflow: "auto",border: "1px dashed black",}}><div style={{ height: "400px" }}></div></div></div> );};export default ScrollLock;',
+  },
+  {
+    icon: BiRefresh,
+    classIcon: "bi",
+    title: "useContinuousRetry",
+    install: 'import { useContinuousRetry } from "use100hooks"',
+    description: {
+      short:
+        "Retry failed asynchronous operations with increasing delay until a successful response is received.",
+      long: `The useContinuousRetry hook allows for continuous retrying of an asynchronous operation until a specified condition is met. It takes an asyncFunction as input, which should be a function that returns a Promise<boolean>. The hook manages the retry logic by executing the asyncFunction and retrying it until the condition evaluates to true. It provides a retry function that can be called manually to trigger a retry attempt.`,
+    },
+    url: "/tools/useContinuousRetry",
+    return: [
+      {
+        name: "hasResolved",
+        type: "boolean",
+        description: "Indicates whether the retry condition has been resolved.",
+      },
+    ],
+    parameters: [
+      {
+        name: "asyncFunction",
+        type: "function",
+        description:
+          "An asynchronous function that will be retried until success.",
+      },
+      {
+        name: "delay",
+        type: "number",
+        description: "The delay (in milliseconds) between each retry attempt.",
+      },
+    ],
+    demo: ContinousRetry,
+    example:
+      'import { useContinuousRetry } from "use100hooks";import { useState } from "react";const ContinousRetry = () => { const [value, setValue] = useState(0); const hasResolved = useContinuousRetry(() => { console.log("Retry . . . ");return value > 10; }, 1000); return ( <section><h1>useContinuousRetry</h1> <button onClick={() => setValue(value + 1)}>{value}</button><pre>{JSON.stringify({ hasResolved, value }, null, 2)}</pre></section> );};export default ContinousRetry;',
+  },
+  {
+    icon: IoLogoJavascript,
+    classIcon: "io",
+    title: "useScript",
+    install: 'import { useScript } from "use100hooks"',
+    description: {
+      short: "Load external JavaScript files dynamically in React.",
+      long: `The useScript hook is used to dynamically load an external JavaScript file into a React component. It takes a src parameter, which specifies the source URL of the script to be loaded. The hook adds the script to the <body> element of the document, and ensures that it is removed when the component is unmounted. This allows for easy integration of external scripts in a React application.`,
+    },
+    url: "/tools/useScript",
+    parameters: [
+      {
+        name: "src",
+        type: "string",
+        description: "The source URL of the script to be loaded.",
+      },
+    ],
+    demo: Script,
+    example:
+      'import { useScript } from "use100hooks";const Script = () => { useScript( "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" );  return ( <div><h1>useScript Example</h1><p>This is an example of using the useScript hook.</p><p>Added https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js</p></div>);};export default Script;',
+  },
+  {
+    icon: SiRender,
+    classIcon: "si",
+    title: "useRenderInfo",
+    install: 'import { useRenderInfo } from "use100hooks"',
+    description: {
+      short: "Retrieve rendering information for a React component.",
+      long: `The useRenderInfo hook provides information about the rendering of a React component. It tracks the number of times the component has rendered and the timestamp of the most recent render. The hook takes a name parameter as input, which represents the name of the component. By utilizing this hook, you can easily access render-related information for debugging, performance monitoring, or other purposes.`,
+    },
+    url: "/tools/useRenderInfo",
+    return: [
+      {
+        name: "name",
+        type: "string",
+        description: "The name of the component.",
+      },
+      {
+        name: "renderCount",
+        type: "number",
+        description: "The number of times the component has rendered.",
+      },
+      {
+        name: "renderTimestamp",
+        type: "number",
+        description: "The timestamp of the most recent render in milliseconds.",
+      },
+    ],
+    parameters: [
+      {
+        name: "name",
+        type: "string",
+        description: "The name of the component for identification.",
+      },
+    ],
+    demo: RenderInfo,
+    example:
+      'import { useRenderInfo } from "use100hooks";const RenderInfo = () => {  const renderInfo = useRenderInfo("RenderInfo"); return ( <div><h1>{renderInfo.name}</h1><p>Render Count: {renderInfo.renderCount}</p><p>Render Timestamp: {renderInfo.renderTimestamp}</p></div>);};export default RenderInfo;',
+  },
+  {
+    icon: AiOutlineHistory,
+    classIcon: "ai",
+    title: "useStateHistory",
+    install: 'import { useStateHistory } from "use100hooks"',
+    description: {
+      short: "State management with built-in undo and redo functionality.",
+      long: `The useHistoryState hook allows you to manage a state value with built-in undo and redo functionality. It maintains a history of past states, present state, and future states. The hook provides functions like undo, redo, and update to navigate through the state history and update the present state. This can be useful for implementing undo/redo functionality or managing any state that requires tracking of historical changes.`,
+    },
+    url: "/tools/useStateHistory",
+    return: [
+      {
+        name: "past",
+        type: "array",
+        description: "An array of past state values.",
+      },
+      {
+        name: "present",
+        type: "string | object | array",
+        description: "The current state value.",
+      },
+      {
+        name: "future",
+        type: "array",
+        description: "An array of future state values.",
+      },
+      {
+        name: "undo",
+        type: "function",
+        description: "Function to undo the last state change.",
+      },
+      {
+        name: "redo",
+        type: "function",
+        description: "Function to redo a previously undone state change.",
+      },
+      {
+        name: "update",
+        type: "function",
+        description: "Function to update the present state with a new value.",
+      },
+    ],
+    parameters: [
+      {
+        name: "initialState	",
+        type: "any",
+        description: "The initial state value.",
+      },
+    ],
+    demo: StateHistory,
+    example:
+      'import React from "react";import { useHistoryState } from "use100hooks" ;export default function App() {  const { present, past, future, undo, redo, update } = useHistoryState("initial");  const handleInputChange = (event) => { update(event.target.value); };  return ( <div><h1>useHistoryState Example</h1><input type="text" value={present} onChange={handleInputChange} /><button onClick={undo} disabled={past.length === 0}>Undo</button><button onClick={redo} disabled={future.length === 0}>Redo</button><p>Past States: {JSON.stringify(past)}</p><p>Present State: {present}</p><p>Future States: {JSON.stringify(future)}</p></div>);}',
   },
 ];
 

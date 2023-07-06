@@ -72,6 +72,12 @@ html, body {
 .tools-icons.lu path,
 .tools-icons.ai path,
 .tools-icons.rs path,
+.tools-icons.bi path,
+.tools-icons.pi path,
+.tools-icons.gi path,
+.tools-icons.si path,
+.tools-icons.in path,
+.tools-icons.io path,
 .tools-icons.md path:not([fill="none"]){
   fill: #3b82f6 !important;
 }
