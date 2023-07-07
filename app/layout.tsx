@@ -8,6 +8,24 @@ export const metadata = {
   description:
     "use100hooks is a comprehensive collection of 100+ ready-to-use React Hooks",
   author: "ikigami-sama",
+  themeColor: "black",
+  openGraph: {
+    title:
+      "use100hooks - Maximize Reusability with use100hooks: 100+ React Hooks",
+    description:
+      "use100hooks is a comprehensive collection of 100+ ready-to-use React Hooks",
+    url: "https://use100hooks.vercel.app",
+    images: ["https://use100hooks.vercel.app/main-banner.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "use100hooks - Maximize Reusability with use100hooks: 100+ React Hooks",
+    description:
+      "use100hooks is a comprehensive collection of 100+ ready-to-use React Hooks",
+    creator: "@iikigami",
+    images: ["https://nextjs.org/og.png"],
+  },
 };
 
 const Navbar = dynamic(() => import("@/components/Navbar"), {

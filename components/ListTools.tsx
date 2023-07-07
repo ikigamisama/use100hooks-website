@@ -6,7 +6,7 @@ import { MdSubdirectoryArrowRight } from "react-icons/md";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useCustomState from "@/dist/useCategoryChoose";
-import { useDebounce, useMetaTags } from "use100hooks";
+import { useDebounce } from "use100hooks";
 
 const CardTools = ({
   icon: Icon,
@@ -57,31 +57,6 @@ const ListTools = () => {
   const [allToolsTitle, setAlltoolsTitle] = useState("");
   const debounceSearch = useDebounce(search, 250);
 
-  const metaTags = {
-    title:
-      "use100hooks - Maximize Reusability with use100hooks: 100+ React Hooks",
-    description:
-      "use100hooks is a comprehensive collection of 100+ ready-to-use React Hooks",
-    image: `${window.location.protocol}//${window.location.host}/main-banner.jpg`,
-    twitter: {
-      card: "summary_large_image",
-      site: `@iikgiami`,
-      creator: "@iikgiami",
-      title: `use100hooks - Maximize Reusability with use100hooks: 100+ React Hooks`,
-      url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
-      image: `${window.location.protocol}//${window.location.host}/main-banner.jpg`,
-      description: `"use100hooks is a comprehensive collection of 100+ ready-to-use React Hooks`,
-    },
-    og: {
-      title: `use100hooks - Maximize Reusability with use100hooks: 100+ React Hooks`,
-      description: `"use100hooks is a comprehensive collection of 100+ ready-to-use React Hooks`,
-      imageUrl: `${window.location.protocol}//${window.location.host}/main-banner.jpg`,
-      url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
-    },
-  };
-
-  useMetaTags(metaTags);
-
   useEffect(() => {
     const searchTools = () => {
       if (debounceSearch) {
@@ -123,6 +98,8 @@ const ListTools = () => {
     };
     searchTools();
   }, [toolsList, debounceSearch]);
+
+  //console.log(allToolsTitle);
 
   return (
     <div className="mx-auto max-w-7xl mb-10 px-4">

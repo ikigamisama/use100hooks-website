@@ -1137,17 +1137,27 @@ export const toolsList: ToolsData[] = [
     url: "/tools/useScreenshot",
     parameters: [
       {
-        name: "message",
-        type: "string",
-        description:
-          "The custom message to be displayed in the browser's confirmation dialog.",
+        name: "ref",
+        type: " React.RefObject<HTMLElement | null>",
+        description: "Ref object of the target HTML element",
       },
     ],
     return: [
       {
+        name: "loading",
+        type: "boolean",
+        description:
+          "Indicates whether the screenshot is currently being captured",
+      },
+      {
         name: "screenshot",
         type: "string | null",
         description: "A data URL string representing the captured screenshot.",
+      },
+      {
+        name: "captureScreenshot",
+        type: "function",
+        description: "Function to capture the screenshot",
       },
     ],
     demo: Screenshot,
