@@ -17,7 +17,7 @@ const CardTools = ({
 }: ToolsData) => {
   return (
     <Link href={url}>
-      <div className="w-full bg-white  dark:bg-gradient-to-l dark:from-sky-400 dark:to-blue-500 h-48 drop-shadow-xl p-4 ease-in duration-300 hover:drop-shadow-2xl">
+      <div className="w-full bg-white dark:bg-gradient-to-l dark:from-sky-400 dark:to-blue-500 h-56 drop-shadow-xl p-4 ease-in duration-300 hover:drop-shadow-2xl">
         <div className="flex flex-col justify-between h-full">
           <div className="flex flex-row items-center mb-4">
             <div className="rounded-full w-10 h-10 bg-blue-100 dark:bg-white flex items-center justify-center">
@@ -89,17 +89,17 @@ const ListTools = () => {
 
         let newTitleList: string[] = [];
         sortedList.map((d) => {
-          newTitleList.push(d.title);
+          newTitleList.push(`${d.title}`);
         });
 
-        setAlltoolsTitle(newTitleList.join(", "));
+        setAlltoolsTitle(newTitleList.join(","));
         setListTools(sortedList);
       }
     };
     searchTools();
   }, [toolsList, debounceSearch]);
 
-  //console.log(allToolsTitle);
+  console.log(allToolsTitle);
 
   return (
     <div className="mx-auto max-w-7xl mb-10 px-4">

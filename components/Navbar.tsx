@@ -54,7 +54,10 @@ const Navbar = () => {
               </button>
             )}
 
-            <Link href="/">
+            <Link
+              target="_blank"
+              href="https://github.com/ikigamisama/use100hooks"
+            >
               <RxGithubLogo
                 size={25}
                 color={isDarkMode ? "#889096" : "#000000"}

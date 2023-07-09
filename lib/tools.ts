@@ -1,7 +1,17 @@
 import { ToolsData } from "@/common.types";
-import { GrDocumentConfig } from "react-icons/gr";
-import { LiaClipboard } from "react-icons/lia";
-import { TbBounceRight, TbArrowsRandom } from "react-icons/tb";
+import { GrDocumentConfig, GrSort } from "react-icons/gr";
+import {
+  LiaClipboard,
+  LiaSortAmountDownSolid,
+  LiaCookieSolid,
+} from "react-icons/lia";
+import {
+  TbBounceRight,
+  TbArrowsRandom,
+  TbProgress,
+  TbResize,
+  TbPageBreak,
+} from "react-icons/tb";
 import {
   MdStorage,
   MdOutlinePages,
@@ -10,10 +20,12 @@ import {
   MdInput,
   MdSyncLock,
   MdDataArray,
+  MdDataset,
+  MdOutlineSignalWifiStatusbarNull,
+  MdAccountBalance,
 } from "react-icons/md";
-import { FaMoon, FaRegWindowMaximize } from "react-icons/fa";
+import { FaMoon, FaRegWindowMaximize, FaRegClone } from "react-icons/fa";
 import { VscSymbolParameter } from "react-icons/vsc";
-import { LiaSortAmountDownSolid } from "react-icons/lia";
 import {
   BsDatabaseFillLock,
   BsFillGeoAltFill,
@@ -21,11 +33,14 @@ import {
   BsBatteryCharging,
   BsFillStickyFill,
   BsCursorText,
+  BsMemory,
+  BsPercent,
+  BsQrCode,
 } from "react-icons/bs";
 import { LuKeyboard, LuPanelBottomInactive } from "react-icons/lu";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { TfiLayoutSidebarLeft } from "react-icons/tfi";
-import { CgScrollV, CgArrowsScrollV } from "react-icons/cg";
+import { CgScrollV, CgArrowsScrollV, CgPlayListSearch } from "react-icons/cg";
 import { FaTowerObservation, FaCartFlatbed } from "react-icons/fa6";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import {
@@ -38,22 +53,37 @@ import {
   PiUserFocusBold,
   PiNavigationArrowFill,
   PiCubeFocusDuotone,
+  PiPlaceholderFill,
+  PiClockCountdownBold,
+  PiImagesSquareFill,
+  PiArrowsCounterClockwiseThin,
 } from "react-icons/pi";
 import {
   GiNetworkBars,
   GiFloatingPlatforms,
   GiCardRandom,
+  GiCombinationLock,
 } from "react-icons/gi";
 import {
   AiTwotoneAudio,
   AiOutlineExpandAlt,
   AiOutlineHistory,
+  AiOutlineLineChart,
+  AiOutlineDotChart,
+  AiOutlineBarChart,
 } from "react-icons/ai";
 import { RxVideo } from "react-icons/rx";
-import { ImPagebreak } from "react-icons/im";
+import { ImPagebreak, ImStopwatch } from "react-icons/im";
 import { BiScreenshot, BiRefresh } from "react-icons/bi";
-import { SiScrollreveal, SiRender } from "react-icons/si";
+import {
+  SiScrollreveal,
+  SiRender,
+  SiPersistent,
+  SiCountingworkspro,
+} from "react-icons/si";
 import { IoLogoJavascript } from "react-icons/io";
+import { IoTimerSharp } from "react-icons/io5";
+import { RiDatabaseLine } from "react-icons/ri";
 
 import DarkMode from "@/components/demo/DarkMode";
 import HTMLEscape from "@/components/demo/HTMLEscape";
@@ -105,6 +135,31 @@ import ContinousRetry from "@/components/demo/ContinousRetry";
 import Script from "@/components/demo/Script";
 import RenderInfo from "@/components/demo/RenderInfo";
 import StateHistory from "@/components/demo/StateHistory";
+import Cookies from "@/components/demo/Cookies";
+import Progress from "@/components/demo/Progress";
+import Placeholder from "@/components/demo/Placeholder";
+import StatePersist from "@/components/demo/StatePersist";
+import MemoizedValue from "@/components/demo/MemoizedValue";
+import MemoizedSearchFilter from "@/components/demo/MemoizedSearchFilter";
+import WindowResize from "@/components/demo/WindowResize";
+import Countdown from "@/components/demo/Countdown";
+import Stopwatch from "@/components/demo/Stopwatch";
+import ImageProcessLazy from "@/components/demo/ImageProcessLazy";
+import Pagination from "@/components/demo/Pagination";
+import Moment from "@/components/demo/Moment";
+import Dataset from "@/components/demo/Dataset";
+import DataFrame from "@/components/demo/DataFrame";
+import Unique from "@/components/demo/Unique";
+import RemoveNull from "@/components/demo/RemoveNull";
+import Sort from "@/components/demo/Sort";
+import Mean from "@/components/demo/Mean";
+import Median from "@/components/demo/Median";
+import Mode from "@/components/demo/Mode";
+import Percentage from "@/components/demo/Percentage";
+import Combination from "@/components/demo/Combination";
+import CombinationString from "@/components/demo/CombinationString";
+import Permutation from "@/components/demo/Permutation";
+import Variance from "@/components/demo/Variance";
 
 export const toolsList: ToolsData[] = [
   {
@@ -1620,14 +1675,14 @@ export const toolsList: ToolsData[] = [
   {
     icon: SiScrollreveal,
     classIcon: "si",
-    title: "useLockScroll",
-    install: 'import { useLockScroll } from "use100hooks"',
+    title: "useScrollLock",
+    install: 'import { useScrollLock } from "use100hooks"',
     description: {
       short:
         "Toggle Scrolling between enable and disable scroll in certain div or body",
       long: `The useLockScroll hook allows you to lock or unlock scrolling behavior within a specific HTML element, such as the body or a custom target element. It provides flexibility by allowing you to specify whether to disable scrolling horizontally (overflowX) and/or vertically (overflowY). This hook is useful in scenarios where you want to prevent scrolling in certain areas of your application, such as modals or overlays.`,
     },
-    url: "/tools/useLockScroll",
+    url: "/tools/useScrollLock",
     return: [
       {
         name: "lockScroll",
@@ -1817,6 +1872,925 @@ export const toolsList: ToolsData[] = [
     demo: StateHistory,
     example:
       'import React from "react";import { useHistoryState } from "use100hooks" ;export default function App() {  const { present, past, future, undo, redo, update } = useHistoryState("initial");  const handleInputChange = (event) => { update(event.target.value); };  return ( <div><h1>useHistoryState Example</h1><input type="text" value={present} onChange={handleInputChange} /><button onClick={undo} disabled={past.length === 0}>Undo</button><button onClick={redo} disabled={future.length === 0}>Redo</button><p>Past States: {JSON.stringify(past)}</p><p>Present State: {present}</p><p>Future States: {JSON.stringify(future)}</p></div>);}',
+  },
+  {
+    icon: LiaCookieSolid,
+    classIcon: "lia",
+    title: "useCookies",
+    install: 'import { useCookies } from "use100hooks"',
+    description: {
+      short: "Handle or Manage Cookies",
+      long: `The useCookies tool is a custom React hook that provides a simple way to manage cookies within a functional component. It returns the current cookies, allows you to set new cookies, and provides a function to remove cookies.`,
+    },
+    url: "/tools/useCookies",
+    return: [
+      {
+        name: "cookies",
+        type: "Object",
+        description: "An object containing all the current cookies.",
+      },
+      {
+        name: "setCookie",
+        type: "function",
+        description: "A function to set a new cookie.",
+      },
+      {
+        name: "removeCookie",
+        type: "function",
+        description: "A function to remove a cookie.",
+      },
+    ],
+    parameters: [
+      {
+        name: "name",
+        type: "string",
+        description: "The name of the cookie to set or remove.",
+      },
+      {
+        name: "value",
+        type: "string",
+        description: "The value of the cookie to set.",
+      },
+      {
+        name: "options",
+        type: "Object",
+        description:
+          "Additional options for setting the cookie (e.g., path, expires, etc.).",
+      },
+    ],
+    demo: Cookies,
+    example:
+      'import { useCookies } from "use100hooks";const Cookies = () => {  const [cookies, setCookie, removeCookie] = useCookies(); const handleSetCookie = () => { setCookie("myCookie", "Hello, World!", { expires: 7 });  }; const handleRemoveCookie = () => { removeCookie("myCookie");  };  return (    <div><h1>Cookie Example</h1><p>Current Cookie: {cookies.myCookie}</p><button onClick={handleSetCookie}>Set Cookie</button><button onClick={handleRemoveCookie}> Remove Cookie</button></div> );};export default Cookies;',
+  },
+  {
+    icon: TbProgress,
+    classIcon: "tb",
+    title: "useProgress",
+    install: 'import { useProgress } from "use100hooks"',
+    description: {
+      short:
+        "Enables seamless tracking and updating of progress within the range of 0 to 100 in React.",
+      long: `The useProgress hook is a versatile tool in React that allows you to effortlessly track and update progress within a range of 0 to 100. It provides a progress value and a setProgress function, making it easy to integrate progress tracking into your components.`,
+    },
+    url: "/tools/useProgress",
+    return: [
+      {
+        name: "progress",
+        type: "number",
+        description: "The current progress value (ranging from 0 to 100).",
+      },
+      {
+        name: "setProgress",
+        type: "function",
+        description: "A function to update the progress value.",
+      },
+    ],
+    demo: Progress,
+    example:
+      'import { useProgress } from "use100hooks";import { useEffect } from "react";const Progress = () => { const { progress, setProgress } = useProgress(100); useEffect(() => {/**Simulate progress completion after 3 seconds**/ const timeout = setTimeout(() => { setProgress(99);}, 3000);return () => { clearTimeout(timeout);}; }, [setProgress]);  return ( <div><h1>Progress Example</h1><p>Progress: {progress}%</p><div style={{display: "flex",alignItems: "center",justifyContent: "center",}}><div style={{width: "100px",height: "20px",border: "1px solid black",}}><div style={{width: `${progress}%`,height: "100%",backgroundColor: "blue"}}></div></div></div></div>);};export default Progress;',
+  },
+  {
+    icon: PiPlaceholderFill,
+    classIcon: "pi",
+    title: "usePlaceholder",
+    install: 'import { usePlaceholder } from "use100hooks"',
+    description: {
+      short:
+        "Create custom placeholder images easily with the placeholderGenerator hook, providing options for width, height, colors, and text.",
+      long: `The usePlaceholder hook is a versatile tool in React that enables you to generate placeholder images dynamically. By specifying the width, height, background color, text color, and text content, this hook utilizes the HTML5 canvas element to produce data URLs representing the generated images.`,
+    },
+    url: "/tools/usePlaceholder",
+    return: [
+      {
+        name: "dataUrlImg",
+        type: "img",
+        description: "The data URL of the generated placeholder image.",
+      },
+    ],
+    parameters: [
+      {
+        name: "src",
+        type: "object",
+        description:
+          "An object containing the configuration for the placeholder image.",
+      },
+    ],
+    demo: Placeholder,
+    example:
+      'import { usePlaceholder } from "use100hooks"; export const Placeholder = () => { const options = { width: 300, height: 300, bgColor: "#f2f2f2", textColor: "#333", text: "300 x 300", }; const { dataUrlImg } = usePlaceholder(options); return ( <div><h1>Placeholder Example</h1><div style={{ display: "flex", alignItems: "center", justifyContent: "center"}}><img src={dataUrlImg} alt="Placeholder"/></div></div> ); };',
+  },
+
+  {
+    icon: SiPersistent,
+    classIcon: "si",
+    title: "useStatePersist",
+    install: 'import { useStatePersist } from "use100hooks"',
+    description: {
+      short:
+        "Persist and retrieve state values effortlessly with the statePersistence hook, providing automatic storage in local storage for seamless data persistence.",
+      long: `The useStatePersist hook is a powerful tool in React that allows you to persist state values in local storage. It provides a convenient way to store and retrieve data, ensuring that the state remains intact even after a page refresh or closing the application. With the useStatePersist hook, you can easily implement local storage persistence for state values in your React components. This tool automatically saves the state value to local storage whenever it changes, and retrieves the persisted value on component mount, ensuring seamless data persistence.`,
+    },
+    url: "/tools/useStatePersist",
+    return: [
+      {
+        name: "state",
+        type: "any",
+        description: "The persisted state value.",
+      },
+      {
+        name: "setState",
+        type: "function",
+        description: "The data URL of the generated placeholder image.",
+      },
+    ],
+    parameters: [
+      {
+        name: "key",
+        type: "string",
+        description: "The key to store the state value in local storage.",
+      },
+      {
+        name: "initialValue",
+        type: "any",
+        description: "The initial value for the state.",
+      },
+    ],
+    demo: StatePersist,
+    example:
+      'import { useStatePersist } from "use100hooks"; const StatePersist = () => { const [count, setCount] = useStatePersist("count", 0); const increment = () => { setCount((prevCount) => prevCount + 1); }; const decrement = () => { setCount((prevCount) => prevCount - 1);}; return ( <div><h1>Counter Example</h1><p>Count: {count}</p><button onClick={increment}> Increment</button><button onClick={decrement}>Decrement</button></div>); }; export default StatePersist;',
+  },
+  {
+    icon: BsMemory,
+    classIcon: "bs",
+    title: "useMemoizedValue",
+    install: 'import { useMemoizedValue } from "use100hooks"',
+    description: {
+      short:
+        "Memoize complex values effortlessly with the valueMemoizer hook, ensuring efficient rendering by recalculating the value only when the input value changes.",
+      long: `The useMemoizedValue hook is a versatile tool in React that allows you to memoize complex values, such as objects, arrays, or arrays of objects. It helps optimize performance by ensuring that the value is only recalculated when the input value changes.`,
+    },
+    url: "/tools/useMemoizedValue",
+    return: [
+      {
+        name: "memoizedValue",
+        type: "any",
+        description:
+          "The memoized value derived from the provided input value.",
+      },
+      {
+        name: "setValue",
+        type: "function",
+        description: "A function to set a new value for the memoized value.",
+      },
+      {
+        name: "resetValue",
+        type: "function",
+        description:
+          "A function to reset the memoized value to the initial value.",
+      },
+    ],
+    parameters: [
+      {
+        name: "initialValue",
+        type: "any",
+        description: "The initial value for memoization.",
+      },
+    ],
+    demo: MemoizedValue,
+    example:
+      'import { useMemoizedValue } from "use100hooks"; const MemoizedValue = () => { const { memoizedValue, setValue, resetValue } = useMemoizedValue("Initial Value"); const handleChange = (e) => { setValue(e.target.value); }; const handleReset = () => { resetValue();}; return ( <div><h1>Memoized Value Example</h1><p>Current Value: {memoizedValue}</p> <input type="text" value={memoizedValue} onChange={handleChange}/><button onClick={handleReset}>Reset</button></div> );}; export default MemoizedValue;',
+  },
+  {
+    icon: CgPlayListSearch,
+    classIcon: "cg",
+    title: "useMemoizedSearchFilter",
+    install: 'import { useMemoizedSearchFilter } from "use100hooks"',
+    description: {
+      short:
+        "Effortlessly implement search filtering functionality in React using the searchFilter hook, optimizing the filtering process for improved performance.",
+      long: "The useMemoizedSearchFilter hook is a versatile tool in React that allows you to efficiently perform search filtering on an array of objects. By specifying the data array and the key of the object property to be used for filtering, this hook optimizes the filtering process and provides the filtered data based on the search value.",
+    },
+    url: "/tools/useMemoizedSearchFilter",
+    return: [
+      {
+        name: "filteredData",
+        type: "array",
+        description:
+          "The filtered data array based on the search value and the specified filter key.",
+      },
+      {
+        name: "searchValue",
+        type: "string",
+        description: "The current search value.",
+      },
+      {
+        name: "setSearchValue",
+        type: "function",
+        description:
+          "A function to reset the memoized value to the initial value.",
+      },
+    ],
+    parameters: [
+      {
+        name: "data",
+        type: "array",
+        description: "The original array of objects to be filtered.",
+      },
+    ],
+    demo: MemoizedSearchFilter,
+    example:
+      'import { useMemoizedSearchFilter } from "use100hooks"; const MemoizedSearchFilter = () => { const data = [ { id: 1, name: "John Doe", email: "john@example.com" }, { id: 2, name: "Jane Smith", email: "jane@example.com" }, { id: 3, name: "Adam Johnson", email: "adam@example.com" }, ]; const keyFunction = (item) => item.name; const { filteredData, searchValue, setSearchValue } = useMemoizedSearchFilter( data, "id", keyFunction ); const handleSearchChange = (e) => { setSearchValue(e.target.value); }; return ( <div><h1>Search Filter Example</h1><input type="text" value={searchValue} onChange={handleSearchChange} placeholder="Search by Name" /><ul>{filteredData.map((item) => (<li key={item.id}>{item.name} - {item.email}</li>))}</ul></div> ); }; export default MemoizedSearchFilter;',
+  },
+  {
+    icon: TbResize,
+    classIcon: "tb",
+    title: "useWindowResize",
+    install: 'import { useWindowResize } from "use100hooks"',
+    description: {
+      short:
+        "Easily handle window resize events in React with the windowResize hook, keeping your components responsive and up to date with the current window size",
+      long: "The useWindowResize hook is a versatile tool in React that allows you to track and respond to window resize events. It provides an easy way to obtain and update the dimensions of the browser window, facilitating dynamic rendering and responsive behavior in your application. With the useWindowResize hook, you can effortlessly handle window resize events in your React components. This tool uses the useState and useEffect hooks to set up an event listener and update the window size whenever the window is resized, ensuring your components stay in sync with the changing dimensions.",
+    },
+    url: "/tools/useMemoizedSearchFilter",
+    return: [
+      {
+        name: "windowSize",
+        type: "object",
+        description: "An object containing the current window dimensions.",
+      },
+    ],
+    demo: WindowResize,
+    example:
+      'import { useWindowResize } from "use100hooks"; const WindowResize = () => { const { windowSize } = useWindowResize(); return ( <div><h1>Window Resize Example</h1><p>Window Width: {windowSize.width}px</p><p>Window Height: {windowSize.height}px</p></div>);}; export default WindowResize;',
+  },
+  {
+    icon: PiClockCountdownBold,
+    classIcon: "pi",
+    title: "useCountdown",
+    install: 'import { useCountdown } from "use100hooks"',
+    description: {
+      short:
+        "Easily handle window resize events in React with the windowResize hook, keeping your components responsive and up to date with the current window size",
+      long: "The useWindowResize hook is a versatile tool in React that allows you to track and respond to window resize events. It provides an easy way to obtain and update the dimensions of the browser window, facilitating dynamic rendering and responsive behavior in your application. With the useWindowResize hook, you can effortlessly handle window resize events in your React components. This tool uses the useState and useEffect hooks to set up an event listener and update the window size whenever the window is resized, ensuring your components stay in sync with the changing dimensions.",
+    },
+    url: "/tools/useCountdown",
+    return: [
+      {
+        name: "years",
+        type: "number",
+        description: "The remaining years in the countdown.",
+      },
+      {
+        name: "months",
+        type: "number",
+        description: "The remaining months in the countdown.",
+      },
+      {
+        name: "days",
+        type: "number",
+        description: "The remaining days in the countdown.",
+      },
+      {
+        name: "hours",
+        type: "number",
+        description: "The remaining hours in the countdown.",
+      },
+      {
+        name: "minutes",
+        type: "number",
+        description: "The remaining minutes in the countdown.",
+      },
+      {
+        name: "seconds",
+        type: "number",
+        description: "The remaining seconds in the countdown.",
+      },
+    ],
+    parameters: [
+      {
+        name: "duration",
+        type: "object",
+        description: "An object specifying the duration for the countdown.",
+      },
+    ],
+    demo: Countdown,
+    example:
+      'import { useCountdown } from "use100hooks"; const Countdown = () => { const countdownDuration = { years: 0, months: 0, days: 1, hours: 12, minutes: 0, seconds: 0, }; const countdown = useCountdown(countdownDuration); return ( <div><h1>Countdown Example</h1><p>Years: {countdown.years}</p> <p>Months: {countdown.months}</p><p>Days: {countdown.days}</p><p>Hours: {countdown.hours}</p><p>Minutes: {countdown.minutes}</p><p>Seconds: {countdown.seconds}</p></div> ); }; export default Countdown;',
+  },
+  {
+    icon: ImStopwatch,
+    classIcon: "im",
+    title: "useStopwatch",
+    install: 'import { useStopwatch } from "use100hooks"',
+    description: {
+      short:
+        "Implement stopwatch functionalities effortlessly with the stopwatchTimer hook in React, enabling accurate time tracking and manipulation with start, stop, and reset functions.",
+      long: "The useStopwatch hook is a versatile tool in React that allows you to create a stopwatch timer. It provides functions to start, stop, and reset the timer, along with the current running status and the elapsed time in seconds. This hook is ideal for various applications that require precise time measurement, such as timing events or performance monitoring.With the useStopwatch hook, you can easily implement stopwatch functionality in your React application. This hook leverages the useState and useEffect hooks to manage the running state and track the elapsed time. It offers a straightforward interface to control the stopwatch and access the elapsed time, enabling accurate time measurement and synchronization with other components.",
+    },
+    url: "/tools/useStopwatch",
+    return: [
+      {
+        name: "years",
+        type: "number",
+        description: "The remaining years in the countdown.",
+      },
+      {
+        name: "months",
+        type: "number",
+        description: "The remaining months in the countdown.",
+      },
+      {
+        name: "start",
+        type: "function",
+        description: "Function where the stopwatch is start",
+      },
+      {
+        name: "stop",
+        type: "function",
+        description: "Function where the stopwatch is stop",
+      },
+      {
+        name: "reset",
+        type: "function",
+        description: "Function where the stopwatch is reset",
+      },
+    ],
+    demo: Stopwatch,
+    example:
+      'import { useStopwatch } from "use100hooks"; const Stopwatch = () => { const { isRunning, elapsedTime, start, stop, reset } = useStopwatch(); return ( <div><h1>Stopwatch Example</h1> <p>Elapsed Time: {elapsedTime} seconds</p><button onClick={start} disabled={isRunning}>Start</button><button onClick={stop} disabled={!isRunning}>Stop</button><button onClick={reset} disabled={isRunning}>Reset</button></div> ); }; export default Stopwatch;',
+  },
+  {
+    icon: PiImagesSquareFill,
+    classIcon: "pi",
+    title: "useImageProgressLazy",
+    install: 'import { useImageProgressLazy } from "use100hooks"',
+    description: {
+      short:
+        "Implement image loading progress tracking and lazy loading effortlessly with the imageProgressLazy hook in React, enhancing performance and user experience.",
+      long: "The useImageProgressLazy hook is a powerful tool in React that allows you to track the loading progress of an image and lazily load it. It provides information about the current loading status and the progress in percentage, enabling you to implement smooth image loading and display in your application. This hook is particularly useful when working with large or high-resolution images that require progressive loading.",
+    },
+    url: "/tools/useImageProgressLazy",
+    return: [
+      {
+        name: "isLoading",
+        type: "boolean",
+        description: "Indicates whether the image is still loading.",
+      },
+      {
+        name: "progress",
+        type: "number",
+        description: "The loading progress of the image in percentage.",
+      },
+    ],
+    parameters: [
+      {
+        name: "src",
+        type: "string",
+        description: "The source URL of the image.",
+      },
+    ],
+    demo: ImageProcessLazy,
+    example: `import { useImageProgressLazy } from "use100hooks"; const ImageProcessLazy = () => { const { isLoading, progress } = useImageProgressLazy("/mainlogo-dark.png"); return ( <div>{isLoading ? ( <div>Loading... {progress}%</div> ) : ( <image src="/mainlogo-dark.png" alt="image" width='75' height='75' /> )}</div> ); }; export default ImageProcessLazy;`,
+  },
+  {
+    icon: TbPageBreak,
+    classIcon: "tb",
+    title: "usePagination",
+    install: 'import { usePagination } from "use100hooks"',
+    description: {
+      short:
+        "Effortlessly incorporate pagination functionality with the paginationHook in React, providing intuitive navigation, current page information, and dynamically updated paginated data.",
+      long: "The usePagination hook is a powerful tool in React that enables seamless implementation of pagination logic for managing large datasets. It provides functions to navigate through pages, tracks the current page and total page count, and includes the paginated data for the current page. This versatile hook simplifies the process of handling paginated data, empowering you to deliver efficient and user-friendly pagination features in your application.",
+    },
+    url: "/tools/usePagination",
+    return: [
+      {
+        name: "currentPage",
+        type: "number",
+        description: "The current page number.",
+      },
+      {
+        name: "totalPages",
+        type: "number",
+        description:
+          "The total number of pages based on the total items and items per page.",
+      },
+      {
+        name: "data",
+        type: "array",
+        description: "The paginated data for the current page.",
+      },
+      {
+        name: "goToPage",
+        type: "function",
+        description: "A function to navigate to a specific page.",
+      },
+      {
+        name: "nextPage",
+        type: "function",
+        description: "A function to navigate to the next page.",
+      },
+      {
+        name: "prevPage",
+        type: "function",
+        description: "A function to navigate to the previous page.",
+      },
+    ],
+    parameters: [
+      {
+        name: "paginatedData",
+        type: "object",
+        description: "The source URL of the image.",
+      },
+      {
+        name: "itemsPerPage",
+        type: "number",
+        description: "The number of items per page.",
+      },
+    ],
+    demo: Pagination,
+    example:
+      'import { usePagination } from "use100hooks"; const generateData = (count: number) => { const data = []; for (let i = 1; i <= count; i++) { data.push({ id: i, name: `Item ${i}`, }); } return data; }; const data = generateData(50); const Pagination = () => { const itemsPerPage = 10; const { currentPage, totalPages, data: paginatedData, goToPage, nextPage, prevPage, } = usePagination({ data, totalItems: data.length }, itemsPerPage); return ( <div>{paginatedData.map((item) => ( <div key={item.id}>{/* Render your item data */}</div> ))}<div><button onClick={() => prevPage()} disabled={currentPage === 1}>Previous</button><button onClick={() => nextPage()} disabled={currentPage === totalPages} >Next</button></div><div><p>Page {currentPage} of {totalPages}</p><select value={currentPage} onChange={(e) => goToPage(parseInt(e.target.value))}>{Array.from({ length: totalPages }, (_, index) => ( <option key={index + 1} value={index + 1}>{index + 1}</option> ))}</select></div></div>); }; export default Pagination;',
+  },
+  {
+    icon: IoTimerSharp,
+    classIcon: "io",
+    title: "useMoment",
+    install: 'import { useMoment } from "use100hooks"',
+    description: {
+      short:
+        "Calculates the elapsed time between a MySQL datetime and the current moment, providing a human-readable string representation of the time elapsed.",
+      long: "The useMoment hook is a custom React hook that calculates the elapsed time between a given MySQL datetime string and the current moment. It returns a human-readable string representing the elapsed time in years, months, days, hours, minutes, and seconds. This hook enables you to effortlessly display the time elapsed since a specific point in your React application, providing an intuitive way to visualize temporal information.",
+    },
+    url: "/tools/useMoment",
+    return: [
+      {
+        name: "elapsedTime",
+        type: "string",
+        description: "The human-readable string representing the elapsed time",
+      },
+    ],
+    parameters: [
+      {
+        name: "datetime",
+        type: "string",
+        description: "The MySQL datetime string to calculate from.",
+      },
+    ],
+    demo: Moment,
+    example: `import { useMoment } from "use100hooks"; const Moment = () => { const datetime = '2023-01-01 12:00:00'; const { elapsedTime } = useMoment(datetime); return ( <div> <h1>Time Elapsed</h1> <p>{elapsedTime}</p></div> ); }; export default Moment;`,
+  },
+  {
+    icon: MdDataset,
+    classIcon: "md",
+    title: "useDataset",
+    install: 'import { useDataset } from "use100hooks"',
+    description: {
+      short:
+        "Simplifies the handling and display of large data sets, managing loading states and errors for asynchronous data fetching.",
+      long: "The useDataSet hook is a custom React hook that simplifies the handling and display of large data sets in a performant manner. By providing a getData function that returns a promise resolving to the data array, this hook manages the data fetching process, including loading state and error handling. It enables effortless integration of large data sets into your React components, making it easier to handle asynchronous data fetching and rendering.",
+    },
+    url: "/tools/useDataset",
+    return: [
+      {
+        name: "data",
+        type: "array",
+        description: "The fetched data array.",
+      },
+      {
+        name: "isLoading",
+        type: "boolean",
+        description: "Indicates whether the data is currently being fetched.",
+      },
+      {
+        name: "error",
+        type: "string",
+        description:
+          "The error message, if any, encountered during data fetching.",
+      },
+    ],
+    parameters: [
+      {
+        name: "getData",
+        type: "function",
+        description:
+          "A function that returns a promise resolving to the data array.",
+      },
+    ],
+    demo: Dataset,
+    example:
+      'import { useDataset } from "use100hooks"; const fetchData = async () => { return new Promise((resolve) => { setTimeout(() => { const data = Array.from({ length: 5000 }, (_, index) => `Item ${index}`); resolve(data); }, 2000); }); }; const Dataset = () => { const { data, isLoading, error } = useDataset(fetchData); if (isLoading) { return <div>Loading...</div>; } if (error) { return <div>Error: {error}</div>; } return ( <div><h1>Data Set</h1><ul>{data.map((item) => (<li key={item}>{item}</li>))}</ul></div> ); }; export default Dataset;',
+  },
+
+  {
+    icon: RiDatabaseLine,
+    classIcon: "ri",
+    title: "useDataFrame ",
+    install: 'import { useDataFrame } from "use100hooks"',
+    description: {
+      short: "Enhance your React components' ability to handle tabular data",
+      long: "The useDataFrame hook is a custom React hook that emulates basic DataFrame functionalities. It takes an initial data array as a parameter and returns the current state of the DataFrame, along with utility functions to perform operations such as extracting columns, filtering data based on column values, grouping data by columns, and adding new rows to the DataFrame. This hook facilitates the management and manipulation of tabular data within a React component.",
+    },
+    url: "/tools/useDataFrame",
+    return: [
+      {
+        name: "dataFrame",
+        type: "array",
+        description: "The current state of the DataFrame.",
+      },
+      {
+        name: "getColumn",
+        type: "function",
+        description: "Returns an array of values from a specified column.",
+      },
+      {
+        name: "filterByColumnValue",
+        type: "function",
+        description: "Filters the DataFrame based on a column value.",
+      },
+      {
+        name: "groupByColumn",
+        type: "function",
+        description: "Groups the DataFrame by a specific column.",
+      },
+      {
+        name: "addRow",
+        type: "function",
+        description: "Adds a new row to the DataFrame.",
+      },
+    ],
+    parameters: [
+      {
+        name: "data",
+        type: "array",
+        description: "The initial data for the DataFrame.",
+      },
+    ],
+    demo: DataFrame,
+    example:
+      'import { useDataFrame } from "use100hooks"; import { useState } from "react"; const DataFrame = () => { const [data, setData] = useState([ { name: "John", age: 30, city: "New York" }, { name: "Jane", age: 25, city: "San Francisco" }, { name: "Bob", age: 35, city: "Chicago" }, ]); const { dataFrame, getColumn, filterByColumnValue, groupByColumn, addRow } = useDataFrame(data); const handleAddRow = () => { const newRow = { name: "Alice", age: 28, city: "London" }; addRow(newRow); }; return ( <div><h1>Data Frame</h1><button onClick={handleAddRow}>Add Row</button><ul>{dataFrame.map((row, index) => (<li key={index}>{JSON.stringify(row)}</li> ))}</ul><h2>Column: Name</h2><ul>{getColumn("name").map((value, index) => ( <li key={index}>{value}</li> ))}</ul><h2>Filtered Data (City: New York)</h2><ul>{filterByColumnValue("city", "New York").map( (row, index) => ( <li key={index}>{JSON.stringify(row)}</li> ))}</ul><h2>Grouped Data (By City)</h2>{Array.from(groupByColumn("city")).map( ([key, group], index: number) => ( <div key={index}><h3>{key}</h3><ul>{group.map((row, index) => ( <li key={index}>{JSON.stringify(row)}</li> ))}</ul></div> ) )}</div> ); }; export default DataFrame;',
+  },
+
+  {
+    icon: FaRegClone,
+    classIcon: "ri",
+    title: "useUnique",
+    install: 'import { useUnique } from "use100hooks"',
+    description: {
+      short:
+        "Simplify the process of obtaining unique values from an array, providing a straightforward way to filter out duplicates",
+      long: "The useUnique hook is a custom React hook that allows you to obtain unique values from an input array. It utilizes the useState and useEffect hooks to update the list of unique values whenever the input array changes. This hook is useful for scenarios where you need to filter out duplicate values and work with only the unique elements within an array.",
+    },
+    url: "/tools/useUnique",
+    return: [
+      {
+        name: "uniqueValues",
+        type: "array",
+        description: "An array of unique values from the input array.",
+      },
+    ],
+    parameters: [
+      {
+        name: "data",
+        type: "array",
+        description:
+          "The input array of values. Can be an array of primitives or objects.",
+      },
+      {
+        name: "key",
+        type: "string",
+        description:
+          "(Optional) The key to use for finding unique values in an array of objects.",
+      },
+    ],
+    demo: Unique,
+    example:
+      'import { useUnique } from "use100hooks"; const Unique = () => { const numbers = [1, 2, 3, 2, 4, 4, 5]; const uniqueNumbers = useUnique(numbers); const people: Person[] = [ { id: 1, name: "John" }, { id: 2, name: "Jane" }, { id: 3, name: "John" }, { id: 4, name: "Bob" }, { id: 5, name: "Jane" }, ]; const uniquePeople = useUnique(people); return ( <div><h2>Unique Numbers</h2><ul>{uniqueNumbers.map((number, index) => ( <li key={index}>{number}</li> ))}</ul><h2>Unique People</h2><ul>{uniquePeople.map((person: Person) => (<li key={person.id}>{person.name}</li> ))}</ul></div> ); }; export default Unique;',
+  },
+  {
+    icon: MdOutlineSignalWifiStatusbarNull,
+    classIcon: "md",
+    title: "useRemoveNull",
+    install: 'import { useRemoveNull } from "use100hooks"',
+    description: {
+      short:
+        "Effortlessly remove null values from arrays or arrays of objects ",
+      long: "The useRemoveNull hook is a versatile utility for handling arrays or arrays of objects in React applications. It leverages React hooks such as useState, useEffect, useRef, useCallback, and useMemo to ensure optimal performance and data integrity. The hook accepts an initial array or array of objects and removes any null values from it. Whether dealing with simple arrays or complex objects, the hook efficiently filters out null values.",
+    },
+    url: "/tools/useRemoveNull",
+    return: [
+      {
+        name: "processedData",
+        type: "array",
+        description:
+          "The processed array or array of objects without null values.",
+      },
+    ],
+    parameters: [
+      {
+        name: "initialData",
+        type: "array",
+        description: "The initial array or array of objects to process.",
+      },
+      {
+        name: "key",
+        type: "string",
+        description:
+          "(Optional) The key to use for finding unique values in an array of objects.",
+      },
+    ],
+    demo: RemoveNull,
+    example:
+      'import { useRemoveNull } from "use100hooks"; const RemoveNull = () => { const numbers = [1, null, 3, null, 5]; const uniqueNumbers = useRemoveNull(numbers); const people: Person[] = [ { id: 1, name: "John" }, { id: 2, name: null }, { id: 3, name: "Jane" }, { id: 4, name: null }, { id: 5, name: "Bob" }, ]; const nonNullPeople = useRemoveNull(people); return ( <div><h2>Unique Numbers (without null values)</h2><ul>{uniqueNumbers.map((number: number, index: number) => ( <li key={index}>{number}</li> ))}</ul><h2>Non-Null People</h2><ul>{nonNullPeople.map((person: Person) => ( <li key={person.id}>{person.name}</li> ))}</ul></div>);}; export default RemoveNull;',
+  },
+  {
+    icon: GrSort,
+    classIcon: "gr",
+    title: "useSort",
+    install: 'import { useSort } from "use100hooks"',
+    description: {
+      short:
+        "Effortlessly remove null values from arrays or arrays of objects ",
+      long: "The useRemoveNull hook is a versatile utility for handling arrays or arrays of objects in React applications. It leverages React hooks such as useState, useEffect, useRef, useCallback, and useMemo to ensure optimal performance and data integrity. The hook accepts an initial array or array of objects and removes any null values from it. Whether dealing with simple arrays or complex objects, the hook efficiently filters out null values.",
+    },
+    url: "/tools/useSort",
+    return: [
+      {
+        name: "sortedData",
+        type: "array",
+        description: "The sorted array or array of objects.",
+      },
+    ],
+    parameters: [
+      {
+        name: "initialData",
+        type: "array",
+        description: "The initial array or array of objects to process.",
+      },
+      {
+        name: "key",
+        type: "string",
+        description:
+          "(Optional) The key to use for finding unique values in an array of objects.",
+      },
+      {
+        name: "sortOrder",
+        type: "string",
+        description: "Choose between (asc) ascending or (desc) descending",
+      },
+    ],
+    demo: Sort,
+    example:
+      'import { useSort } from "use100hooks"; const Sort = () => { const numbers = [3, 1, 5, 2, 4]; const sortedNumbers = useSort(numbers, null, "desc"); const people: Person[] = [ { id: 1, name: "John", age: 25 }, { id: 2, name: "Jane", age: 30 }, { id: 3, name: "Bob", age: 20 }, ]; const sortedPeople = useSort(people, "age", "asc"); return ( <div> <h2>Sorted Numbers (descending order)</h2> <ul> {sortedNumbers.map((number: number, index: number) => ( <li key={index}>{number}</li> ))} </ul> <h2>Sorted People (ascending order by age)</h2> <ul> {sortedPeople.map((person: Person) => ( <li key={person.id}> {person.name} - {person.age} years old </li> ))} </ul> </div> ); }; export default Sort;',
+  },
+  {
+    icon: AiOutlineLineChart,
+    classIcon: "ai",
+    title: "useMean",
+    install: 'import { useMean } from "use100hooks"',
+    description: {
+      short: "Easily calculate the mean value of numerical data ",
+      long: "The useMean hook is a useful utility for calculating the mean (average) of an array of numbers in a React application. To to ensure accurate calculations and efficient updates. The hook accepts an array of numbers and calculates the mean value. It handles both simple arrays and arrays of objects, allowing for versatile usage. ",
+    },
+    url: "/tools/useMean",
+    return: [
+      {
+        name: "mean",
+        type: "number",
+        description: "The calculated mean value of the input numbers.",
+      },
+    ],
+    parameters: [
+      {
+        name: "numbers",
+        type: "array",
+        description: "The array of numbers to calculate the mean.",
+      },
+      {
+        name: "recalculateMean",
+        type: "function",
+        description: "Function where recalculate the value of mean",
+      },
+    ],
+    demo: Mean,
+    example:
+      'import { useMean } from "use100hooks"; const Mean = () => { const numbers = [5, 10, 15, 20, 25]; const mean = useMean(numbers); return ( <div><h2>Mean Calculation</h2><p>Numbers:{numbers.join(", ")}</p><p>Mean: {mean}</p></div> );}; export default Mean;',
+  },
+  {
+    icon: AiOutlineDotChart,
+    classIcon: "ai",
+    title: "useMedian",
+    install: 'import { useMedian } from "use100hooks"',
+    description: {
+      short: "Retrieve the middle value of an array of numbers as the median",
+      long: "The useMedian hook is a useful utility for calculating the median value of an array of numbers in a React application. To ensure accurate calculations and efficient updates. The hook accepts an array of numbers and calculates the median value. It handles both simple arrays and arrays of objects, allowing for versatile usage.",
+    },
+    url: "/tools/useMedian",
+    return: [
+      {
+        name: "median",
+        type: "number",
+        description: "The calculated median value of the input numbers.",
+      },
+      {
+        name: "recalculateMedian",
+        type: "function",
+        description: "Function where recalculate the value of median",
+      },
+    ],
+    parameters: [
+      {
+        name: "numbers",
+        type: "array",
+        description: "The array of numbers to calculate the median.",
+      },
+    ],
+    demo: Median,
+    example:
+      'import { useMedian } from "use100hooks"; const Median = () => { const numbers = [5, 10, 15, 20, 25];  const [median, recalculateMedian] = useMedian(numbers); return ( <div><h2>Median Calculation</h2><p>Numbers: {numbers.join(", ")}</p><p>Median: {median}</p><button onClick={recalculateMedian}>Recalculate</button></div> ); }; export default Median;',
+  },
+  {
+    icon: AiOutlineBarChart,
+    classIcon: "ai",
+    title: "useMode",
+    install: 'import { useMode } from "use100hooks"',
+    description: {
+      short:
+        "Obtain the number(s) that appear(s) most frequently in an array without hassle",
+      long: "The useMedian hook is a useful utility for calculating the median value of an array of numbers in a React application. To ensure accurate calculations and efficient updates. The hook accepts an array of numbers and calculates the median value. It handles both simple arrays and arrays of objects, allowing for versatile usage.",
+    },
+    url: "/tools/useMode",
+    return: [
+      {
+        name: "mode",
+        type: "array",
+        description: "The calculated mode(s) of the input numbers.",
+      },
+    ],
+    parameters: [
+      {
+        name: "numbers",
+        type: "array",
+        description: "The array of numbers to calculate the mode.",
+      },
+    ],
+    demo: Mode,
+    example:
+      'import { useMode } from "use100hooks"; const Mode = () => { const numbers = [1, 2, 2, 3, 4, 4, 4, 5]; const mode = useMode(numbers); return ( <div><h2>Mode Calculation</h2><p>Numbers: {numbers.join(", ")}</p><p>Mode: {mode ? mode.join(", ") : "No mode"}</p></div> ); }; export default Mode;',
+  },
+  {
+    icon: BsPercent,
+    classIcon: "bs",
+    title: "usePercentage",
+    install: 'import { usePercentage } from "use100hooks"',
+    description: {
+      short:
+        "Effortlessly calculate percentages based on a numerator and denominato",
+      long: "The usePercentage hook is a versatile utility for calculating percentages in a React application  The hook accepts a numerator and a denominator and calculates the percentage based on these values. It automatically recalculates the percentage whenever the numerator or denominator changes. The hook handles scenarios where the denominator is zero, ensuring that a undefined value is returned in such cases to avoid potential error",
+    },
+    url: "/tools/usePercentage",
+    return: [
+      {
+        name: "percentage",
+        type: "number",
+        description: "The calculated percentage value.",
+      },
+    ],
+    parameters: [
+      {
+        name: "numerator",
+        type: "array",
+        description: "The numerator value for the calculation.",
+      },
+      {
+        name: "denominator",
+        type: "number",
+        description: "The denominator value for the calculation.",
+      },
+    ],
+    demo: Percentage,
+    example:
+      'import { usePercentage } from "use100hooks"; const Percentage = () => { const numerator = 75; const denominator = 100; const percentage = usePercentage(numerator, denominator); return ( <div> <h2>Percentage Calculation</h2> <p>Numerator: {numerator}</p> <p>Denominator: {denominator}</p> <p>Percentage: {percentage ? `${percentage}%` : "N/A"}</p> </div> ); }; export default Percentage;',
+  },
+  {
+    icon: GiCombinationLock,
+    classIcon: "gi",
+    title: "useCombination",
+    install: 'import { useCombination } from "use100hooks"',
+    description: {
+      short: "A hook that computes combinations of numbers",
+      long: "The useCombination hook is a versatile utility for generating combinations in a React application The hook accepts an array of items and a size representing the length of the combinations to be generated. It utilizes backtracking to generate all possible combinations of the given size from the provided items. The resulting combinations are then stored in the combinations state variable. By utilizing the useEffect hook and dependency tracking, the hook automatically generates the combinations whenever the input items or size change. The useCombination hook is a valuable tool for production-level applications that require generating combinations for various purposes.",
+    },
+    url: "/tools/useCombination",
+    return: [
+      {
+        name: "combinations",
+        type: "array",
+        description: "The generated combinations of the items.",
+      },
+    ],
+    parameters: [
+      {
+        name: "items",
+        type: "array",
+        description: "The array of items to combine.",
+      },
+      {
+        name: "items",
+        type: "array",
+        description: "The array of items to combine.",
+      },
+    ],
+    demo: Combination,
+    example:
+      'import { useCombination } from "use100hooks"; const Combination = () => { const items = [1, 2, 3, 4]; const size = 2; const combinations = useCombination(items, size); return ( <div><h2>Combinations</h2> {combinations ? ( <ul>{combinations.map((combination, index) => ( <li key={index}>{JSON.stringify(combination)}</li> ))}</ul> ) : ( <p>Generating combinations...</p> )}</div> ); }; export default Combination;',
+  },
+  {
+    icon: PiArrowsCounterClockwiseThin,
+    classIcon: "gi",
+    title: "useCombinationString",
+    install: 'import { useCombinationString } from "use100hooks"',
+    description: {
+      short:
+        "Easily generate all possible combinations of characters in a string ",
+      long: "The useCombinationString hook is a versatile utility for generating all possible string combinations in a React application. The hook accepts a string as input and generates all possible combinations of the characters in the string. It uses a backtracking algorithm to compute the combinations recursively. The resulting combinations are then stored in the combinations state variable. By utilizing the useEffect hook and dependency tracking, the hook automatically generates the combinations whenever the input string changes. The useCombinationString hook is a valuable tool for production-level applications that require generating all possible string combinations for various purposes.",
+    },
+    url: "/tools/useCombinationString",
+    return: [
+      {
+        name: "combinations",
+        type: "array",
+        description: "The generated string combinations.",
+      },
+    ],
+    parameters: [
+      {
+        name: "str",
+        type: "string",
+        description: "The input string to combine.",
+      },
+    ],
+    demo: CombinationString,
+    example:
+      'import { useCombinationString } from "use100hooks"; const CombinationString = () => { const inputString = "abc"; const combinations = useCombinationString(inputString); return ( <div><h2>String Combinations</h2>{combinations ? ( <ul>{combinations.map((combination, index) => ( <li key={index}>{combination}</li> ))} </ul> ) : ( <p>Generating combinations...</p> )}</div> ); }; export default CombinationString;',
+  },
+  {
+    icon: SiCountingworkspro,
+    classIcon: "si",
+    title: "usePermutation",
+    install: 'import { usePermutation } from "use100hooks"',
+    description: {
+      short: "Compute permutations for an array of items without complexity ",
+      long: "The useCombinationString hook is a versatile utility for generating all possible string combinations in a React application. The hook accepts a string as input and generates all possible combinations of the characters in the string. It uses a backtracking algorithm to compute the combinations recursively. The resulting combinations are then stored in the combinations state variable. By utilizing the useEffect hook and dependency tracking, the hook automatically generates the combinations whenever the input string changes. The useCombinationString hook is a valuable tool for production-level applications that require generating all possible string combinations for various purposes.",
+    },
+    url: "/tools/usePermutation",
+    return: [
+      {
+        name: "permutations",
+        type: "array",
+        description: "The generated permutations of the items.",
+      },
+    ],
+    parameters: [
+      {
+        name: "items",
+        type: "array",
+        description: "The array of items to permute.",
+      },
+    ],
+    demo: Permutation,
+    example:
+      'import { usePermutation } from "use100hooks"; const Permutation = () => { const items = [1, 2, 3]; const permutations = usePermutation(items); return ( <div><h2>Permutations</h2> {permutations ? ( <ul>{permutations.map((permutation, index) => ( <li key={index}>{JSON.stringify(permutation)}</li> ))}</ul> ) : ( <p>Generating permutations...</p> )}</div> ); }; export default Permutation;',
+  },
+
+  {
+    icon: MdAccountBalance,
+    classIcon: "md",
+    title: "useVariance",
+    install: 'import { useVariance } from "use100hooks"',
+    description: {
+      short:
+        "Calculate the variance value for a given array of numbers without complexity",
+      long: "The useVariance hook is a utility that allows you to calculate the variance of an array of numbers in a React application.  The hook accepts an array of numbers and computes the variance value. It utilizes the formula for variance, which involves calculating the mean, squared differences, and averaging the squared differences. The resulting variance value is then stored in the variance state variable. By utilizing the useEffect hook and dependency tracking, the hook automatically recalculates the variance whenever the input numbers change. The useVariance hook is a useful tool for production-level applications that require variance calculations for statistical analysis.",
+    },
+    url: "/tools/useVariance",
+    return: [
+      {
+        name: "variance",
+        type: "number",
+        description: "The calculated variance value.",
+      },
+    ],
+    parameters: [
+      {
+        name: "numbers",
+        type: "array",
+        description: "The array of numbers.",
+      },
+    ],
+    demo: Variance,
+    example:
+      'import { useVariance } from "use100hooks"; const Variance = () => { const numbers = [2, 4, 6, 8, 10]; const variance = useVariance(numbers); return ( <div><h2>Variance Calculation</h2>{variance !== undefined ? ( <p>The variance is: {variance}</p> ) : ( <p>Calculating variance...</p> )}</div> );}; export default Variance;',
   },
 ];
 
