@@ -11,6 +11,9 @@ import {
   TbProgress,
   TbResize,
   TbPageBreak,
+  TbLineDotted,
+  TbHexagons,
+  TbClearFormatting,
 } from "react-icons/tb";
 import {
   MdStorage,
@@ -23,9 +26,19 @@ import {
   MdDataset,
   MdOutlineSignalWifiStatusbarNull,
   MdAccountBalance,
+  MdTextFields,
+  MdNumbers,
+  MdOutlineFlipCameraAndroid,
+  MdOutlineBreakfastDining,
 } from "react-icons/md";
-import { FaMoon, FaRegWindowMaximize, FaRegClone } from "react-icons/fa";
-import { VscSymbolParameter } from "react-icons/vsc";
+import {
+  FaMoon,
+  FaRegWindowMaximize,
+  FaRegClone,
+  FaTextHeight,
+  FaGripLines,
+} from "react-icons/fa";
+import { VscSymbolParameter, VscSymbolString } from "react-icons/vsc";
 import {
   BsDatabaseFillLock,
   BsFillGeoAltFill,
@@ -35,14 +48,21 @@ import {
   BsCursorText,
   BsMemory,
   BsPercent,
-  BsQrCode,
+  BsFillFileBinaryFill,
 } from "react-icons/bs";
-import { LuKeyboard, LuPanelBottomInactive } from "react-icons/lu";
+import { LuKeyboard, LuPanelBottomInactive, LuSpace } from "react-icons/lu";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { TfiLayoutSidebarLeft } from "react-icons/tfi";
-import { CgScrollV, CgArrowsScrollV, CgPlayListSearch } from "react-icons/cg";
+import {
+  CgScrollV,
+  CgArrowsScrollV,
+  CgPlayListSearch,
+  CgPassword,
+  CgBatteryEmpty,
+} from "react-icons/cg";
 import { FaTowerObservation, FaCartFlatbed } from "react-icons/fa6";
 import { HiOutlineStatusOnline } from "react-icons/hi";
+import { HiMiniBarsArrowDown } from "react-icons/hi2";
 import {
   BsWindowDesktop,
   BsReverseLayoutTextWindowReverse,
@@ -71,17 +91,22 @@ import {
   AiOutlineLineChart,
   AiOutlineDotChart,
   AiOutlineBarChart,
+  AiOutlineFieldString,
+  AiOutlineGroup,
 } from "react-icons/ai";
 import { RxVideo } from "react-icons/rx";
-import { ImPagebreak, ImStopwatch } from "react-icons/im";
-import { BiScreenshot, BiRefresh } from "react-icons/bi";
+import { ImPagebreak, ImStopwatch, ImFileWord } from "react-icons/im";
+import { BiScreenshot, BiRefresh, BiSort } from "react-icons/bi";
 import {
   SiScrollreveal,
   SiRender,
   SiPersistent,
   SiCountingworkspro,
+  SiDevrant,
+  SiCoderwall,
+  SiLetsencrypt,
 } from "react-icons/si";
-import { IoLogoJavascript } from "react-icons/io";
+import { IoLogoJavascript, IoMdReverseCamera } from "react-icons/io";
 import { IoTimerSharp } from "react-icons/io5";
 import { RiDatabaseLine } from "react-icons/ri";
 
@@ -160,6 +185,31 @@ import Combination from "@/components/demo/Combination";
 import CombinationString from "@/components/demo/CombinationString";
 import Permutation from "@/components/demo/Permutation";
 import Variance from "@/components/demo/Variance";
+import TextUpsideDown from "@/components/demo/TextUpsideDown";
+import MorseCode from "@/components/demo/MorseCode";
+import PasswordGenerator from "@/components/demo/PasswordGenerator";
+import Truncate from "@/components/demo/Truncate";
+import LoremIpsum from "@/components/demo/LoremIpsum";
+import TextMinifier from "@/components/demo/TextMinifier";
+import StringBuilder from "@/components/demo/StringBuilder";
+import WordReplace from "@/components/demo/WordReplace";
+import ReverseString from "@/components/demo/ReverseString";
+import Base32 from "@/components/demo/Base32";
+import Base58 from "@/components/demo/Base58";
+import Base64 from "@/components/demo/Base64";
+import StringHex from "@/components/demo/StringHex";
+import StringBinary from "@/components/demo/StringBinary";
+import CaseConverter from "@/components/demo/CaseConverter";
+import RemoveAccent from "@/components/demo/RemoveAccent";
+import RemoveDuplicateLines from "@/components/demo/RemoveDuplicateLines";
+import RemoveEmptyLines from "@/components/demo/RemoveEmptyLines";
+import RemoveExtraSpace from "@/components/demo/RemoveExtraSpace";
+import StringLength from "@/components/demo/StringLength";
+import RemoveContain from "@/components/demo/RemoveContain";
+import SortTextLines from "@/components/demo/SortTextLines";
+import TextFilpper from "@/components/demo/TextFilpper";
+import StringFormat from "@/components/demo/StringFormat";
+import RemoveLineBreak from "@/components/demo/RemoveLineBreak";
 
 export const toolsList: ToolsData[] = [
   {
@@ -1332,13 +1382,13 @@ export const toolsList: ToolsData[] = [
   {
     icon: MdInput,
     classIcon: "md",
-    title: "useValidatedForm",
-    install: 'import { useValidatedForm } from "use100hooks"',
+    title: "useValidateForm",
+    install: 'import { useValidateForm } from "use100hooks"',
     description: {
       short: "Validate form input fields and handle form submission.",
       long: `The useFocusTrap hook is a React hook that enables the creation of a focus trap within a specific container element. It ensures that the focus remains within the trapped area, preventing it from moving outside to other elements on the page. This is useful for modal dialogs, dropdown menus, or any component that requires user interaction without losing focus context. With this hook, you can easily implement a focus trap by providing a container ref and handling keyboard events to manage the focus behavior.`,
     },
-    url: "/tools/useValidatedForm",
+    url: "/tools/useValidateForm",
     return: [
       {
         name: "formState",
@@ -2762,7 +2812,6 @@ export const toolsList: ToolsData[] = [
     example:
       'import { usePermutation } from "use100hooks"; const Permutation = () => { const items = [1, 2, 3]; const permutations = usePermutation(items); return ( <div><h2>Permutations</h2> {permutations ? ( <ul>{permutations.map((permutation, index) => ( <li key={index}>{JSON.stringify(permutation)}</li> ))}</ul> ) : ( <p>Generating permutations...</p> )}</div> ); }; export default Permutation;',
   },
-
   {
     icon: MdAccountBalance,
     classIcon: "md",
@@ -2791,6 +2840,836 @@ export const toolsList: ToolsData[] = [
     demo: Variance,
     example:
       'import { useVariance } from "use100hooks"; const Variance = () => { const numbers = [2, 4, 6, 8, 10]; const variance = useVariance(numbers); return ( <div><h2>Variance Calculation</h2>{variance !== undefined ? ( <p>The variance is: {variance}</p> ) : ( <p>Calculating variance...</p> )}</div> );}; export default Variance;',
+  },
+  {
+    icon: SiDevrant,
+    classIcon: "si",
+    title: "useTextUpsideDown",
+    install: 'import { useTextUpsideDown } from "use100hooks"',
+    description: {
+      short: "Transform text into its upside-down representation",
+      long: "The useTextUpsideDown hook is a utility that allows you to flip text upside down in a React application The hook accepts a text string and generates an upside-down version of the text. It performs character replacement based on a predefined mapping of characters to their upside-down equivalents",
+    },
+    url: "/tools/useTextUpsideDown",
+    return: [
+      {
+        name: "upsideDownText",
+        type: "string",
+        description: "The generated upside-down text.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text",
+      },
+    ],
+    demo: TextUpsideDown,
+    example:
+      'import { useTextUpsideDown } from "use100hooks";const TextUpsideDown = () => { const inputText = "Hello, World!";  const upsideDownText = useTextUpsideDown(inputText);  return ( <div><h2>Text Upside Down Conversion</h2><p>Input Text: {inputText}</p><p>Upside Down Text: {upsideDownText}</p></div>  );};export default TextUpsideDown;',
+  },
+
+  {
+    icon: SiCoderwall,
+    classIcon: "si",
+    title: "useMorseCode",
+    install: 'import { useMorseCode } from "use100hooks"',
+    description: {
+      short:
+        "Convert plain text to Morse code and vice versa without complexity ",
+      long: "The useMorseCode hook is a tool that helps convert plain text into Morse code and vice versa. It takes a piece of text as input and returns an object with two properties: encryptedText and decryptedText.When you pass your text to the useMorseCode hook, it will convert each character into a series of dots and dashes based on the Morse code standard. For example, the letter A is represented as a dot followed by a dash, while B is represented as a dash followed by three dots.",
+    },
+    url: "/tools/useMorseCode",
+    return: [
+      {
+        name: "encryptedText",
+        type: "string",
+        description: "The Morse code encryption of the input text.",
+      },
+      {
+        name: "decryptedText",
+        type: "string",
+        description: "The decrypted text from the Morse code encryption.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text",
+      },
+    ],
+    demo: MorseCode,
+    example:
+      'import { useMorseCode } from "use100hooks";const MorseCode = () => { const inputText = "Hello, World!";  const { encryptedText, decryptedText } = useMorseCode(inputText);  return (<div><h2>Morse Code Conversion</h2><p>Input Text: {inputText}</p><p>Encrypted Text (Morse Code): {encryptedText}</p><p>Decrypted Text: {decryptedText}</p></div> );};export default MorseCode;',
+  },
+  {
+    icon: CgPassword,
+    classIcon: "cg",
+    title: "usePasswordGenerator",
+    install: 'import { usePasswordGenerator } from "use100hooks"',
+    description: {
+      short:
+        "The usePasswordGenerator hook generates random passwords with customizable options.",
+      long: 'The usePasswordGenerator hook is a tool that generates random passwords for you. It takes a set of options as input to customize the generated password. With these options, you can define the desired length of the password, specify whether to include special characters like "$" or "@", and choose whether to include uppercase letters like "A" or "B". By adjusting these options, you can generate passwords that meet specific requirements or preferences. This hook ensures that the passwords generated are strong, secure, and suitable for different online platforms or accounts.',
+    },
+    url: "/tools/usePasswordGenerator",
+    return: [
+      {
+        name: "generatedPassword",
+        type: "string",
+        description: "The generated password based on the specified options.",
+      },
+    ],
+    parameters: [
+      {
+        name: "options.length",
+        type: "number",
+        description: "The desired length of the generated password.",
+      },
+      {
+        name: "options.includeSpecialCharacters",
+        type: "boolean",
+        description:
+          "Flag indicating whether to include special characters in the password.",
+      },
+      {
+        name: "options.includeUpperCase",
+        type: "boolean",
+        description:
+          "Flag indicating whether to include uppercase letters in the password.",
+      },
+    ],
+    demo: PasswordGenerator,
+    example:
+      'import { usePasswordGenerator } from "use100hooks";const PasswordGenerator = () => { const options = { length: 12,includeSpecialCharacters: true,includeUpperCase: true, }; const generatedPassword = usePasswordGenerator(options);  return (    <div><h2>Password Generator</h2><p>Generated Password: {generatedPassword}</p></div> );};export default PasswordGenerator;',
+  },
+  {
+    icon: TbLineDotted,
+    classIcon: "cg",
+    title: "useTruncate",
+    install: 'import { useTruncate } from "use100hooks"',
+    description: {
+      short:
+        "Control the length of the truncated text and provide a separator to ensure the truncated text ends at a logical point.",
+      long: "The useTruncate hook allows you to truncate a given text string based on certain options. You can define the maximum length of the truncated text to control how many characters are displayed. Additionally, you have the option to specify a separator string that helps ensure the truncated text ends at a logical point, such as the end of a word or sentence.",
+    },
+    url: "/tools/useTruncate",
+    return: [
+      {
+        name: "truncatedText",
+        type: "string",
+        description: "The truncated text based on the provided options.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The text to be truncated.",
+      },
+      {
+        name: "length",
+        type: "boolean",
+        description: "The maximum length of the truncated text.",
+      },
+      {
+        name: "separator",
+        type: "boolean",
+        description: "The separator used for truncation (optional).",
+      },
+    ],
+    demo: Truncate,
+    example:
+      'import { useTruncate } from "use100hooks";const Truncate = () => {  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."; const options = { length: 20, separator: "......" };  const truncatedText = useTruncate(text, options);  return (<div><h2>Truncated Text</h2><p>{truncatedText}</p></div>);};export default Truncate;',
+  },
+  {
+    icon: ImFileWord,
+    classIcon: "im",
+    title: "useLoremIpsum",
+    install: 'import { useLoremIpsum } from "use100hooks"',
+    description: {
+      short: "Generate Lorem Ipsum text based on the provided options",
+      long: "The useLoremIpsum hook generates Lorem Ipsum text, which is commonly used as a placeholder in designs and prototypes. It accepts an options object that allows you to customize the generated text. You can specify the number of words, sentences, and paragraphs to generate.",
+    },
+    url: "/tools/useLoremIpsum",
+    return: [
+      {
+        name: "loremIpsumText",
+        type: "string",
+        description:
+          "The generated Lorem Ipsum text based on the provided options.",
+      },
+    ],
+    parameters: [
+      {
+        name: "words",
+        type: "number",
+        description: "TThe number of words to generate ",
+      },
+      {
+        name: "sentences",
+        type: "number",
+        description: "The number of sentences to generate",
+      },
+      {
+        name: "paragraphs",
+        type: "number",
+        description: "The number of paragraphs to generate ",
+      },
+    ],
+    demo: LoremIpsum,
+    example:
+      'import { useLoremIpsum } from "use100hooks";const LoremIpsum = () => { const loremIpsum = useLoremIpsum({ words: 50, sentences: 3, paragraphs: 2 });return ( <div><h2>Lorem Ipsum Text</h2><p>{loremIpsum}</p></div> );};export default LoremIpsum;',
+  },
+  {
+    icon: HiMiniBarsArrowDown,
+    classIcon: "hi",
+    title: "useTextMinifier",
+    install: 'import { useTextMinifer } from "use100hooks"',
+    description: {
+      short: "Minify text by removing spaces, tabs, and specified lines. ",
+      long: "The useTextMinifier hook provides the ability to minify text by removing spaces, tabs, and specified lines. It accepts a text string and an options object that allows you to customize the minification process. By default, no minification is applied. However, you can enable specific minification options by setting the corresponding properties in the options object. For example, if removeSpace is set to true, all spaces within the text will be removed. Similarly, if removeTab is true, all tabs will be removed.",
+    },
+    url: "/tools/useTextMinifer",
+    return: [
+      {
+        name: "minifiedText",
+        type: "string",
+        description: "The minified text based on the provided options.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The text to be minified.",
+      },
+      {
+        name: "removeSpace",
+        type: "boolean",
+        description: "Whether to remove spaces from the text (optional).",
+      },
+      {
+        name: "removeTab",
+        type: "boolean",
+        description: "Whether to remove tabs from the text (optional).",
+      },
+      {
+        name: "removeLine",
+        type: "number",
+        description: "Specifies the interval of lines to remove ",
+      },
+    ],
+    demo: TextMinifier,
+    example:
+      'import { useTextMinifier } from "use100hooks";const TextMinifier = () => {  const text = `Lorem ipsum dolor sit amet,consectetur adipiscing elit. Nulla ac fermentum ipsum,`;  const options = { removeSpace: true,removeTab: true,removeLine: true };  const minifiedText = useTextMinifier(text, options);  return ( <div><h2>Minified Text</h2><pre>{minifiedText}</pre></div>  );};export default TextMinifier;',
+  },
+
+  {
+    icon: AiOutlineFieldString,
+    classIcon: "ai",
+    title: "useStringBuilder",
+    install: 'import { useStringBuilder } from "use100hooks"',
+    description: {
+      short:
+        "Allows you to dynamically build a string by accumulating new texts.",
+      long: "The useStringBuilder hook provides the ability to dynamically build a string by accumulating new texts. It maintains an internal state that keeps track of the built string. By default, you can initialize the hook with an initial text, but its optional. You can pass an options object to customize the building process. The addNewLine option, when set to true, adds a new line before the new text. Similarly, the extraPaddedSpace option, when set to true, adds an extra padded space before the new text.",
+    },
+    url: "/tools/useStringBuilder",
+    return: [
+      {
+        name: "minifiedText",
+        type: "string",
+        description: "The built string that accumulates new texts.",
+      },
+      {
+        name: "buildText",
+        type: "function",
+        description: "A function to add new text to the builder.",
+      },
+    ],
+    parameters: [
+      {
+        name: "initialText",
+        type: "string",
+        description: "The initial text to start with ",
+      },
+      {
+        name: "addNewLine",
+        type: "boolean",
+        description:
+          "Whether to add a new line before the new text (optional).",
+      },
+      {
+        name: "extraPaddedSpace",
+        type: "boolean",
+        description:
+          "Whether to add an extra padded space before the new text ",
+      },
+    ],
+    demo: StringBuilder,
+    example:
+      'import { useStringBuilder } from "use100hooks";const StringBuilder = () => {  const [text, buildText] = useStringBuilder("Hello", { addNewLine: true,extraPaddedSpace: true, }); const handleClick = () => { buildText("world!");  };  return ( <div><h2>Text Builder Example</h2><pre>{text}</pre><button onClick={handleClick}>Add Text</button></div> );};export default StringBuilder;',
+  },
+  {
+    icon: VscSymbolString,
+    classIcon: "vsc",
+    title: "useWordReplacer",
+    install: 'import { useWordReplacer } from "use100hooks"',
+    description: {
+      short: "Replace specific words in a text with new words. ",
+      long: "The useWordReplacer hook enables you to perform word replacement in a given text. It accepts the original text and an options object that contains the word to be replaced and the word to replace it with.To use the hook, provide the text parameter with the original text you want to modify. The options object should include the replaceWord and withWord properties. The replaceWord specifies the word you want to replace, while the withWord indicates the word you want to replace it with..",
+    },
+    url: "/tools/useWordReplacer",
+    return: [
+      {
+        name: "replacedText",
+        type: "string",
+        description: "The text with the replaced words",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The original text to perform word replacement.",
+      },
+      {
+        name: "replaceWord",
+        type: "string",
+        description: "The word to be replaced in the text.",
+      },
+      {
+        name: "withWord",
+        type: "string",
+        description: "The word to replace the matched words with.",
+      },
+    ],
+    demo: WordReplace,
+    example:
+      'import { useWordReplacer } from "use100hooks";const WordReplace = () => { const text = "The quick brown fox jumps over the lazy dog."; const options = { replaceWord: "fox", withWord: "cat" };  const replacedText = useWordReplacer(text, options);  return ( <div><h2>Word Replacer Example</h2><p>Original Text: {text}</p><p>Replaced Text: {replacedText}</p></div>);};export default WordReplace;',
+  },
+  {
+    icon: IoMdReverseCamera,
+    classIcon: "vsc",
+    title: "useReverseString",
+    install: 'import { useReverseString } from "use100hooks"',
+    description: {
+      short: "Reverse a given text.",
+      long: "he useReverseString hook enables you to reverse a text string. It accepts a string as input, and it returns the reversed version of that string. To use the hook, provide the text parameter with the original text you want to reverse. The hook internally splits the text into individual characters, reverses the order of those characters, and then joins them back together to form the reversed text.",
+    },
+    url: "/tools/useReverseString",
+    return: [
+      {
+        name: "reverseText",
+        type: "string",
+        description: "The reversed text.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The original text to be reversed.",
+      },
+    ],
+    demo: ReverseString,
+    example:
+      'import { useReverseString } from "use100hooks";const ReverseString = () => {  const text = "Hello, world!";  const reversedText = useReverseString(text); return ( <div><h2>Reverse String Example</h2> <p>Original Text: {text}</p><p>Reversed Text: {reversedText}</p></div> );};export default ReverseString;',
+  },
+  {
+    icon: SiLetsencrypt,
+    classIcon: "si",
+    title: "useBase32",
+    install: 'import { useBase32 } from "use100hooks"',
+    description: {
+      short:
+        "Provides functions to encode and decode text using the Base32 encoding scheme.",
+      long: "The useBase32 hook allows you to encode and decode text using the Base32 encoding scheme. Base32 is a binary-to-text encoding that represents binary data as a series of ASCII characters.",
+    },
+    url: "/tools/useBase32",
+    return: [
+      {
+        name: "encode",
+        type: "function",
+        description: "A function that encodes the input text to Base32.",
+      },
+      {
+        name: "decode",
+        type: "function",
+        description: "A function that decodes the Base32-encoded text.",
+      },
+    ],
+    demo: Base32,
+    example:
+      'import { useBase32 } from "use100hooks";const Base32 = () => { const { encode, decode } = useBase32();  const originalText = "Hello, world!";  const encodedText = encode(originalText);  const decodedText = decode(encodedText);  return ( <div><h2>Base32 Example</h2><p>Original Text: {originalText}</p><p>Encoded Text: {encodedText}</p><p>Decoded Text: {decodedText}</p></div>  );};export default Base32;',
+  },
+  {
+    icon: SiLetsencrypt,
+    classIcon: "si",
+    title: "useBase58",
+    install: 'import { useBase58 } from "use100hooks"',
+    description: {
+      short:
+        "Provides functions to encode and decode text using the Base58 encoding scheme.",
+      long: "The useBase58 hook allows you to encode and decode text using the Base58 encoding scheme. Base32 is a binary-to-text encoding that represents binary data as a series of ASCII characters.",
+    },
+    url: "/tools/useBase58",
+    return: [
+      {
+        name: "encode",
+        type: "function",
+        description: "A function that encodes the input text to Base58.",
+      },
+      {
+        name: "decode",
+        type: "function",
+        description: "A function that decodes the Base58-encoded text.",
+      },
+    ],
+    demo: Base58,
+    example:
+      'import { useBase58 } from "use100hooks";const Base58 = () => { const { encode, decode } = useBase58();  const originalText = "Hello, world!";  const encodedText = encode(originalText);  const decodedText = decode(encodedText);  return ( <div><h2>Base58 Example</h2><p>Original Text: {originalText}</p><p>Encoded Text: {encodedText}</p><p>Decoded Text: {decodedText}</p></div>  );};export default Base58;',
+  },
+  {
+    icon: SiLetsencrypt,
+    classIcon: "si",
+    title: "useBase64",
+    install: 'import { useBase64 } from "use100hooks"',
+    description: {
+      short:
+        "Provides functions to encode and decode text using the Base64 encoding scheme.",
+      long: "The useBase64 hook allows you to encode and decode text using the Base64 encoding scheme. Base32 is a binary-to-text encoding that represents binary data as a series of ASCII characters.",
+    },
+    url: "/tools/useBase64",
+    return: [
+      {
+        name: "encode",
+        type: "function",
+        description: "A function that encodes the input text to Base64.",
+      },
+      {
+        name: "decode",
+        type: "function",
+        description: "A function that decodes the Base64-encoded text.",
+      },
+    ],
+    demo: Base64,
+    example:
+      'import { useBase64 } from "use100hooks";const Base64 = () => { const { encode, decode } = useBase64();  const originalText = "Hello, world!";  const encodedText = encode(originalText);  const decodedText = decode(encodedText);  return ( <div><h2>Base64 Example</h2><p>Original Text: {originalText}</p><p>Encoded Text: {encodedText}</p><p>Decoded Text: {decodedText}</p></div>  );};export default Base64;',
+  },
+  {
+    icon: TbHexagons,
+    classIcon: "tb",
+    title: "useStringHex",
+    install: 'import { useStringHex } from "use100hooks"',
+    description: {
+      short:
+        "Allows you to encode strings into hexadecimal representation and decode hexadecimal strings back to their original form.",
+      long: "The useStringHex hook is a utility for encoding and decoding strings in hexadecimal format. It provides two functions: encode and decode. The encode function takes a string as input and converts it into its hexadecimal representation, where each character is converted into its corresponding Unicode code point in hexadecimal format. On the other hand, the decode function performs the reverse operation by converting a hexadecimal string back into its original string form. This hook can be useful in scenarios where you need to work with hexadecimal representations, such as encoding binary data or manipulating color values.",
+    },
+    url: "/tools/useStringHex",
+    return: [
+      {
+        name: "encode",
+        type: "function",
+        description:
+          "Function to encode a string to hexadecimal representation.",
+      },
+      {
+        name: "decode",
+        type: "function",
+        description:
+          "Function to decode a hexadecimal string back to its original string form.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The string to encode or decode.",
+      },
+      {
+        name: "hexText",
+        type: "string",
+        description: "The hexadecimal string to decode.",
+      },
+    ],
+    demo: StringHex,
+    example:
+      'import { useStringHex } from "use100hooks";const StringHex = () => { const { encode, decode } = useStringHex(); const originalText = "Hello, World!"; const encodedText = encode(originalText);  const decodedText = decode(encodedText); return ( <div><h2>Original Text:</h2><p>{originalText}</p><h2>Encoded Text:</h2><p>{encodedText}</p><h2>Decoded Text:</h2><p>{decodedText}</p></div> );};export default StringHex;',
+  },
+  {
+    icon: BsFillFileBinaryFill,
+    classIcon: "bs",
+    title: "useStringBinary",
+    install: 'import { useStringBinary } from "use100hooks"',
+    description: {
+      short: "Convert strings to binary representation and vice versa",
+      long: "The useStringBinary hook is a utility that enables you to convert strings to binary representation and decode binary strings back to their original string form. It provides two functions: encode and decode. The encode function takes a string as input and converts each character into its corresponding binary representation. This is done by converting the Unicode code point of each character to an 8-bit binary value. On the other hand, the decode function performs the reverse operation by converting binary strings back to their original string form.",
+    },
+    url: "/tools/useStringBinary",
+    return: [
+      {
+        name: "encode",
+        type: "function",
+        description: "Function to encode a string to binary representation.",
+      },
+      {
+        name: "decode",
+        type: "function",
+        description:
+          "Function to decode a binary string back to its original string form.",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The string to encode or decode.",
+      },
+      {
+        name: "binaryText",
+        type: "string",
+        description: "The binary string to decode.",
+      },
+    ],
+    demo: StringBinary,
+    example:
+      'import { useStringBinary } from "use100hooks";const StringBinary = () => {  const { encode, decode } = useStringBinary();const originalText = "Hello, World!";const encodedText = encode(originalText); const decodedText = decode(encodedText); return ( <div><h2>Original Text:</h2><p>{originalText}</p><h2>Encoded Text (Binary):</h2><p>{encodedText}</p><h2>Decoded Text:</h2><p>{decodedText}</p></div> );};export default StringBinary;',
+  },
+  {
+    icon: FaTextHeight,
+    classIcon: "fa",
+    title: "useCaseConverter",
+    install: 'import { useCaseConverter } from "use100hooks"',
+    description: {
+      short: "Convert strings to the type cases",
+      long: "The useCaseConverter function is like a magic machine that can take some text and convert it to different styles. It understands four styles: Upper Case (all capital letters), Lower Case (all small letters), Title Case (capitalizing the first letter of each word), and Sentence Case (capitalizing the first letter of the sentence). It returns the converted text.",
+    },
+    url: "/tools/useCaseConverter",
+    return: [
+      {
+        name: "convertedText",
+        type: "string",
+        description: "The converted text based on the selected case type",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The string to encode or decode.",
+      },
+      {
+        name: "type",
+        type: "string",
+        description:
+          "The selected case type for the conversion (e.g., Upper Case)",
+      },
+    ],
+    demo: CaseConverter,
+    example:
+      'import { useCaseConverter } from "use100hooks";import { useState } from "react";const CaseConverter = () => { const [text, setText] = useState("");const [caseType, setCaseType] = useState("Upper Case");  const convertedText = useCaseConverter(text, caseType);  return (<div><input type="text" value={text} onChange={(event) => setText(event.target.value)} /><select value={caseType} onChange={(event) => setCaseType(event.target.value)}><option value="Upper Case">Upper Case</option><option value="Lower Case">Lower Case</option><option value="Title Case">Title Case</option><option value="Sentence Case">Sentence Case</option></select><p>{convertedText}</p></div> );};export default CaseConverter;',
+  },
+  {
+    icon: MdTextFields,
+    classIcon: "md",
+    title: "useRemoveAccent",
+    install: 'import { useRemoveAccent } from "use100hooks"',
+    description: {
+      short:
+        "Converted text without accents is displayed in a paragraph element.",
+      long: "The useRemoveAccent function is like a special tool that can take a piece of text and remove any accents from it. Accents are those small marks or symbols that appear above or below some letters, like the tilde (~) or the acute accent (´). This tool knows which non-accented letter corresponds to each accented letter. For example, it knows that 'á' should be converted to 'a' and 'é' should be converted to 'e'. It returns the text with all the accents removed.",
+    },
+    url: "/tools/useRemoveAccent",
+    return: [
+      {
+        name: "convertedText",
+        type: "string",
+        description: "The converted text with accents removed",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with accented characters",
+      },
+    ],
+    demo: RemoveAccent,
+    example:
+      'import { useRemoveAccent } from "use100hooks";import { useState } from "react";const RemoveAccent = () => { const [text, setText] = useState(""); const convertedText = useRemoveAccent(text);  return ( <div><input type="text" value={text} onChange={(event) => setText(event.target.value)}/><p>{convertedText}</p></div> );};export default RemoveAccent;',
+  },
+  {
+    icon: FaGripLines,
+    classIcon: "fa",
+    title: "useRemoveDuplicateLines",
+    install: 'import { useRemoveDuplicateLines } from "use100hooks"',
+    description: {
+      short: "It splits the text into lines, removes duplicate lines",
+      long: "The useRemoveDuplicateLines function is like a special tool that can take a bunch of text with multiple lines and remove any duplicate lines from it. Imagine you have a list of items, and sometimes you accidentally write the same item twice. This tool helps you find those duplicates and removes them, so you have a clean list without any repetitions. It returns the text with duplicate lines removed.",
+    },
+    url: "/tools/useRemoveDuplicateLines",
+    return: [
+      {
+        name: "convertedText",
+        type: "string",
+        description: "The converted text with accents removed",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with accented characters",
+      },
+    ],
+    demo: RemoveDuplicateLines,
+    example:
+      'import { useRemoveDuplicateLines } from "use100hooks";import { useState } from "react";const RemoveDuplicateLines = () => { const [text, setText] = useState("");  const uniqueText = useRemoveDuplicateLInes(text);  return ( <div><textarea value={text} onChange={(event) => setText(event.target.value)}/><textarea value={uniqueText} readOnly /></div> );};export default RemoveDuplicateLines;',
+  },
+
+  {
+    icon: CgBatteryEmpty,
+    classIcon: "cg",
+    title: "useRemoveEmptyLines",
+    install: 'import { useRemoveEmptyLines } from "use100hooks"',
+    description: {
+      short:
+        "Splits the text into lines, filters out the empty lines, and then joins the non-empty lines back together.",
+      long: "The useRemoveEmptyLines function is like a helpful tool that can take a bunch of text with multiple lines and remove any empty lines from it. Empty lines are those lines that don't have any text; they are like blank spaces. This tool helps you get rid of those empty lines and keep your text tidy. It returns the text with empty lines removed.",
+    },
+    url: "/tools/useRemoveEmptyLines",
+    return: [
+      {
+        name: "nonEmptyText",
+        type: "string",
+        description: "The text with empty lines removed",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with accented characters",
+      },
+    ],
+    demo: RemoveEmptyLines,
+    example:
+      'import { useRemoveEmptyLines } from "use100hooks";import { useState } from "react";const RemoveEmptyLines = () => { const [text, setText] = useState(""); const nonEmptyText = useRemoveEmptyLines(text); return ( <div> <textarea value={text} onChange={event => setText(event.target.value)}/> <textarea value={nonEmptyText} readOnly /> </div>);};export default RemoveEmptyLines;',
+  },
+  {
+    icon: LuSpace,
+    classIcon: "lu",
+    title: "useRemoveExtraSpace",
+    install: 'import { useRemoveExtraSpace } from "use100hooks"',
+    description: {
+      short:
+        "Replaces multiple consecutive spaces with a single space and trims any leading or trailing spaces.",
+      long: "The useRemoveExtraSpace function is like a special tool that can take a piece of text and remove any extra spaces from it. Extra spaces are those additional spaces that might accidentally appear when you press the spacebar multiple times or when you copy and paste text from somewhere. This tool helps you clean up the text and make sure there's only one space between words. It returns the text without any extra spaces.",
+    },
+    url: "/tools/useRemoveExtraSpace",
+    return: [
+      {
+        name: "textWithoutBreaks",
+        type: "string",
+        description: "The text with extra spaces removed",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with extra space",
+      },
+    ],
+    demo: RemoveExtraSpace,
+    example:
+      'import { useRemoveExtraSpace } from "use100hooks";import { useState } from "react";const RemoveExtraSpace = () => { const [text, setText] = useState("");  const textWithoutBreaks = useRemoveExtraSpace(text); return ( <div><textarea value={text} onChange={(event) => setText(event.target.value)}/><textarea value={textWithoutBreaks} readOnly /></div> );};export default RemoveExtraSpace;',
+  },
+  {
+    icon: MdNumbers,
+    classIcon: "md",
+    title: "useStringLength",
+    install: 'import { useStringLength } from "use100hooks"',
+    description: {
+      short: "Count the string overall length",
+      long: "The useStringLength function is like a magical tool that can tell you how long a piece of text is. Imagine you have a sentence, and you want to know the number of characters in that sentence. This tool helps you count the characters and tells you the length of the sentence. It returns the number of characters in the text.",
+    },
+    url: "/tools/useStringLength",
+    return: [
+      {
+        name: "textLength",
+        type: "string",
+        description: "The length of the provided text string",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text to measure the length",
+      },
+    ],
+    demo: StringLength,
+    example:
+      'import { useStringLength } from "use100hooks";import { useState } from "react";const StringLength = () => {  const [text, setText] = useState(""); const textLength = useStringLength(text);  return ( <div><input type="text" value={text} onChange={(event) => setText(event.target.value)} /><p>Length: {textLength}</p></div> );};export default StringLength;',
+  },
+  {
+    icon: AiOutlineGroup,
+    classIcon: "ai",
+    title: "useRemoveLineContain",
+    install: 'import { useRemoveLineContain } from "use100hooks"',
+    description: {
+      short:
+        "Remove the filtered text by removing lines that contain the specified keyword",
+      long: "The useRemoveLineContain function is like a clever tool that can take a bunch of text with multiple lines and remove any lines that contain a specific keyword. It's like having a text with several sentences, and you want to get rid of the sentences that mention a certain word. This tool helps you do that. It returns the text with the lines containing the keyword removed.",
+    },
+    url: "/tools/useRemoveLineContain",
+    return: [
+      {
+        name: "filteredText",
+        type: "string",
+        description: "The text with lines containing the keyword removed",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with multiple lines",
+      },
+      {
+        name: "keyword",
+        type: "string",
+        description: "The keyword to filter lines from the text",
+      },
+    ],
+    demo: RemoveContain,
+    example:
+      'import { useRemoveLineContain } from "use100hooks";import { useState } from "react";const RemoveContain = () => {  const [text, setText] = useState("");  const [keyword, setKeyword] = useState(""); const filteredText = useRemoveLineContain(text, keyword); return ( <div><textarea  value={text} onChange={(event) => setText(event.target.value)} /><input type="text" value={keyword} onChange={(event) => setKeyword(event.target.value)}/><textarea value={filteredText} readOnly /></div> );};export default RemoveContain;',
+  },
+  {
+    icon: BiSort,
+    classIcon: "bi",
+    title: "useSortTextLines",
+    install: 'import { useSortTextLines } from "use100hooks"',
+    description: {
+      short:
+        "It splits the text into lines, sorts the lines in alphabetical order, and then joins the sorted lines back together.",
+      long: "The useSortTextLines function is like a magical tool that can take a bunch of text with multiple lines and sort those lines alphabetically. Imagine you have a list of items, and you want to organize them in alphabetical order. This tool helps you do that. It returns the text with the lines sorted in alphabetical order.",
+    },
+    url: "/tools/useSortTextLines",
+    return: [
+      {
+        name: "sortedText",
+        type: "string",
+        description: "The text with lines sorted in alphabetical order",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with multiple lines",
+      },
+    ],
+    demo: SortTextLines,
+    example:
+      'import { useSortTextLines } from "use100hooks";import { useState } from "react";const SortTextLines = () => { const [text, setText] = useState(""); const sortedText = useSortTextLines(text);  return ( <div><textarea value={text} onChange={(event) => setText(event.target.value)}/> <textarea value={sortedText} readOnly/></div> );};export default SortTextLines;',
+  },
+  {
+    icon: MdOutlineFlipCameraAndroid,
+    classIcon: "md",
+    title: "useTextFilpper",
+    install: 'import { useTextFilpper } from "use100hooks"',
+    description: {
+      short: "Reversing the order of characters in the provided input text",
+      long: "The useTextFlipper function is like a special tool that can take a piece of text and flip the characters in it. Imagine you have a word, and you want to see it as if it were written in a mirror. This tool helps you achieve that effect. It returns the text with the characters flipped.",
+    },
+    url: "/tools/useTextFilpper",
+    return: [
+      {
+        name: "flippedText",
+        type: "string",
+        description: "The text with the characters flipped",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text to flip the character",
+      },
+    ],
+    demo: TextFilpper,
+    example:
+      'import { useTextFilpper } from "@/dist/useTextFilpper";import { useState } from "react";const TextFilpper = () => { const [text, setText] = useState(""); const flippedText = useTextFilpper(text);  return ( <div><input  type="text" value={text} onChange={(event) => setText(event.target.value)}/><p>{flippedText}</p></div> );};export default TextFilpper;',
+  },
+  {
+    icon: MdOutlineBreakfastDining,
+    classIcon: "md",
+    title: "useRemoveLineBreak",
+    install: 'import { useRemoveLineBreak } from "use100hooks"',
+    description: {
+      short: 'It replaces all line breaks ("\n") with a space character.',
+      long: "The useRemoveLineBreaks function is like a helpful tool that can take a piece of text and remove any line breaks from it. Line breaks are like new lines that you create when you press the Enter or Return key on your keyboard. Sometimes you want to remove those line breaks and have all the text in one continuous line. This tool helps you do that. It returns the text without any line breaks.",
+    },
+    url: "/tools/useRemoveLineBreak",
+    return: [
+      {
+        name: "textWithoutBreaks",
+        type: "string",
+        description: "The text with line breaks removed",
+      },
+    ],
+    parameters: [
+      {
+        name: "text",
+        type: "string",
+        description: "The input text with line breaks",
+      },
+    ],
+    demo: RemoveLineBreak,
+    example:
+      'import { useRemoveLineBreak } from "use100hooks";import { useState } from "react";const RemoveLineBreak = () => { const [text, setText] = useState("");  const textWithoutBreaks = useRemoveLineBreak(text); return ( <div><textarea value={text} onChange={(event) => setText(event.target.value)}/><textarea value={textWithoutBreaks} readOnly /></div> );};export default RemoveLineBreak;',
+  },
+  {
+    icon: TbClearFormatting,
+    classIcon: "tb",
+    title: "useStringFormat",
+    install: 'import { useStringFormat } from "use100hooks"',
+    description: {
+      short: "Formatted text based on the provided format type",
+      long: "The useStringFormat function is like a versatile tool that can take a piece of text and format it in different ways. You can think of it as a magical text transformer. It can format the text in four different styles: camelCase, kebabCase, snakeCase, and startCase. It returns the text formatted according to the chosen style.",
+    },
+    url: "/tools/useStringFormat",
+    return: [
+      {
+        name: "formattedText",
+        type: "string",
+        description: "The text formatted based on the type",
+      },
+    ],
+    parameters: [
+      {
+        name: "type",
+        type: "string",
+        description: "Type of format to convert",
+      },
+      {
+        name: "text",
+        type: "string",
+        description:
+          "The input text to convert in various type (e.g camelCase)",
+      },
+    ],
+    demo: StringFormat,
+    example:
+      'import { useStringFormat } from "use100hooks";import { useState } from "react";const StringFormat = () => {  const [text, setText] = useState("");  const [formatType, setFormatType] = useState("camelCase");  const formattedText = useStringFormat({ type: formatType, text });  return (    <div>      <input type="text" value={text} onChange={(event) => setText(event.target.value)} /> <select value={formatType} onChange={(event) => setFormatType(event.target.value)}><option value="camelCase">camelCase</option><option value="kebabCase">kebabCase</option><option value="snakeCase">snakeCase</option> <option value="startCase">startCase</option></select><p>{formattedText}</p></div>);};export default StringFormat;',
   },
 ];
 

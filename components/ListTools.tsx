@@ -92,14 +92,12 @@ const ListTools = () => {
           newTitleList.push(`${d.title}`);
         });
 
-        setAlltoolsTitle(newTitleList.join(","));
+        setAlltoolsTitle(newTitleList.join("\n"));
         setListTools(sortedList);
       }
     };
     searchTools();
   }, [toolsList, debounceSearch]);
-
-  console.log(allToolsTitle);
 
   return (
     <div className="mx-auto max-w-7xl mb-10 px-4">
